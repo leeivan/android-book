@@ -769,7 +769,7 @@ vnd.android.cursor.item/vnd.google.note是指示vnd.android.cursor.item资源中
 Intent，且用户可能希望每次使用不同的应用，则应采用显式方式显示选择器对话框。选择器对话框会要求用户选择用于操作的应用（用户无法为该操作选择默认应用）。例如当应用使用
 ACTION\_SEND 操作执行“共享”时，用户根据目前的状况可能需要使用另一不同的应用，因此应当始终使用选择器对话框，如图 5‑1所示。
 
-![](md/media/chapter05_ui_interaction/media/image1.png)
+![](md-media/chapter05_ui_interaction/media/image1.png)
 
 图 5‑1 选择器对话框
 
@@ -1345,9 +1345,9 @@ ActivityResult，能够在回调中提取 resultCode 和 Intent，如以下示�
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter05_ui_interaction/media/image2.png" style="width:2.625in;height:0.93056in" /></p>
+<td><p><img src="md-media/chapter05_ui_interaction/media/image2.png" style="width:2.625in;height:0.93056in" /></p>
 <p>图 5‑2第一个活动</p></td>
-<td><p><img src="md/media/chapter05_ui_interaction/media/image3.png" style="width:2.53472in;height:0.94538in" /></p>
+<td><p><img src="md-media/chapter05_ui_interaction/media/image3.png" style="width:2.53472in;height:0.94538in" /></p>
 <p>图 5‑3 第二个活动</p></td>
 </tr>
 </tbody>
@@ -3189,7 +3189,7 @@ Telephony 处的文档。
 
 码 5‑72 ActionDataActivity.java
 
-![](md/media/chapter05_ui_interaction/media/image4.png)
+![](md-media/chapter05_ui_interaction/media/image4.png)
 
 图 5‑4
 
@@ -3391,7 +3391,7 @@ getConnectionInfo()。从安卓8.0开始，系统对清单声明的接收器施�
 广播接收器的动态注册方式采用在Java程序代码中调用活动的方法来注册，因为是在程序运行过程中才注册，所以称为动态注册。注册时所需要信息同样包括广播接收器和意图过滤器，以及行为条件。动态注册方式与静态注册方式不同，因为在程序运行中注册，所以当应用程序关闭后，广播接收器就不再进行监听。下面这个例子通过按钮事件，在Java程序中动态实现广播接收器的注册和注销，见**图
 5‑6**。
 
-![](md/media/chapter05_ui_interaction/media/image5.png)
+![](md-media/chapter05_ui_interaction/media/image5.png)
 
 **图** **5‑7** 动态实现广播接收器的注册和注销界面
 

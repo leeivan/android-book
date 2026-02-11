@@ -105,7 +105,7 @@ ACCESS\_FINE\_LOCATION 权限访问确切位置，可以请求用户允许该应
 当应用中的功能需要位置信息访问权限时，请等到用户与该功能互动时再发出权限请求。本工作流遵循在上下文中请求运行时权限的最佳做法，如介绍如何请求应用权限的指南中所述。图
 10‑1举例说明了如何执行此过程。该应用包含一项“分享位置信息”功能，需要前台位置信息访问权限。不过，在用户选择分享位置信息按钮之前，应用不会请求位置权限，如果用户选择仅在使用该应用时允许，系统就会启用该功能。
 
-![](md/media/chapter10_location_services/media/image1.png)
+![](md-media/chapter10_location_services/media/image1.png)
 
 图 ‑1需要前台位置信息访问权限的位置信息分享功能。
 
@@ -132,9 +132,9 @@ ACCESS\_FINE\_LOCATION 和 ACCESS\_COARSE\_LOCATION 时，系统权限对话框�
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter10_location_services/media/image2.png" style="width:1.25827in;height:2.5597in" /></p>
+<td><p><img src="md-media/chapter10_location_services/media/image2.png" style="width:1.25827in;height:2.5597in" /></p>
 <p>图 ‑2 应用仅请求 ACCESS_COARSE_LOCATION 时显示的系统权限对话框</p></td>
-<td><p><img src="md/media/chapter10_location_services/media/image3.png" style="width:1.26119in;height:2.5826in" /></p>
+<td><p><img src="md-media/chapter10_location_services/media/image3.png" style="width:1.26119in;height:2.5826in" /></p>
 <p>图 ‑3 应用在单个运行时请求中同时请求 ACCESS_FINE_LOCATION 和 ACCESS_COARSE_LOCATION 时显示的系统权限对话框</p></td>
 </tr>
 </tbody>
@@ -222,9 +222,9 @@ Wi-Fi 将某个设备与附近的设备配对，考虑使用配套设备配对�
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter10_location_services/media/image4.png" style="width:1.93455in;height:3.91791in" /></p>
+<td><p><img src="md-media/chapter10_location_services/media/image4.png" style="width:1.93455in;height:3.91791in" /></p>
 <p>图 ‑4 用户之前选择了大致位置和仅在使用该应用时允许</p></td>
-<td><p><img src="md/media/chapter10_location_services/media/image5.png" style="width:1.93513in;height:3.92537in" /></p>
+<td><p><img src="md-media/chapter10_location_services/media/image5.png" style="width:1.93513in;height:3.92537in" /></p>
 <p>图 ‑5 用户之前选择了大致位置和仅限这一次</p></td>
 </tr>
 </tbody>
@@ -240,7 +240,7 @@ Wi-Fi 将某个设备与附近的设备配对，考虑使用配套设备配对�
 
 (2)稍后等到用户摸索需要后台位置信息使用权的功能时，可以届时再请求在后台访问位置信息的权限。
 
-![](md/media/chapter10_location_services/media/image6.png)
+![](md-media/chapter10_location_services/media/image6.png)
 
 图 ‑6这两项功能都需要位置信息使用权，但只有“推荐附近地点”功能需要后台位置信息使用权。
 
@@ -249,9 +249,9 @@ Wi-Fi 将某个设备与附近的设备配对，考虑使用配套设备配对�
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter10_location_services/media/image7.png" style="width:1.28358in;height:2.6179in" /></p>
+<td><p><img src="md-media/chapter10_location_services/media/image7.png" style="width:1.28358in;height:2.6179in" /></p>
 <p>图 ‑7 设置页面包含一个名为始终允许的选项，用于授予后台位置信息使用权。</p></td>
-<td><p><img src="md/media/chapter10_location_services/media/image8.png" style="width:1.28226in;height:2.58955in" /></p>
+<td><p><img src="md-media/chapter10_location_services/media/image8.png" style="width:1.28226in;height:2.58955in" /></p>
 <p>图 ‑8 提醒用户他们已授予应用后台位置信息使用权的通知</p></td>
 </tr>
 </tbody>
@@ -436,7 +436,7 @@ LocationManager.NETWORK\_PROVIDER
 
 应用程序如果要使用这两种方式的定位服务，需要通过系统设置，如**图 10‑9**。
 
-![](md/media/chapter10_location_services/media/image9.png)
+![](md-media/chapter10_location_services/media/image9.png)
 
 **图** **10‑9 设置定位方式**
 
@@ -871,7 +871,7 @@ geo nmea发送一个NMEA 0183句子，例如：
 
 **图 10‑10**通过使用时间线展示了获取用户位置更新的流程时间线，这个时间线体现了应用监听用户位置更新的各个时间段和各个时间段发生的事件。
 
-![](md/media/chapter10_location_services/media/image10.png)
+![](md-media/chapter10_location_services/media/image10.png)
 
 **图** **10‑10 用户位置更新**
 

@@ -9,20 +9,19 @@ success=0
 fail=0
 
 for f in doc/*.docx; do
-  [ -f "$f" ] || continue
-
   name=$(basename "$f" .docx)
+
   count=$((count+1))
 
   echo "--------------------------------------"
   echo "[$count] 正在转换: $f"
   echo "输出文件: md/$name.md"
-  echo "图片目录: md/media/$name"
+  echo "图片目录: md-media/$name"
 
   if pandoc "$f" \
     -t gfm \
     -o "md/$name.md" \
-    --extract-media="md/media/$name" \
+    --extract-media="md-media/$name" \
     --mathjax; then
 
     echo "✅ 转换成功: $name"

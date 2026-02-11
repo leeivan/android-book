@@ -51,7 +51,7 @@
 如果应用程序在与用户交互的同时需要执行繁重的任务，用户单线程模式可能会导致运行性能很低下；比如说，在查询数据库时，应用程序就需要做两件事，一是需要与数据库连接，访问数据库，获取查询结果；第二件事是要初始化显示界面的组件，把获取的数据给显示出来。因为是单线程，就必须先做完第一件事后才能做第二件事。这个过程有可能因为网络状况或数据库繁忙，在访问数据库、获取结果数据时花费比较长的时间，导致不能执行用户显示界面的初始化，使得用户界面呈现出静止状态。这种状态称为界面线程阻塞。如果界面线程被阻塞超过一定时间（目前大约是5秒钟），用户就会被提示
 “应用程序没有响应”（ANR）对话框，就是这个对话框。
 
-![](md/media/chapter06_multitasking_and_notifications/media/image1.png)
+![](md-media/chapter06_multitasking_and_notifications/media/image1.png)
 
 **图** **7‑1 界面线程阻塞**
 
@@ -72,7 +72,7 @@
 对于多线程的安卓应用程序来说有两类线程：一类是主线程，也就是界面线程；另一类是工作线程，也就是主线程或工作线程所创建的线程。安卓的线程间消息处理机制主要是用来处理主线程跟工作线程间通信的，图
 6.1是线程间通信原理图。安卓应用程序是通过消息来驱动的，即在应用程序的主线程中有一个消息循环，负责处理消息队列中的消息，比如当从网上下载文件时，为了不使主线程被阻塞，通常需要创建一个子线程来负责下载任务，同时在下载的过程将下载进度以百分比的形式在应用程序的界面上显示出来，这样既不会阻塞主线程的运行，又能获得良好的用户体验，但是安卓应用程序的子线程是不可以操作主线程的界面的，那么这个负责下载任务的子线程应该如何在应用程序界面上显示下载的进度呢？如果我们能够在子线程中往主线程的消息队列中发送消息，那么问题就迎刃而解了，因为发往主线程消息队列的消息最终是由主线程来处理的，在处理这个消息时，就可以在应用程序界面上显示下载进度了。
 
-![](md/media/chapter06_multitasking_and_notifications/media/image2.png)
+![](md-media/chapter06_multitasking_and_notifications/media/image2.png)
 
 　　图 7‑2线程间通信原理
 
@@ -447,7 +447,7 @@ SystemClock.uptimeMillis()。在深度睡眠中花费的时间会增加执行的
 使 Runnable添加到消息队列中，在uptimeMillis 给定的特定时间运行。时基是
 SystemClock.uptimeMillis()。在深度睡眠中花费的时间会增加执行的额外延迟。 可运行对象将在附加此处理程序的线程上运行。
 
-![](md/media/chapter06_multitasking_and_notifications/media/image3.png)
+![](md-media/chapter06_multitasking_and_notifications/media/image3.png)
 
 图 7‑3
 
@@ -630,7 +630,7 @@ onPostExecute。AsyncTask是抽象类，AsyncTask定义了三种泛型：Params�
 
 码 7‑5 AsyncTaskActivity.java
 
-![](md/media/chapter06_multitasking_and_notifications/media/image4.png)
+![](md-media/chapter06_multitasking_and_notifications/media/image4.png)
 
 图 7‑4 AsyncTask
 
@@ -743,7 +743,7 @@ HandlerThread，而非传统的 Thread
 虽然服务的生命周期比活动的生命周期简单，但服务的生命周期非常重要。因为服务在后台运行，有时用户甚至意识不到它的存在，所以我们更多关注于服务如何创建和销毁。服务的生命周期根据创建一个服务的方式不同而有所不同，见图
 7‑5，分别是启动方式和绑定方式。
 
-![](md/media/chapter06_multitasking_and_notifications/media/image5.png)
+![](md-media/chapter06_multitasking_and_notifications/media/image5.png)
 
 **图** **7‑5
 服务的[生命周期](http://blog.csdn.net/fireofstar/article/details/7299443)**
@@ -1393,7 +1393,7 @@ stopSelf(int) 确保服务停止请求始终基于最近的启动请求。换言
 相对应的启动请求 ID（传递给 onStartCommand()的 startId）。此外，如果服务在能够调用
 stopSelf(int) 之前收到新启动请求，则ID不匹配，服务也不会停止。
 
-![](md/media/chapter06_multitasking_and_notifications/media/image6.png)
+![](md-media/chapter06_multitasking_and_notifications/media/image6.png)
 
 图 7‑6 启动和终止
 
@@ -1657,7 +1657,7 @@ IBinder变量返回当前服务的实例，使得客户端用这个方法能够�
 
 码 7‑14显示了客户端怎样使用ServiceConnection接口和onServiceConnected回调方法的实现来绑定服务的。
 
-![](md/media/chapter06_multitasking_and_notifications/media/image7.png)
+![](md-media/chapter06_multitasking_and_notifications/media/image7.png)
 
 图 7‑7 绑定服务
 
@@ -2272,7 +2272,7 @@ IBinder变量返回当前服务的实例，使得客户端用这个方法能够�
 
 这样我们就实现了客户端和服务的双向通信，客户端和服务都有自己的Handler和Messenger对象，使得对方可以给自己发送消息，客户端的Messenger是通过Message的replyTo传递给服务的。
 
-![](md/media/chapter06_multitasking_and_notifications/media/image8.png)
+![](md-media/chapter06_multitasking_and_notifications/media/image8.png)
 
 图 7‑8 Messenger服务
 
@@ -2281,7 +2281,7 @@ IBinder变量返回当前服务的实例，使得客户端用这个方法能够�
 通知即是一个消息，可以在应用程序界面显示其图形标记提示用户。例如当用户操作应用时，如果有电话、短信或者邮件到达，可以向系统提交一个通知，它会首先以图标的形式显示在设备的状态栏位置，在手机的状态栏上就会出现一个小图标，提示用户处理这个消息，如**图
 7‑6**所示。用户手从上方滑动状态栏就可以展开查看通知的详细信息，并进行处理。
 
-![](md/media/chapter06_multitasking_and_notifications/media/image9.png)
+![](md-media/chapter06_multitasking_and_notifications/media/image9.png)
 
 **图** **7‑9通知**
 
@@ -2293,9 +2293,9 @@ IBinder变量返回当前服务的实例，使得客户端用这个方法能够�
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter06_multitasking_and_notifications/media/image10.png" style="width:2.53543in;height:0.95139in" /></p>
+<td><p><img src="md-media/chapter06_multitasking_and_notifications/media/image10.png" style="width:2.53543in;height:0.95139in" /></p>
 <p>图 7‑10 通知图标显示在状态栏的左侧</p></td>
-<td><p><img src="md/media/chapter06_multitasking_and_notifications/media/image11.png" style="width:1.97917in;height:2.06972in" /></p>
+<td><p><img src="md-media/chapter06_multitasking_and_notifications/media/image11.png" style="width:1.97917in;height:2.06972in" /></p>
 <p>图 7‑11 抽屉式通知栏中的通知</p></td>
 </tr>
 </tbody>
@@ -2308,9 +2308,9 @@ IBinder变量返回当前服务的实例，使得客户端用这个方法能够�
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter06_multitasking_and_notifications/media/image12.png" style="width:1.92764in;height:1.89583in" /></p>
+<td><p><img src="md-media/chapter06_multitasking_and_notifications/media/image12.png" style="width:1.92764in;height:1.89583in" /></p>
 <p>图 7‑12显示在前台应用前面的提醒式通知</p></td>
-<td><p><img src="md/media/chapter06_multitasking_and_notifications/media/image13.png" style="width:1.51357in;height:1.90278in" /></p>
+<td><p><img src="md-media/chapter06_multitasking_and_notifications/media/image13.png" style="width:1.51357in;height:1.90278in" /></p>
 <p>图 7‑13 锁定屏幕上已隐藏敏感内容的通知</p></td>
 </tr>
 </tbody>
@@ -2332,9 +2332,9 @@ IBinder变量返回当前服务的实例，使得客户端用这个方法能够�
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter06_multitasking_and_notifications/media/image14.png" style="width:2.02778in;height:2.12128in" /></p>
+<td><p><img src="md-media/chapter06_multitasking_and_notifications/media/image14.png" style="width:2.02778in;height:2.12128in" /></p>
 <p>图 7‑14 通知标志和长按菜单</p></td>
-<td><p><img src="md/media/chapter06_multitasking_and_notifications/media/image15.png" style="width:2.63518in;height:0.77083in" /></p>
+<td><p><img src="md-media/chapter06_multitasking_and_notifications/media/image15.png" style="width:2.63518in;height:0.77083in" /></p>
 <p>图 7‑15包含基本详情的通知</p></td>
 </tr>
 </tbody>
@@ -2361,9 +2361,9 @@ IBinder变量返回当前服务的实例，使得客户端用这个方法能够�
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter06_multitasking_and_notifications/media/image16.png" style="width:2.31944in;height:0.86889in" /></p>
+<td><p><img src="md-media/chapter06_multitasking_and_notifications/media/image16.png" style="width:2.31944in;height:0.86889in" /></p>
 <p>图 7‑16 包含操作按钮的通知</p></td>
-<td><p><img src="md/media/chapter06_multitasking_and_notifications/media/image17.png" style="width:1.84028in;height:1.84028in" /></p>
+<td><p><img src="md-media/chapter06_multitasking_and_notifications/media/image17.png" style="width:1.84028in;height:1.84028in" /></p>
 <p>图 7‑17适合更多文本的展开式通知</p></td>
 </tr>
 </tbody>
@@ -2401,9 +2401,9 @@ IBinder变量返回当前服务的实例，使得客户端用这个方法能够�
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter06_multitasking_and_notifications/media/image18.png" style="width:1.77778in;height:2.01281in" /></p>
+<td><p><img src="md-media/chapter06_multitasking_and_notifications/media/image18.png" style="width:1.77778in;height:2.01281in" /></p>
 <p>图 7‑18 收起和展开后的通知组</p></td>
-<td><p><img src="md/media/chapter06_multitasking_and_notifications/media/image19.png" style="width:2.80556in;height:2.37513in" /></p>
+<td><p><img src="md-media/chapter06_multitasking_and_notifications/media/image19.png" style="width:2.80556in;height:2.37513in" /></p>
 <p>图 7‑19 时钟应用及该应用的某个渠道的通知设置</p></td>
 </tr>
 </tbody>
@@ -2425,9 +2425,9 @@ Android 利用通知的重要程度来决定通知应在多大程度上干扰用
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter06_multitasking_and_notifications/media/image20.png" style="width:1.21528in;height:2.16198in" /></p>
+<td><p><img src="md-media/chapter06_multitasking_and_notifications/media/image20.png" style="width:1.21528in;height:2.16198in" /></p>
 <p>图 7‑20 在搭载安卓 8.0 及更高版本的设备上，用户可以更改每个渠道的重要程度</p></td>
-<td><p><img src="md/media/chapter06_multitasking_and_notifications/media/image21.png" style="width:2.65607in;height:2.25in" /></p>
+<td><p><img src="md-media/chapter06_multitasking_and_notifications/media/image21.png" style="width:2.65607in;height:2.25in" /></p>
 <p>图 7‑21 用户可以根据系统级类别（左侧）和短信发送者或来电者（右侧）允许显示通知。</p></td>
 </tr>
 </tbody>
@@ -2545,7 +2545,7 @@ Android 利用通知的重要程度来决定通知应在多大程度上干扰用
 
 最基本、精简形式（也称为折叠形式）的通知会显示一个图标、一个标题和少量内容文本。在本部分中，将了解如何创建用户点击后可启动应用中的活动的通知。
 
-![](md/media/chapter06_multitasking_and_notifications/media/image22.png)
+![](md-media/chapter06_multitasking_and_notifications/media/image22.png)
 
 图 7‑22带有标题和文本的通知
 
@@ -2696,9 +2696,9 @@ ID。注意：从安卓8.1（API 级别
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter06_multitasking_and_notifications/media/image23.png" style="width:1.88889in;height:0.70159in" /></p>
+<td><p><img src="md-media/chapter06_multitasking_and_notifications/media/image23.png" style="width:1.88889in;height:0.70159in" /></p>
 <p>图 7‑23 带有一个操作按钮的通知</p></td>
-<td><p><img src="md/media/chapter06_multitasking_and_notifications/media/image24.png" style="width:3.13194in;height:0.52786in" /></p>
+<td><p><img src="md-media/chapter06_multitasking_and_notifications/media/image24.png" style="width:3.13194in;height:0.52786in" /></p>
 <p>图 7‑24 点按“回复”按钮会打开文本输入框</p></td>
 </tr>
 </tbody>
@@ -2864,7 +2864,7 @@ Intent。会话 ID 会作为意图的 extra
 
 在处理这个新通知时，使用传递给接收者的 onReceive() 方法的上下文。还应通过调用 setRemoteInputHistory() 将回复附加到通知底部。但如果要构建即时通讯应用，应创建消息式通知，并在会话中附加新消息。通知可以包含动画形式的进度指示器，向用户显示正在进行的操作的状态。
 
-![](md/media/chapter06_multitasking_and_notifications/media/image25.png)
+![](md-media/chapter06_multitasking_and_notifications/media/image25.png)
 
 图 7‑25 操作期间和操作结束后的进度条。
 
@@ -3171,9 +3171,9 @@ BigPictureStyle.bigLargeIcon() 并向其传递 null，这样大图标就会在�
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter06_multitasking_and_notifications/media/image26.png" style="width:1.59028in;height:1.8453in" /></p>
+<td><p><img src="md-media/chapter06_multitasking_and_notifications/media/image26.png" style="width:1.59028in;height:1.8453in" /></p>
 <p>图 7‑26 NotificationCompat.BigPictureStyle</p></td>
-<td><p><img src="md/media/chapter06_multitasking_and_notifications/media/image17.png" style="width:1.84028in;height:1.84028in" /></p>
+<td><p><img src="md-media/chapter06_multitasking_and_notifications/media/image17.png" style="width:1.84028in;height:1.84028in" /></p>
 <p>图 7‑27 NotificationCompat.BigTextStyle</p></td>
 </tr>
 </tbody>
@@ -3270,9 +3270,9 @@ NotificationCompat.MessagingStyle.Message 对象传递。
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter06_multitasking_and_notifications/media/image27.png" style="width:2.18831in;height:1.79994in" /></p>
+<td><p><img src="md-media/chapter06_multitasking_and_notifications/media/image27.png" style="width:2.18831in;height:1.79994in" /></p>
 <p>图 7‑28 NotificationCompat.MessagingStyle</p></td>
-<td><p><img src="md/media/chapter06_multitasking_and_notifications/media/image28.png" style="width:2.19171in;height:1.57143in" /></p>
+<td><p><img src="md-media/chapter06_multitasking_and_notifications/media/image28.png" style="width:2.19171in;height:1.57143in" /></p>
 <p>图 7‑29 NotificationCompat.MediaStyle</p></td>
 </tr>
 </tbody>
@@ -3761,7 +3761,7 @@ ACTION\_CHANNEL\_NOTIFICATION\_SETTINGS
 
 如果希望进一步整理渠道在设置界面中的外观，则可以创建渠道分组。当应用支持多个用户帐号（例如用于工作资料）时，强烈建议这么做，因为这么做可以为每个帐号各创建一个通知渠道分组。这样一来，用户便可以轻松识别和控制具有相同名称的多个通知渠道了。
 
-![](md/media/chapter06_multitasking_and_notifications/media/image29.png)
+![](md-media/chapter06_multitasking_and_notifications/media/image29.png)
 
 图 7‑30包含个人帐号和工作帐号分组的通知渠道设置
 

@@ -228,7 +228,7 @@ onFocusChange()（如事件监听器部分中所述）。
 
   - 缩小（Pinch Close）：用两个手指按住，向相互接近的方向移动，抬起。缩小内容。
 
-![](md/media/chapter09_touch_and_input/media/image1.png)
+![](md-media/chapter09_touch_and_input/media/image1.png)
 
 **图** **9.1 手势种类**
 
@@ -569,7 +569,7 @@ android:textStyle="bold" /\>
 
 定义好布局文件后，创建一个活动，导入所定义的XML布局文件，运行应用程序，可以显示出**图 9.2**的界面。
 
-![](md/media/chapter09_touch_and_input/media/image2.png)
+![](md-media/chapter09_touch_and_input/media/image2.png)
 
 **图** **9.2 运行效果**
 
@@ -583,7 +583,7 @@ android:textStyle="bold" /\>
 在上面示例中的活动和自定义布局的三种方法方法的返回值都为false，则触摸事件传递到最内层的自定义TextView。由于自定义的TextView的onTouchEvent()返回值为true，所以触摸事件被消费。**图
 9.3**示意了从外向内传递触摸事件的路径。
 
-![](md/media/chapter09_touch_and_input/media/image3.png)
+![](md-media/chapter09_touch_and_input/media/image3.png)
 
 **图** **9.3** 从外向内传递触摸事件的路径
 
@@ -639,7 +639,7 @@ action:ACTION\_UP
 9‑5中，将自定义TextView的onTouchEvent()方法返回值改为false，触摸事件就从内向外传递触摸事件（见**图
 9.4**虚线所示）。
 
-![](md/media/chapter09_touch_and_input/media/image4.png)
+![](md-media/chapter09_touch_and_input/media/image4.png)
 
 **图** **9.4** 从内向外传递触摸事件路径
 

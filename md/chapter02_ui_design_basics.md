@@ -369,12 +369,12 @@ controls”窗口中打开“Help”窗格。
 <tbody>
 <tr class="odd">
 <td>Close</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image1.png" style="width:0.18013in;height:0.14179in" alt="“Close”图标" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image1.png" style="width:0.18013in;height:0.14179in" alt="“Close”图标" /></td>
 <td>关闭模拟器。</td>
 </tr>
 <tr class="even">
 <td>Minimiz</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image2.png" style="width:0.21935in;height:0.11194in" alt="“Minimize”图标" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image2.png" style="width:0.21935in;height:0.11194in" alt="“Minimize”图标" /></td>
 <td>最小化模拟器窗口。</td>
 </tr>
 <tr class="odd">
@@ -384,38 +384,38 @@ controls”窗口中打开“Help”窗格。
 </tr>
 <tr class="even">
 <td>Power</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image3.png" style="width:0.19403in;height:0.16483in" alt="“Power”图标" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image3.png" style="width:0.19403in;height:0.16483in" alt="“Power”图标" /></td>
 <td>点击即可开启或关闭屏幕。<br />
 点击并按住即可开启或关闭设备。</td>
 </tr>
 <tr class="odd">
 <td>Volume up</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image4.png" style="width:0.18648in;height:0.17164in" alt="“Volume Up”图标" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image4.png" style="width:0.18648in;height:0.17164in" alt="“Volume Up”图标" /></td>
 <td>点击即可显示一个滑块控件并将音量调高。再次点击即可进一步调高音量，也可以使用滑块控件调整音量。</td>
 </tr>
 <tr class="even">
 <td>Volume down</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image5.png" style="width:0.20149in;height:0.16903in" alt="“Volume Down”图标" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image5.png" style="width:0.20149in;height:0.16903in" alt="“Volume Down”图标" /></td>
 <td>点击即可显示一个滑块控件并将音量调低。再次点击即可进一步调低音量，也可以使用滑块控件调整音量。</td>
 </tr>
 <tr class="odd">
 <td>Rotate left</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image6.png" style="width:0.20851in;height:0.21642in" alt="“Rotate Left”图标" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image6.png" style="width:0.20851in;height:0.21642in" alt="“Rotate Left”图标" /></td>
 <td>将设备逆时针旋转 90 度。</td>
 </tr>
 <tr class="even">
 <td>Rotate right</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image7.png" style="width:0.21642in;height:0.21642in" alt="“Rotate Right”图标" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image7.png" style="width:0.21642in;height:0.21642in" alt="“Rotate Right”图标" /></td>
 <td>将设备顺时针旋转 90 度。</td>
 </tr>
 <tr class="odd">
 <td>Take screenshot</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image8.png" style="width:0.17164in;height:0.15703in" alt="“Take Screenshot”图标" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image8.png" style="width:0.17164in;height:0.15703in" alt="“Take Screenshot”图标" /></td>
 <td>点击即可对设备进行屏幕截图。</td>
 </tr>
 <tr class="even">
 <td>Enter zoom mode</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image9.png" style="width:0.20815in;height:0.20149in" alt="“Enter Zoom Mode”图标" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image9.png" style="width:0.20815in;height:0.20149in" alt="“Enter Zoom Mode”图标" /></td>
 <td><p>点击即可使光标变为缩放图标。如需退出缩放模式，再次点击该按钮即可。</p>
 <p>在缩放模式下放大和缩小：</p>
 <ul>
@@ -429,28 +429,28 @@ controls”窗口中打开“Help”窗格。
 </tr>
 <tr class="odd">
 <td>Back</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image10.png" style="width:0.17577in;height:0.18657in" alt="“Back”图标" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image10.png" style="width:0.17577in;height:0.18657in" alt="“Back”图标" /></td>
 <td>返回上一个屏幕，或者关闭对话框、选项菜单、“Notifications”面板或屏幕上的键盘。</td>
 </tr>
 <tr class="even">
 <td>Home</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image11.png" style="width:0.17569in;height:0.18649in" alt="“Home”图标" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image11.png" style="width:0.17569in;height:0.18649in" alt="“Home”图标" /></td>
 <td>返回主屏幕。</td>
 </tr>
 <tr class="odd">
 <td><p>Overview</p>
 <p>(Recent Apps)</p></td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image12.png" style="width:0.17911in;height:0.17911in" alt="“Overview”图标" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image12.png" style="width:0.17911in;height:0.17911in" alt="“Overview”图标" /></td>
 <td>点按即可打开最近用过的应用的缩略图列表。如需打开某个应用，点按相应缩略图即可。如需从列表中移除某个缩略图，请向左或向右滑动该缩略图。Wear OS 不支持此按钮。</td>
 </tr>
 <tr class="even">
 <td>Fold</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image13.png" style="width:0.1908in;height:0.16418in" alt="“Fold”图标" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image13.png" style="width:0.1908in;height:0.16418in" alt="“Fold”图标" /></td>
 <td>对于可折叠设备，折叠设备以显示其较小的屏幕配置。</td>
 </tr>
 <tr class="odd">
 <td>Unfold</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image14.png" style="width:0.18213in;height:0.15672in" alt="“Unfold”图标" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image14.png" style="width:0.18213in;height:0.15672in" alt="“Unfold”图标" /></td>
 <td>对于可折叠设备，展开设备以显示其较大的屏幕配置。</td>
 </tr>
 <tr class="even">
@@ -460,7 +460,7 @@ controls”窗口中打开“Help”窗格。
 </tr>
 <tr class="odd">
 <td>More</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image15.png" style="width:0.23117in;height:0.10448in" alt="“More”图标" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image15.png" style="width:0.23117in;height:0.10448in" alt="“More”图标" /></td>
 <td>点击即可访问下一个表中介绍的其他功能和设置。</td>
 </tr>
 </tbody>
@@ -542,7 +542,7 @@ build.gradle 文件控制 Gradle 插件构建应用的方式。
 在本节课中将学习如何使用 Android Studio 布局编辑器创建包含一个文本框和一个按钮的布局（图
 2‑1），如何在点按该按钮时让应用将文本框的内容发送到其他活动。
 
-![](md/media/chapter02_ui_design_basics/media/image16.png)
+![](md-media/chapter02_ui_design_basics/media/image16.png)
 
 图 2‑1 最终布局的屏幕截图
 
@@ -561,9 +561,9 @@ Studio提供的图形化界面设计工具，能够把工具提供的布局和�
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image17.png" style="width:1.82292in;height:0.36458in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image17.png" style="width:1.82292in;height:0.36458in" /></p>
 <p>图 2‑2 Design标签</p></td>
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image18.png" style="width:2.43235in;height:2.73006in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image18.png" style="width:2.43235in;height:2.73006in" /></p>
 <p>图 2‑3 Palette窗口</p></td>
 </tr>
 </tbody>
@@ -572,7 +572,7 @@ Studio提供的图形化界面设计工具，能够把工具提供的布局和�
 安卓应用的界面以布局和微件的层次结构形式构建而成。布局是 ViewGroup 对象，即控制其子视图在屏幕上的放置方式的容器；微件是 View 对象，即按钮和文本框等界面组件（图
 2‑4）。
 
-![](md/media/chapter02_ui_design_basics/media/image19.png)
+![](md-media/chapter02_ui_design_basics/media/image19.png)
 
  图 2‑4 ViewGroup 对象如何在布局中形成分支并包含 View 对象的图示
 
@@ -590,25 +590,25 @@ Project”，或直接点击 Android Studio 屏幕左侧的 Project；
 
 (3)如果编辑器显示 XML 源代码，请点击窗口右上角的 Design 标签页；
 
-(4)点击 ![](md/media/chapter02_ui_design_basics/media/image20.png) （“Select
+(4)点击 ![](md-media/chapter02_ui_design_basics/media/image20.png) （“Select
 Design Surface”），然后选择 Blueprint；
 
-(5)点击布局编辑器工具栏中的 ![](md/media/chapter02_ui_design_basics/media/image21.png) （“View
+(5)点击布局编辑器工具栏中的 ![](md-media/chapter02_ui_design_basics/media/image21.png) （“View
 Options”），并确保选中 “Show All Constraints”；
 
 (6)确保 Autoconnect 处于关闭状态，当 Autoconnect
-处于关闭状态时，工具栏中的提示会显示 ![](md/media/chapter02_ui_design_basics/media/image22.png) （“Enable
+处于关闭状态时，工具栏中的提示会显示 ![](md-media/chapter02_ui_design_basics/media/image22.png) （“Enable
 Autoconnection to Parent”）；
 
-(7)点击工具栏中的 ![](md/media/chapter02_ui_design_basics/media/image23.png) （“Default
+(7)点击工具栏中的 ![](md-media/chapter02_ui_design_basics/media/image23.png) （“Default
 Margins”），然后选择 16，如果需要可以稍后调整每个视图的外边距。
 
-(8)点击工具栏中的 ![](md/media/chapter02_ui_design_basics/media/image24.png) （“Device
+(8)点击工具栏中的 ![](md-media/chapter02_ui_design_basics/media/image24.png) （“Device
 for Preview”），然后选择 “5.5, 1440 × 2560, 560 dpi (Pixel XL)”。
 
 布局编辑器现在如图 2‑5所示。
 
-![](md/media/chapter02_ui_design_basics/media/image25.png)
+![](md-media/chapter02_ui_design_basics/media/image25.png)
 
 图 2‑5显示 activity\_main.xml 的布局编辑器
 
@@ -616,7 +616,7 @@ for Preview”），然后选择 “5.5, 1440 × 2560, 560 dpi (Pixel XL)”�
 Tree 面板显示布局的视图层次结构。在本例中根视图是 ConstraintLayout，其仅包含一个 TextView 对象。ConstraintLayout 是一种布局，其根据同级视图和父布局的约束条件定义每个视图的位置。这样一来，使用扁平视图层次结构既可以创建简单布局，又可以创建复杂布局。这种布局无需嵌套布局。嵌套布局是布局内的布局（图
 2‑4），会增加绘制界面所需的时间。
 
-![](md/media/chapter02_ui_design_basics/media/image26.png)
+![](md-media/chapter02_ui_design_basics/media/image26.png)
 
 图 2‑6 ConstraintLayout 内放有两个视图的图示
 
@@ -637,9 +637,9 @@ Tree 面板显示布局的视图层次结构。在本例中根视图是 Constr
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image27.png" style="width:0.28566in;height:0.91411in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image27.png" style="width:0.28566in;height:0.91411in" /></p>
 <p>图 2‑7 Zoom 按钮</p></td>
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image28.png" style="width:2.49693in;height:0.83524in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image28.png" style="width:2.49693in;height:0.83524in" /></p>
 <p>图 2‑8按照到父布局顶部和左侧的距离约束文本框</p></td>
 </tr>
 </tbody>
@@ -663,7 +663,7 @@ Tree 面板显示布局的视图层次结构。在本例中根视图是 Constr
 
 #### 添加按钮
 
-![](md/media/chapter02_ui_design_basics/media/image29.png)
+![](md-media/chapter02_ui_design_basics/media/image29.png)
 
  图 2‑9 按照到文本框右侧的距离以及文本框基线来约束按钮
 
@@ -674,14 +674,14 @@ Tree 面板显示布局的视图层次结构。在本例中根视图是 Constr
 (3)创建一个从按钮左侧到文本框右侧的约束条件；
 
 (4)如需按水平对齐约束视图，创建一个文本基线之间的约束条件，为此右键点击按钮，然后选择 “Show
-Baseline” ![在布局编辑器中显示基准操作](md/media/chapter02_ui_design_basics/media/image30.png)。基线锚点显示在按钮内部，点击并按住此锚点，然后将其拖动到相邻文本框中显示的基线锚点上，结果应如图
+Baseline” ![在布局编辑器中显示基准操作](md-media/chapter02_ui_design_basics/media/image30.png)。基线锚点显示在按钮内部，点击并按住此锚点，然后将其拖动到相邻文本框中显示的基线锚点上，结果应如图
 2‑9所示。
 
 注意：您还可以根据顶边或底边实现水平对齐。但按钮的图片周围有内边距，因此如果以这种方式对齐，那么其们看上去是没有对齐的。
 
 #### 更改界面字符串
 
-若要预览界面，请点击工具栏中的 ![](md/media/chapter02_ui_design_basics/media/image20.png) (“Select
+若要预览界面，请点击工具栏中的 ![](md-media/chapter02_ui_design_basics/media/image20.png) (“Select
 Design Surface”)，然后选择 Design。请注意，文本输入和按钮标签应设置为默认值。若要更改界面字符串，请按以下步骤操作：
 
 (1)打开 Project窗口，然后打开“app \> res \> values \>
@@ -690,9 +690,9 @@ strings.xml”。这是一个字符串资源文件，可在此文件中指定所
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image31.png" style="width:2.67894in;height:0.61194in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image31.png" style="width:2.67894in;height:0.61194in" /></p>
 <p>图 2‑10 字符串管理界面</p></td>
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image32.png" style="width:2.69419in;height:1.23691in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image32.png" style="width:2.69419in;height:1.23691in" /></p>
 <p>图 2‑11 用于添加新字符串的对话框</p></td>
 </tr>
 </tbody>
@@ -702,7 +702,7 @@ strings.xml”。这是一个字符串资源文件，可在此文件中指定所
 Editor”，其提供了一个可以添加和修改默认字符串的简单界面，其还有助于让所有已翻译的字符串井然有序（图
 2‑10）；
 
-(3)点击 ![](md/media/chapter02_ui_design_basics/media/image33.png) (“Add
+(3)点击 ![](md-media/chapter02_ui_design_basics/media/image33.png) (“Add
 Key”) 可以创建一个新字符串作为文本框的提示文本，此时会打开如图 2‑11所示的窗口，在 Add Key 对话框中，完成以下步骤：
 
   - 在 Key 字段中输入“edit\_message”。
@@ -719,29 +719,29 @@ Key”) 可以创建一个新字符串作为文本框的提示文本，此时会
 
 (2)找到 text 属性（当前设为“Name”）并删除相应的值；
 
-(3)找到 hint 属性，然后点击文本框右侧的![](md/media/chapter02_ui_design_basics/media/image34.png)(“Pick
+(3)找到 hint 属性，然后点击文本框右侧的![](md-media/chapter02_ui_design_basics/media/image34.png)(“Pick
 a Resource”)，在显示的对话框中，双击列表中的 edit\_message；
 
-(4)点击布局中的按钮，找到其 text 属性（当前设为“Button”），然后点击![](md/media/chapter02_ui_design_basics/media/image34.png)(“Pick
+(4)点击布局中的按钮，找到其 text 属性（当前设为“Button”），然后点击![](md-media/chapter02_ui_design_basics/media/image34.png)(“Pick
 a Resource”)，并选择 button\_send。
 
 #### 大小可灵活调整
 
-若要创建一个适应不同屏幕尺寸的布局，需要让文本框拉伸以填充去除按钮和外边距后剩余的所有水平空间。继续操作之前，点击工具栏中的 ![](md/media/chapter02_ui_design_basics/media/image20.png) (Select
+若要创建一个适应不同屏幕尺寸的布局，需要让文本框拉伸以填充去除按钮和外边距后剩余的所有水平空间。继续操作之前，点击工具栏中的 ![](md-media/chapter02_ui_design_basics/media/image20.png) (Select
 Design Surface)，然后选择 Blueprint，若要让文本框大小可灵活调整按以下步骤操作：
 
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image35.png" style="width:3.52505in;height:0.85821in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image35.png" style="width:3.52505in;height:0.85821in" /></p>
 <p>图 2‑12选择 Create Horizontal Chain 后所得到的结果</p></td>
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image36.png" style="width:2.12484in;height:1.48368in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image36.png" style="width:2.12484in;height:1.48368in" /></p>
 <p>图 2‑13点击以将宽度更改为 Match Constraints</p></td>
 </tr>
 </tbody>
 </table>
 
-![](md/media/chapter02_ui_design_basics/media/image37.png)
+![](md-media/chapter02_ui_design_basics/media/image37.png)
 
 图 2‑14 文本框现在拉伸以填充剩余空间
 
@@ -829,7 +829,7 @@ XML文件：
 码 2‑4
 
 点击 Run
-'app'![](md/media/chapter02_ui_design_basics/media/image38.png) 以安装并运行应用，该按钮仍然没有任何作用。如需构建在点按该按钮后会启动的另一个活动，继续下一节。
+'app'![](md-media/chapter02_ui_design_basics/media/image38.png) 以安装并运行应用，该按钮仍然没有任何作用。如需构建在点按该按钮后会启动的另一个活动，继续下一节。
 
 ### 调用活动
 
@@ -974,7 +974,7 @@ Android Studio 会自动执行下列三项操作：
 
 #### 添加文本视图
 
-![](md/media/chapter02_ui_design_basics/media/image39.png)
+![](md-media/chapter02_ui_design_basics/media/image39.png)
 
 图 2‑15 位于布局顶部中心的文本视图。
 
@@ -983,7 +983,7 @@ Android Studio 会自动执行下列三项操作：
 (1)打开“ app \> res \> layout \> activity\_display\_message.xml ”文件。
 
 (2)点击工具栏中的“Enable Autoconnection to
-Parent” ![](md/media/chapter02_ui_design_basics/media/image22.png)。系统将启用
+Parent” ![](md-media/chapter02_ui_design_basics/media/image22.png)。系统将启用
 Autoconnect，参见图 2‑15。
 
 (3)在 Palette 面板中，点击 Text，将 TextView 拖动到布局中，然后将其放置在靠近布局顶部中心的位置，使其贴靠到出现的垂直线上。Autoconnect
@@ -1064,14 +1064,14 @@ AndroidManifest.xml” 文件，找到 DisplayMessageActivity 的 \<activity
 #### 运行应用
 
 点击工具栏中的“Apply Changes”
-![](md/media/chapter02_ui_design_basics/media/image40.png)以运行应用，当应用打开后在文本字段中输入一条消息，点按发送即会看到该消息显示在第二个活动中。
+![](md-media/chapter02_ui_design_basics/media/image40.png)以运行应用，当应用打开后在文本字段中输入一条消息，点按发送即会看到该消息显示在第二个活动中。
 
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image41.png" style="width:2.56716in;height:1.56989in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image41.png" style="width:2.56716in;height:1.56989in" /></p>
 <p>图 2‑16 输入屏幕</p></td>
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image42.png" style="width:2.58535in;height:1.56944in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image42.png" style="width:2.58535in;height:1.56944in" /></p>
 <p>图 2‑17 输出结果</p></td>
 </tr>
 </tbody>
@@ -1086,7 +1086,7 @@ AndroidManifest.xml” 文件，找到 DisplayMessageActivity 的 \<activity
 先看一个典型的例子：在编写短信时，有一个紧急电话打过来，用户必须要接这个电话；如果接完电话后，肯定希望继续编辑刚才的短信完成这个任务。为了完成类似的任务，安卓系统需要同时执行多个程序。但对于移动终端这种有限资源的平台来说，同时执行多个程序有可以提高用户友好性，但是也有其严重的缺点，即每多执行一个应用程序，就会多耗费一些系统内存。手机里的内存是相当有限的，当同时执行的程序过多，或是关闭的程序没有正确释放掉内存，执行系统时就会觉得越来越慢甚至不稳定。为了解决个问题，安卓引入了生命周期的机制来管理应用程序，见**图
 2‑18**。
 
-![](md/media/chapter02_ui_design_basics/media/image43.png)
+![](md-media/chapter02_ui_design_basics/media/image43.png)
 
 **图** **2‑18 Activity的生命周期**
 
@@ -1388,7 +1388,7 @@ onCreate()。onDestroy() 回调应释放先前的回调（例如 onStop()）尚�
 
 从onResume()开始到onPause()结束。在这段时间里，该活动处于所有活动的最前面，和用户进行交互。活动可以经常性地在resumed和paused状态之间切换，例如：当设备准备休眠时，当一个活动处理结果被分发时，当一个新的Intent被分发时。所以在这些接口方法中的代码应该属于非常轻量级的。
 
-![](md/media/chapter02_ui_design_basics/media/image44.png)
+![](md-media/chapter02_ui_design_basics/media/image44.png)
 
 图 2‑19活动的状态转换
 
@@ -1557,7 +1557,7 @@ Monitor中的Logcat，向上下滚动可以看到很多输出日志，在图
 2‑20中标记1的位置输入“MainActivity”搜索特定的输出，会注意到三个方法被调用：活动Created、活动started
 和活动resumed。
 
-![](md/media/chapter02_ui_design_basics/media/image45.png)
+![](md-media/chapter02_ui_design_basics/media/image45.png)
 
 图 2‑20 搜索特定的Logcat输出日志
 
@@ -1567,9 +1567,9 @@ Monitor中的Logcat，向上下滚动可以看到很多输出日志，在图
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image46.png" style="width:1.87313in;height:1.81104in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image46.png" style="width:1.87313in;height:1.81104in" /></p>
 <p>图 2‑21 三种模拟器操作</p></td>
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image47.png" style="width:3.64272in;height:0.85075in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image47.png" style="width:3.64272in;height:0.85075in" /></p>
 <p>图 2‑22 点击退出按钮后的日志输出</p></td>
 </tr>
 </tbody>
@@ -1582,11 +1582,11 @@ Monitor中的Logcat，向上下滚动可以看到很多输出日志，在图
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image48.png" style="width:1.16452in;height:1.88624in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image48.png" style="width:1.16452in;height:1.88624in" /></p>
 <p>图 2‑23</p></td>
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image49.png" style="width:1.34362in;height:1.86836in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image49.png" style="width:1.34362in;height:1.86836in" /></p>
 <p>图 2‑24</p></td>
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image50.png" style="width:2.752in;height:0.8209in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image50.png" style="width:2.752in;height:0.8209in" /></p>
 <p>图 2‑25</p></td>
 </tr>
 </tbody>
@@ -1603,9 +1603,9 @@ being destroyed。
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image51.png" style="width:1.66548in;height:2.64179in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image51.png" style="width:1.66548in;height:2.64179in" /></p>
 <p>图 2‑26</p></td>
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image52.png" style="width:3.37347in;height:0.76119in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image52.png" style="width:3.37347in;height:0.76119in" /></p>
 <p>图 2‑27</p></td>
 </tr>
 </tbody>
@@ -1620,7 +1620,7 @@ being destroyed。
 所谓任务就是某些参与用户交互的活动集合，其目的是为完成某项确定的工作。安卓系统通过任务栈结构来管理任务中的这些活动，活动按照被打开的顺序排列在任务栈中。设备的Home屏幕是大多数任务的起点，当用户触摸应用程序的图标（或者Home屏幕上的快捷方式）时，该应用程序的任务就会来到前台。如果该应用的任务不存在（即应用在最近时间段内没有使用过），那么一个新的任务被创建，应用的主活动会作为任务栈中的根活动打开。如果用户从当前的Activity\_1打开了一个新的Activity\_2，则新的Activity\_2被压入到栈的顶部并且成为用户的前端界面，而原来的Activity\_1仍然在任务栈中，但是已经变成停止状态，此时系统会保留其用户界面的状态，继续打开新的Activity\_3成为用户的前端界面，活动\_1和Activity\_2依次仍然在任务栈中，此时系统会保留它们用户界面的状态。当用户按下返回按钮时，当前的Activity\_3就会从任务栈的顶部弹出，即当前的Activity\_3就会被销毁，而原来的Activity\_2就会被重新恢复显示被系统保存的状态。在任务栈中的活动不会被重排，只有压入和弹出两种操作，这种任务栈的读写方式为“后进先出”，称其为回退栈。**图
 2‑28**展示了多个活动在一个任务中切换的过程。
 
-![](md/media/chapter02_ui_design_basics/media/image53.png)
+![](md-media/chapter02_ui_design_basics/media/image53.png)
 
 **图** **2‑28活动的回退栈**
 
@@ -1631,7 +1631,7 @@ being destroyed。
 A的堆栈中有Activity\_Y和Activity\_X，用户按主屏幕按钮，然后从应用启动器中启动新应用，主屏幕出现后任务A转到后台。当新应用启动时，系统会启动该应用的任务B，该任务具有自己的活动\_Z
 堆栈。与该应用互动后，用户再次返回到主屏幕并选择最初启动任务A的应用，现在任务A进入前台，其堆栈中的两个活动都完好如初，堆栈顶部的Activity\_Y恢复运行。此时，用户仍可通过以下方式切换到任务B：转到主屏幕并选择启动该任务的应用图标（或者从最近使用的应用屏幕中选择该应用的任务），这就是在安卓平台上进行多任务处理的一个例子。
 
-![](md/media/chapter02_ui_design_basics/media/image54.png)
+![](md-media/chapter02_ui_design_basics/media/image54.png)
 
 **图** **2‑29 两个任务：任务 B 在前台接收用户互动，任务 A 在后台等待恢复。**
 
@@ -1646,7 +1646,7 @@ A的堆栈中有Activity\_Y和Activity\_X，用户按主屏幕按钮，然后从
 安卓系统从Android 3.0（API level
 11）开始推出片段，主要目的是支持多屏幕更加动态和灵活的界面设计。用户界面设计时，把一个活动切分成多个片段，那么在把应用从手机屏幕迁移到大屏幕时，布局设计就不再需要改变和管理片段内部的视图层次结构，而可以重点考虑活动的显示外观了。
 
-![](md/media/chapter02_ui_design_basics/media/image55.png)
+![](md-media/chapter02_ui_design_basics/media/image55.png)
 
 **图** **2‑30片段的使用实例**
 
@@ -1660,7 +1660,7 @@ A的堆栈中有Activity\_Y和Activity\_X，用户按主屏幕按钮，然后从
 
 片段必须放置在活动中使用，不能独立存在。片段具有自己的生命周期，但它的生命周期也直接受所在的活动生命周期的影响，例如当一个活动被销毁时，所包含的所有片段也都被销毁了。一个活动中可以包含多个片段，每个片段都定义自己的布局，并在生命周期中的回调方法中定义自己的动作。片段之间是相互独立的，活动通过回退栈来管理每个片段发生的事件，每一个对片段操作的事件，都会添加到回退栈中，通过回退栈允许用户通过回退键取消已经执行的动作。
 
-![](md/media/chapter02_ui_design_basics/media/image56.png)
+![](md-media/chapter02_ui_design_basics/media/image56.png)
 
 图 2‑31 Fragment的生命周期
 
@@ -1902,14 +1902,14 @@ getChildFragmentManager()方法获取对管理片段子级的FragmentManager的�
 getParentFragmentManager()方法。下面来看几个示例，看看片段、其宿主以及与每个片段关联的 FragmentManager
 实例之间的关系。
 
-![](md/media/chapter02_ui_design_basics/media/image57.png)
+![](md-media/chapter02_ui_design_basics/media/image57.png)
 
 图 2‑32 两个界面布局示例，显示了片段与其宿主活动之间的关系
 
 图
 2‑32显示了两个示例，每个示例中都有一个活动宿主。这两个示例中的宿主活动都以BottomNavigationView的形式向用户显示顶级导航，该视图负责以应用中的不同屏幕换出宿主片段，其中每个屏幕都实现为单独的片段。例1中的宿主片段托管两个子片段，这些片段构成拆分视图屏幕，例2中的宿主片段托管一个子片段，该片段构成滑动视图的显示片段。
 
-![](md/media/chapter02_ui_design_basics/media/image58.png)
+![](md-media/chapter02_ui_design_basics/media/image58.png)
 
 图 2‑33 每个宿主都有与其关联的FragmentManager，用于管理其子片段
 
@@ -2381,7 +2381,7 @@ ID。为了创建视图并从应用中引用它们，常见的模式是：
 类都会实现一个扩展 ViewGroup.LayoutParams 的嵌套类。此子类包含的属性类型会根据需要为视图组的每个子视图定义尺寸和位置。如图
 2‑35所示，父视图组会为每个子视图（包括子视图组）定义布局参数。
 
-![](md/media/chapter02_ui_design_basics/media/image59.png)
+![](md-media/chapter02_ui_design_basics/media/image59.png)
 
 图 2‑37 以可视化方式表示的视图层次结构，其中包含与每个视图关联的布局参数
 
@@ -2419,11 +2419,11 @@ ViewGroup
 
 | 布局类型 | 样式                                                         | 说明                                                      |
 | ---- | ---------------------------------------------------------- | ------------------------------------------------------- |
-| 线性布局 | ![](md/media/chapter02_ui_design_basics/media/image60.png) | 一种使用单个水平行或垂直行来组织子项的布局。此布局会在窗口长度超出屏幕长度时创建滚动条             |
-| 相对布局 | ![](md/media/chapter02_ui_design_basics/media/image61.png) | 能指定子对象彼此之间的相对位置（子对象 A 在子对象 B 左侧）或子对象与父对象的相对位置（与父对象顶部对齐） |
-| 网页视图 | ![](md/media/chapter02_ui_design_basics/media/image62.png) | 显示网页                                                    |
-| 列表视图 | ![](md/media/chapter02_ui_design_basics/media/image63.png) | 显示滚动的单列列表                                               |
-| 网格视图 | ![](md/media/chapter02_ui_design_basics/media/image64.png) | 显示滚动的行列网格                                               |
+| 线性布局 | ![](md-media/chapter02_ui_design_basics/media/image60.png) | 一种使用单个水平行或垂直行来组织子项的布局。此布局会在窗口长度超出屏幕长度时创建滚动条             |
+| 相对布局 | ![](md-media/chapter02_ui_design_basics/media/image61.png) | 能指定子对象彼此之间的相对位置（子对象 A 在子对象 B 左侧）或子对象与父对象的相对位置（与父对象顶部对齐） |
+| 网页视图 | ![](md-media/chapter02_ui_design_basics/media/image62.png) | 显示网页                                                    |
+| 列表视图 | ![](md-media/chapter02_ui_design_basics/media/image63.png) | 显示滚动的单列列表                                               |
+| 网格视图 | ![](md-media/chapter02_ui_design_basics/media/image64.png) | 显示滚动的行列网格                                               |
 
 表 2‑4 常见布局类型
 
@@ -2598,9 +2598,9 @@ XML）来构建布局。本节提供了使用约束布局在 Android Studio 3.0
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image65.png" style="width:2.33869in;height:1.12687in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image65.png" style="width:2.33869in;height:1.12687in" /></p>
 <p>图 2‑38 编辑器将视图C显示在视图A下方，但并没有垂直约束条件</p></td>
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image66.png" style="width:2.35417in;height:1.13433in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image66.png" style="width:2.35417in;height:1.13433in" /></p>
 <p>图 2‑39 视图C现垂直约束在视图A下方</p></td>
 </tr>
 </tbody>
@@ -2608,7 +2608,7 @@ XML）来构建布局。本节提供了使用约束布局在 Android Studio 3.0
 
 尽管缺少约束条件不会导致出现编译错误，但布局编辑器会将缺少约束条件作为错误显示在工具栏中。要查看错误和其他警告，请点击 Show
 Warnings and
-Errors![](md/media/chapter02_ui_design_basics/media/image67.png)。
+Errors![](md-media/chapter02_ui_design_basics/media/image67.png)。
 为避免出现缺少约束条件这一问题，布局编辑器会使用 [Autoconnect 和 Infer
 Constraints](https://developer.android.com/training/constraint-layout?hl=zh-cn#use-autoconnect-and-infer-constraints) 功能自动添加约束条件。如需在项目中使用 约束布局，按以下步骤操作：
 
@@ -2651,9 +2651,9 @@ Constraints](https://developer.android.com/training/constraint-layout?hl=zh-cn#u
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image68.png" style="width:2.11749in;height:1.66418in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image68.png" style="width:2.11749in;height:1.66418in" /></p>
 <p>图 2‑40用于将布局转换为 约束布局的菜单</p></td>
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image69.png" style="width:2.87185in;height:1.6194in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image69.png" style="width:2.87185in;height:1.6194in" /></p>
 <p>图 2‑41 可以通过 Attributes 窗口中的 Layout 部分创建连接</p></td>
 </tr>
 </tbody>
@@ -2682,7 +2682,7 @@ Constraints](https://developer.android.com/training/constraint-layout?hl=zh-cn#u
   - 点击约束手柄并将其拖动到可用定位点。此点可以是另一视图的边缘、布局的边缘或者引导线。请注意，当您拖动约束手柄时，布局编辑器会显示可行的连接定位点和蓝色叠加层。
 
   - 点击 Attributes 窗口的 Layout 部分中的“Create a
-    connection”按钮![](md/media/chapter02_ui_design_basics/media/image70.png)，具体如图
+    connection”按钮![](md-media/chapter02_ui_design_basics/media/image70.png)，具体如图
     2‑39所示。
 
 创建约束条件后，编辑器会为其指定默认外边距来分隔两个视图。创建约束条件时，请注意以下规则：
@@ -2702,9 +2702,9 @@ Constraints](https://developer.android.com/training/constraint-layout?hl=zh-cn#u
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image71.png" style="width:1.68077in;height:1.85821in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image71.png" style="width:1.68077in;height:1.85821in" /></p>
 <p>图 2‑42红色约束条件表示您可以点击将其删除</p></td>
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image72.png" style="width:3.02239in;height:1.76564in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image72.png" style="width:3.02239in;height:1.76564in" /></p>
 <p>图 2‑43 点击约束定位点将其删除</p></td>
 </tr>
 </tbody>
@@ -2727,44 +2727,44 @@ constraints”；如果希望保持当前尺寸，但想要移动视图使其不
 <tbody>
 <tr class="odd">
 <td>父级位置</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image73.png" style="width:2.05253in;height:0.99149in" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image73.png" style="width:2.05253in;height:0.99149in" /></td>
 <td>将视图的一侧约束到布局的相应边缘。在左图中，视图的左侧连接到父布局的左边缘，可以使用外边距来定义距离边缘的距离。</td>
 <td></td>
 </tr>
 <tr class="even">
 <td>顺序位置</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image74.png" style="width:2.0447in;height:0.97775in" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image74.png" style="width:2.0447in;height:0.97775in" /></td>
 <td>定义两个视图的显示顺序（垂直或水平方向）。在左图中，B 被约束为始终位于 A 的右侧，而 C 被约束在 A 的下方。 不过，这些约束条件并不意味着对齐，因此 B 仍然可以上下移动。</td>
 <td></td>
 </tr>
 <tr class="odd">
 <td>对齐方式</td>
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image75.png" style="width:1.02978in;height:1.03321in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image75.png" style="width:1.02978in;height:1.03321in" /></p>
 <p>（1）</p></td>
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image76.png" style="width:1.00746in;height:1.00746in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image76.png" style="width:1.00746in;height:1.00746in" /></p>
 <p>（2）</p></td>
-<td>将一个视图的边缘与另一视图的同一边对齐。在左1图 中，B 的左侧与 A 的左侧对齐。 如果要与视图中心对齐，请对两侧创建约束条件。可以通过从约束布局向内拖动视图来偏移对齐量。例如，左2图显示 B 的偏移对齐为 24dp。偏移量由受约束视图的外边距定义。还可以选择要对齐的所有视图，然后点击工具栏中的“Align”图标<img src="md/media/chapter02_ui_design_basics/media/image77.png" style="width:0.13433in;height:0.13433in" />以选择对齐类型。</td>
+<td>将一个视图的边缘与另一视图的同一边对齐。在左1图 中，B 的左侧与 A 的左侧对齐。 如果要与视图中心对齐，请对两侧创建约束条件。可以通过从约束布局向内拖动视图来偏移对齐量。例如，左2图显示 B 的偏移对齐为 24dp。偏移量由受约束视图的外边距定义。还可以选择要对齐的所有视图，然后点击工具栏中的“Align”图标<img src="md-media/chapter02_ui_design_basics/media/image77.png" style="width:0.13433in;height:0.13433in" />以选择对齐类型。</td>
 </tr>
 <tr class="even">
 <td>基线对齐</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image78.png" style="width:2.19279in;height:1.04856in" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image78.png" style="width:2.19279in;height:1.04856in" /></td>
 <td>将一个视图的文本基线与另一视图的文本基线对齐。在左图中，B 的第一行与 A 中的文本对齐。要创建基线约束条件，请右键点击要约束的文本视图，然后点击 “Show Baseline”，接着点击文本基线并将其拖到另一基线上。</td>
 <td></td>
 </tr>
 <tr class="odd">
 <td>引导线约束</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image79.png" style="width:2.20358in;height:1.14925in" /></td>
-<td>可以添加垂直或水平的引导线来约束视图，并且应用用户看不到该引导线。 您可以根据相对于布局边缘的 dp 单位或百分比在布局中定位引导线。要创建引导线，请点击工具栏中的“Guidelines”<img src="md/media/chapter02_ui_design_basics/media/image80.png" />，然后点击“Add Vertical Guideline”或“Add Horizontal Guideline”，拖动虚线将其重新定位，然后点击引导线边缘的圆圈以切换测量模式。</td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image79.png" style="width:2.20358in;height:1.14925in" /></td>
+<td>可以添加垂直或水平的引导线来约束视图，并且应用用户看不到该引导线。 您可以根据相对于布局边缘的 dp 单位或百分比在布局中定位引导线。要创建引导线，请点击工具栏中的“Guidelines”<img src="md-media/chapter02_ui_design_basics/media/image80.png" />，然后点击“Add Vertical Guideline”或“Add Horizontal Guideline”，拖动虚线将其重新定位，然后点击引导线边缘的圆圈以切换测量模式。</td>
 <td></td>
 </tr>
 <tr class="even">
 <td>屏障约束</td>
-<td><img src="md/media/chapter02_ui_design_basics/media/image81.png" style="width:2.1791in;height:2.45486in" /></td>
+<td><img src="md-media/chapter02_ui_design_basics/media/image81.png" style="width:2.1791in;height:2.45486in" /></td>
 <td><p>与引导线类似，屏障是一条隐藏的线，您可以用它来约束视图。屏障不会定义自己的位置；相反，屏障的位置会随着其中所含视图的位置而移动。如果您希望将视图限制到一组视图而不是某个特定视图，这就非常有用。</p>
 <p>例如，图 13 显示视图 C 被约束在屏障的右侧。该屏障设置为视图 A 和视图 B 的“end”侧（或从左至右布局中的右侧）。因此，屏障根据视图 A 或视图 B 的右侧是否为最右侧来移动。如需创建屏障，请按以下步骤操作：</p>
-<p>(1)点击工具栏中的“Guidelines”图标 <img src="md/media/chapter02_ui_design_basics/media/image80.png" style="width:0.10448in;height:0.10448in" />，然后点击“Add Vertical Barrier”或“Add Horizontal Barrier”。</p>
+<p>(1)点击工具栏中的“Guidelines”图标 <img src="md-media/chapter02_ui_design_basics/media/image80.png" style="width:0.10448in;height:0.10448in" />，然后点击“Add Vertical Barrier”或“Add Horizontal Barrier”。</p>
 <p>(2)在“Component Tree”窗口中，选择要放入屏障内的视图，然后将其拖动到屏障组件中。</p>
-<p>(3)在“Component Tree”中选择障碍，打开 Attributes<img src="md/media/chapter02_ui_design_basics/media/image82.png" style="width:0.14179in;height:0.14179in" /> 窗口，然后设置 barrierDirection。</p>
+<p>(3)在“Component Tree”中选择障碍，打开 Attributes<img src="md-media/chapter02_ui_design_basics/media/image82.png" style="width:0.14179in;height:0.14179in" /> 窗口，然后设置 barrierDirection。</p>
 <p>现在，可以从另一个视图创建屏障约束，还可以将屏障内的视图约束到屏障，这样就可以确保屏障中的所有视图始终相互对齐，即使并不知道哪个视图最长或最高，还可以在屏障内添加引导线，以确保屏障的位置最小。</p></td>
 <td></td>
 </tr>
@@ -2780,9 +2780,9 @@ constraints”。
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image83.png" style="width:2.09618in;height:2.45522in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image83.png" style="width:2.09618in;height:2.45522in" /></p>
 <p>图 2‑44 在选择视图时，Attributes 窗口会包含如下控件：(1) 尺寸比、(2)删除约束条、(3)高度/宽度模式、(4)外边距和(5)约束偏差，还可以通过点击(6)约束列表中的各个约束条件来突出显示布局编辑器中的各个约束条件</p></td>
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image84.png" style="width:2.31623in;height:2.49232in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image84.png" style="width:2.31623in;height:2.49232in" /></p>
 <p>图 2‑45 该视图的宽高比设置为 16：9，其宽度基于与高度的比率。</p></td>
 </tr>
 </tbody>
@@ -2793,17 +2793,17 @@ Attributes 窗口。Attributes 窗口顶部附近的视图检查器中包括若�
 2‑42所示（仅适用于约束布局中的视图）。可以通过点击图 2‑42中标注 3
 所指示的符号来更改高度和宽度的计算方式。这些符号代表如下所示的尺寸模式（点击符号即可切换这些设置）：
 
-  - Fixed ![](md/media/chapter02_ui_design_basics/media/image85.png) 
+  - Fixed ![](md-media/chapter02_ui_design_basics/media/image85.png) 
 
 可以在下面的文本框中指定具体维度，也可以在编辑器中调整视图尺寸。
 
   - Wrap Content
-    ![](md/media/chapter02_ui_design_basics/media/image86.png) 
+    ![](md-media/chapter02_ui_design_basics/media/image86.png) 
 
 视图仅在需要时扩展以适应其内容。
 
   - Match Constraints
-    ![](md/media/chapter02_ui_design_basics/media/image87.png) 
+    ![](md-media/chapter02_ui_design_basics/media/image87.png) 
 
 视图会尽可能扩展，以满足每侧的约束条件（在考虑视图的外边距之后），不过可以使用以下属性和值修改该行为（这些属性仅在您将视图宽度设置为“match
 constraints”时才会生效）：
@@ -2824,10 +2824,10 @@ constraints”，可以点击 “Toggle Aspect Ratio
 Constraint”，选择哪个维度基于与另一个维度的比率，视图检查器通过用实线连接相应的边缘来指明哪个被设为比率，例如如果将两侧都设置为“match
 constraints”，双击 “Toggle Aspect Ratio
 Constraint”，将宽度设置为与高度的比率，现在整个尺寸由视图的高度决定（可以任意方式定义），如图
-2‑43所示。要确保所有视图间隔均匀，请点击工具栏中的“Margin”![](md/media/chapter02_ui_design_basics/media/image88.png)，为添加到布局的每个视图选择默认外边距，对默认外边距所做的任何更改仅应用于在更改后添加的视图，可以通过点击代表每个约束条件所在行的数字来控制 Attributes 窗口中每个视图的外边距，例如在图
+2‑43所示。要确保所有视图间隔均匀，请点击工具栏中的“Margin”![](md-media/chapter02_ui_design_basics/media/image88.png)，为添加到布局的每个视图选择默认外边距，对默认外边距所做的任何更改仅应用于在更改后添加的视图，可以通过点击代表每个约束条件所在行的数字来控制 Attributes 窗口中每个视图的外边距，例如在图
 2‑42中，标注 4 表明下外边距设置为 16dp。
 
-![](md/media/chapter02_ui_design_basics/media/image89.png)
+![](md-media/chapter02_ui_design_basics/media/image89.png)
 
 图 2‑46工具栏的 Margin 按钮
 
@@ -2837,9 +2837,9 @@ Design”提供的 8dp方形网格建议保持一致。链是一组视图，这
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image90.png" style="width:2.24009in;height:1.08209in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image90.png" style="width:2.24009in;height:1.08209in" /></p>
 <p>图 2‑47 具有两个视图的水平链</p></td>
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image91.png" style="width:2.32836in;height:1.80945in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image91.png" style="width:2.32836in;height:1.80945in" /></p>
 <p>图 2‑48每种链样式的示例</p></td>
 </tr>
 </tbody>
@@ -2858,16 +2858,16 @@ Design”提供的 8dp方形网格建议保持一致。链是一组视图，这
   - Packed：视图打包在一起（在考虑外边距之后），然后可以通过更改链的头视图偏差调整整条链的偏差（左/右或上/下）。
 
 链的头视图（水平链中最左侧的视图以及垂直链中最顶部的视图）以 XML
-格式定义链的样式，不过可以通过选择链中的任意视图，然后点击出现在该视图下方的链按钮 ![](md/media/chapter02_ui_design_basics/media/image92.png)，在“spread”、“spread
+格式定义链的样式，不过可以通过选择链中的任意视图，然后点击出现在该视图下方的链按钮 ![](md-media/chapter02_ui_design_basics/media/image92.png)，在“spread”、“spread
 inside”和“packed”之间进行切换。如需创建链，选择要包含在链中的所有视图，右键点击其中一个视图，选择 Chains，然后选择 Center
 Horizontally 或 Center Vertically，如图 2‑47和图 2‑48中所示：
 
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image93.png" style="width:2.6339in;height:1.33597in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image93.png" style="width:2.6339in;height:1.33597in" /></p>
 <p>图 2‑49</p></td>
-<td><p><img src="md/media/chapter02_ui_design_basics/media/image94.png" style="width:2.94776in;height:1.25373in" /></p>
+<td><p><img src="md-media/chapter02_ui_design_basics/media/image94.png" style="width:2.94776in;height:1.25373in" /></p>
 <p>图 2‑50</p></td>
 </tr>
 </tbody>
@@ -2887,7 +2887,7 @@ Constraints”会扫描布局，以便为所有视图确定最有效的约束集
 to
 parent”是可以启用的独立功能。启用后，当将子视图添加到父视图时，此功能会自动为每个视图创建两个或多个约束条件，但仅在可以将视图约束到父布局的情况。“Autoconnect”不会为布局中的其他视图创建约束条件，“Autoconnect”在默认情况下处于停用状态，点击布局编辑器工具栏中的“Enable
 Autoconnection to
-Parent”![](md/media/chapter02_ui_design_basics/media/image22.png)，即可启用该功能。
+Parent”![](md-media/chapter02_ui_design_basics/media/image22.png)，即可启用该功能。
 
 ### 线形布局
 
@@ -2916,11 +2916,11 @@ Parent”![](md/media/chapter02_ui_design_basics/media/image22.png)，即可启�
 <tbody>
 <tr class="odd">
 <td><blockquote>
-<p><img src="md/media/chapter02_ui_design_basics/media/image95.gif" style="width:2.63433in;height:1.41942in" /></p>
+<p><img src="md-media/chapter02_ui_design_basics/media/image95.gif" style="width:2.63433in;height:1.41942in" /></p>
 </blockquote>
 <p>图 2‑51布局划分的参数定义</p></td>
 <td><blockquote>
-<p><img src="md/media/chapter02_ui_design_basics/media/image96.png" style="width:1.44776in;height:2.11714in" alt="1" /></p>
+<p><img src="md-media/chapter02_ui_design_basics/media/image96.png" style="width:1.44776in;height:2.11714in" alt="1" /></p>
 </blockquote>
 <p>图 2‑52 线性布局实例效果</p></td>
 </tr>
@@ -3206,7 +3206,7 @@ LinearLayoutActivity。
 
 表 2‑5 相对布局属性
 
-![1](md/media/chapter02_ui_design_basics/media/image97.png)
+![1](md-media/chapter02_ui_design_basics/media/image97.png)
 
 图 2‑53相对布局实例效果
 
@@ -3302,7 +3302,7 @@ LinearLayoutActivity。
 ### 表格布局
 
 ![Row and Column in Table Layout
-Android](md/media/chapter02_ui_design_basics/media/image98.png)
+Android](md-media/chapter02_ui_design_basics/media/image98.png)
 
 图 2‑54 表格布局
 
@@ -3324,7 +3324,7 @@ Android](md/media/chapter02_ui_design_basics/media/image98.png)
 1，则第二列被拉伸以占用行中的任何可用空间，因为列号从 0
 开始；如果值为0,1，则表的第一列和第二列都被拉伸以占用行中的可用空间；如果值为“\*”，则所有列都被拉伸以占用可用空间。
 
-![1](md/media/chapter02_ui_design_basics/media/image99.png)
+![1](md-media/chapter02_ui_design_basics/media/image99.png)
 
 图 2‑55 表格布局实例效果
 
@@ -3600,11 +3600,11 @@ Android](md/media/chapter02_ui_design_basics/media/image98.png)
 2‑54**中的界面只设计有一种布局应用到两种设备，界面显示不能适应变化；而替代的资源是为特定设备配置设计的，**图
 2‑55**中的界面为横向的屏幕设置了替代布局，对于大屏幕的设备可以合理的规划界面显示。通过资源文件目录名，安卓系统会自动应用相应的资源文件，匹配设备当前的配置。
 
-![](md/media/chapter02_ui_design_basics/media/image100.png)
+![](md-media/chapter02_ui_design_basics/media/image100.png)
 
 图 2‑56 布局设计之一
 
-![](md/media/chapter02_ui_design_basics/media/image101.png)
+![](md-media/chapter02_ui_design_basics/media/image101.png)
 
 图 2‑57 布局设计之二
 
