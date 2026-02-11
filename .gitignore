@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# 临时文件
+*.log
+
+# 如果你不想上传原始docx
+# doc/
+
+# 可选：如果图片很大
+# md/media/
+
