@@ -322,9 +322,9 @@ tools: 标签是可选的，指向一个布局，以便 Android Studio 中的预
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter11_case_studies/media/image1.png" style="width:2.66457in;height:1.58209in" /></p>
+<td><p><img src="media/chapter11_case_studies/media/image1.png" style="width:2.66457in;height:1.58209in" /></p>
 <p>图 11‑1</p></td>
-<td><p><img src="md-media/chapter11_case_studies/media/image2.png" style="width:2.56716in;height:1.61223in" /></p>
+<td><p><img src="media/chapter11_case_studies/media/image2.png" style="width:2.56716in;height:1.61223in" /></p>
 <p>图 11‑2</p></td>
 </tr>
 </tbody>
@@ -592,11 +592,11 @@ MainActivity如果处于单窗格模式，调整类以替换现有片段。
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter11_case_studies/media/image3.png" style="width:1.5548in;height:0.84328in" /></p>
+<td><p><img src="media/chapter11_case_studies/media/image3.png" style="width:1.5548in;height:0.84328in" /></p>
 <p>图 11‑3</p></td>
-<td><p><img src="md-media/chapter11_case_studies/media/image4.png" style="width:1.45921in;height:0.83582in" /></p>
+<td><p><img src="media/chapter11_case_studies/media/image4.png" style="width:1.45921in;height:0.83582in" /></p>
 <p>图 11‑4</p></td>
-<td><p><img src="md-media/chapter11_case_studies/media/image5.png" style="width:2.24601in;height:0.59702in" /></p>
+<td><p><img src="media/chapter11_case_studies/media/image5.png" style="width:2.24601in;height:0.59702in" /></p>
 <p>图 11‑5</p></td>
 </tr>
 </tbody>
@@ -891,7 +891,7 @@ replace在操作片段事务之前启用这些动画。
 
 下图显示了安卓的默认视图层次结构：
 
-![](md-media/chapter11_case_studies/media/image6.png)
+![](media/chapter11_case_studies/media/image6.png)
 
 图 11‑6 默认视图层次结构
 
@@ -980,7 +980,7 @@ onMeasure()和onLayout()方法并专门计算其子项，例如可以省略Linea
 
 遍历生命周期事件包括Animate、Measure、Layout和Draw。
 
-![](md-media/chapter11_case_studies/media/image7.png)
+![](media/chapter11_case_studies/media/image7.png)
 
 图 11‑7 视图的生命周期
 
@@ -1372,9 +1372,9 @@ onMeasure()和onLayout()方法并专门计算其子项，例如可以省略Linea
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter11_case_studies/media/image8.png" style="width:1.1506in;height:2.12687in" /></p>
+<td><p><img src="media/chapter11_case_studies/media/image8.png" style="width:1.1506in;height:2.12687in" /></p>
 <p>图 11‑8 点击Background color</p></td>
-<td><p><img src="md-media/chapter11_case_studies/media/image9.png" style="width:1.12133in;height:2.08209in" /></p>
+<td><p><img src="media/chapter11_case_studies/media/image9.png" style="width:1.12133in;height:2.08209in" /></p>
 <p>图 11‑9点击Foreground color</p></td>
 </tr>
 </tbody>
@@ -1861,9 +1861,9 @@ shape.xml 文件。
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter11_case_studies/media/image10.png" style="width:2.42048in;height:2.37313in" /></p>
+<td><p><img src="media/chapter11_case_studies/media/image10.png" style="width:2.42048in;height:2.37313in" /></p>
 <p>图 11‑10</p></td>
-<td><p><img src="md-media/chapter11_case_studies/media/image11.png" style="width:2.477in;height:2.35075in" /></p>
+<td><p><img src="media/chapter11_case_studies/media/image11.png" style="width:2.477in;height:2.35075in" /></p>
 <p>图 11‑11</p></td>
 </tr>
 </tbody>
@@ -2413,7 +2413,7 @@ SQLite 数据库的简单方法。其基于在数据库中持久化数据的最�
 
 #### 验证结果
 
-![](md-media/chapter11_case_studies/media/image12.png)
+![](media/chapter11_case_studies/media/image12.png)
 
 图 11‑12
 
@@ -2971,7 +2971,7 @@ URI 访问数据的基础，并且必须是唯一的。
 
 安装应用程序并使用添加和删除按钮，重新启动应用程序以验证数据是否仍然存在。
 
-![](md-media/chapter11_case_studies/media/image13.png)
+![](media/chapter11_case_studies/media/image13.png)
 
 图 11‑13
 
@@ -4250,11 +4250,11 @@ res/layout中创建“todo\_row.xml”布局文件。
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter11_case_studies/media/image14.png" style="width:1.59125in;height:1.3209in" /></p>
+<td><p><img src="media/chapter11_case_studies/media/image14.png" style="width:1.59125in;height:1.3209in" /></p>
 <p>图 11‑14</p></td>
-<td><p><img src="md-media/chapter11_case_studies/media/image15.png" style="width:1.76271in;height:1.32836in" /></p>
+<td><p><img src="media/chapter11_case_studies/media/image15.png" style="width:1.76271in;height:1.32836in" /></p>
 <p>图 11‑15</p></td>
-<td><p><img src="md-media/chapter11_case_studies/media/image16.png" style="width:1.62889in;height:1.29526in" /></p>
+<td><p><img src="media/chapter11_case_studies/media/image16.png" style="width:1.62889in;height:1.29526in" /></p>
 <p>图 11‑16</p></td>
 </tr>
 </tbody>

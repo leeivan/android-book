@@ -6,7 +6,7 @@
 
 ### 基于监听接口
 
-![](md-media/chapter03_look_and_feel/media/image1.png)
+![](media/chapter03_look_and_feel/media/image1.png)
 
 图 3‑1事件流程处理
 
@@ -344,7 +344,7 @@ v)
 
 按钮控件可以有文本或者图标，也可以文本和图标同时存在（如**图 3‑2**），当用户触摸时就会触发事件。
 
-![](md-media/chapter03_look_and_feel/media/image2.png)
+![](media/chapter03_look_and_feel/media/image2.png)
 
 **图** **3‑2 各种按钮**
 
@@ -451,7 +451,7 @@ borderlessButtonStyle 样式，见码 3‑12。
 
 单选按钮就是RadioButton，在安卓开发中应用的非常广泛。RadioButton的外形是单个圆形的单选框，具有选择或不选择两种状态。在RadioButton没有被选中时，用户能够按下或点击来选中它。与复选框不同的是，用户一旦选中就不能够取消选中。
 
-![](md-media/chapter03_look_and_feel/media/image3.png)
+![](media/chapter03_look_and_feel/media/image3.png)
 
 图 3‑3 单选按钮
 
@@ -631,7 +631,7 @@ borderlessButtonStyle 样式，见码 3‑12。
 
 完成应用程序编码后，同样不要忘记了要到AndroidManifest.xml中注册才能运行。从上面的例子可以看出，安卓控件的事件处理方法与一般的Java图形界面处理类似，只是控件和监听器有所不同，所采用的事件处理机制和原理以及实现步骤都基本相同。
 
-![](md-media/chapter03_look_and_feel/media/image4.png)
+![](media/chapter03_look_and_feel/media/image4.png)
 
 图 3‑4 RadioGroupDemoActivity
 
@@ -771,7 +771,7 @@ borderlessButtonStyle 样式，见码 3‑12。
 
 完成应用程序编码后，不要忘记了需要到AndroidManifest.xml中注册才能运行。从上面的例子可以看出，事件处理方法可以采用与Button相同的模式，只是在处理过程中，可以针对CheckBox不同的状态进行不同编码，实现不同功能。也会触发OnCheckedChange事件，可以对应的使用OnCheckedChangeListener监听器来监听这个事件，重写其中的onCheckedChanged()，使用setOnCheckedChangeListener()方法设置监听器。
 
-![](md-media/chapter03_look_and_feel/media/image5.png)
+![](media/chapter03_look_and_feel/media/image5.png)
 
 图 3‑5 CheckBox
 
@@ -781,8 +781,8 @@ borderlessButtonStyle 样式，见码 3‑12。
 级别14）提供了另外一种叫做Switch的开关按钮，这个按钮提供一个滑动控件，可以通过添加Switch对象来实现（见**图
 3‑6**右图）。
 
-![](md-media/chapter03_look_and_feel/media/image6.png)
-![](md-media/chapter03_look_and_feel/media/image7.png)
+![](media/chapter03_look_and_feel/media/image6.png)
+![](media/chapter03_look_and_feel/media/image7.png)
 
 **图** **3‑6 ToggleButton和Switch**
 
@@ -913,7 +913,7 @@ ToggleButton和Switch控件都是CompoundButton组合按钮的子类并且有着
 提示控件是指Toast，是在窗口表面弹出的一个简短的小消息，只填充消息所需要的空间，并且用户当前的活动依然保持可见性和交互性。这种通知可自动的淡入淡出，且不接受用户的交互事件。例如，如果用户正在编写一封邮件的时候，需要接通一个电话，这时界面会弹出一个提示，邮件保存为草稿，如图
 3‑7。
 
-![](md-media/chapter03_look_and_feel/media/image8.png)
+![](media/chapter03_look_and_feel/media/image8.png)
 
 图 3‑7 Toast显示
 
@@ -1072,7 +1072,7 @@ Toast的布局文件创建完成后，需要把这个布局应用到用户界面
 int, int)方法来创建Toast对象。**码 3‑24**中的setGravity(int, int,
 int)方法，可以重新设置Toast对象的显示位置。这个方法有三个参数，分别为Gravity常量、X轴偏移量、Y轴偏移量。
 
-![](md-media/chapter03_look_and_feel/media/image9.png)
+![](media/chapter03_look_and_feel/media/image9.png)
 
 图 3‑8 自定义提示控件
 
@@ -1274,9 +1274,9 @@ EditText是安卓的文本编辑框，是用户和安卓应用进行数据交互
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter03_look_and_feel/media/image10.png" style="width:1.87292in;height:3.34306in" /></p>
+<td><p><img src="media/chapter03_look_and_feel/media/image10.png" style="width:1.87292in;height:3.34306in" /></p>
 <p>图 3‑9 Edit不同输入类型</p></td>
-<td><p><img src="md-media/chapter03_look_and_feel/media/image11.png" style="width:1.88819in;height:3.35069in" /></p>
+<td><p><img src="media/chapter03_look_and_feel/media/image11.png" style="width:1.88819in;height:3.35069in" /></p>
 <p>图 3‑10对Edit的不同操作</p></td>
 </tr>
 </tbody>
@@ -1510,7 +1510,7 @@ ImageView控件是安卓用于显示图片的控件，可以用于显示来自�
 **图
 3‑11**所示的8幅小图显示了比ImageView小的图片，在不同ScaleType属性的ImageView中显示的效果。这个例子中活动中设计了一个ImageView和一个Button，点击Button可以转换ImageView的ScaleType属性，并把这个属性值标注在Button上。
 
-![](md-media/chapter03_look_and_feel/media/image12.png)
+![](media/chapter03_look_and_feel/media/image12.png)
 
 **图** **3‑11 不同ScaleType属性的ImageView显示效果**
 
@@ -1700,7 +1700,7 @@ ImageView控件是安卓用于显示图片的控件，可以用于显示来自�
 
 ## 进度条
 
-![](md-media/chapter03_look_and_feel/media/image13.png)
+![](media/chapter03_look_and_feel/media/image13.png)
 
 图 3‑12 进度条样式
 
@@ -2084,7 +2084,7 @@ AdapterView.OnItemSelectedListener 接口，则可以接口实例的形式传递
 
 码 3‑39 SpinnerPlanetActivity
 
-![](md-media/chapter03_look_and_feel/media/image14.png)
+![](media/chapter03_look_and_feel/media/image14.png)
 
 图 3‑13 SpinnerPlanet
 
@@ -2501,9 +2501,9 @@ FragmentActivity，而不是标准 Activity 类。
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter03_look_and_feel/media/image15.png" style="width:1.59028in;height:2.65246in" /></p>
+<td><p><img src="media/chapter03_look_and_feel/media/image15.png" style="width:1.59028in;height:2.65246in" /></p>
 <p>图 3‑14 日期</p></td>
-<td><p><img src="md-media/chapter03_look_and_feel/media/image16.png" style="width:1.9375in;height:2.677in" /></p>
+<td><p><img src="media/chapter03_look_and_feel/media/image16.png" style="width:1.9375in;height:2.677in" /></p>
 <p>图 3‑15 时间</p></td>
 </tr>
 </tbody>
@@ -2835,7 +2835,7 @@ flags)方法来进行样式的设置了。setSpan()方法的参数说明如下�
 
 运行后显示如**图 3‑16**所示。
 
-![](md-media/chapter03_look_and_feel/media/image17.png)
+![](media/chapter03_look_and_feel/media/image17.png)
 
 **图** **3‑16 各种格式的文本**
 
@@ -2987,7 +2987,7 @@ EditText 类的子类，MultiAutoCompleteTextView 是 AutoCompleteTextView 类�
 
 码 3‑53 AutoCompleteTextViewActivity
 
-![](md-media/chapter03_look_and_feel/media/image18.png)
+![](media/chapter03_look_and_feel/media/image18.png)
 
 图 3‑17 自动补全
 
@@ -4296,9 +4296,9 @@ Design）是由谷歌推出的设计语言，这种设计语言旨在为手机�
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter03_look_and_feel/media/image19.png" style="width:1.98507in;height:1.88873in" /></p>
+<td><p><img src="media/chapter03_look_and_feel/media/image19.png" style="width:1.98507in;height:1.88873in" /></p>
 <p>图 3‑19 深色质感主题背景</p></td>
-<td><p><img src="md-media/chapter03_look_and_feel/media/image20.png" style="width:1.94776in;height:1.85323in" /></p>
+<td><p><img src="media/chapter03_look_and_feel/media/image20.png" style="width:1.94776in;height:1.85323in" /></p>
 <p>图 3‑20 浅色质感主题</p></td>
 </tr>
 </tbody>
@@ -4323,7 +4323,7 @@ Asset Studio从质感图标库中导入矢量图标。
 
   - 绘制顺序：Z 值较高的视图会显示在其他视图的顶部。
 
-![](md-media/chapter03_look_and_feel/media/image21.png)
+![](media/chapter03_look_and_feel/media/image21.png)
 
 图 3‑21
 

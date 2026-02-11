@@ -1765,7 +1765,7 @@ Preference”的存储方式，可以称其为共享偏好的存储方式。共�
 应用程序通常包括允许用户修改应用程序的特性和行为的设置功能，例如一些应用程序允许用户指定通知是否启用或指定多久使用云同步数据。如果要为应用程序提供设置共享偏好的功能（见**图
 7‑1**），需要使用安卓的偏好API来构建统一的接口。
 
-![](md-media/chapter07_data_and_file_storage/media/image1.png)
+![](media/chapter07_data_and_file_storage/media/image1.png)
 
 **图** **7‑1 特性和行为的设置**
 
@@ -1972,11 +1972,11 @@ app:title="Send feedback"/\>
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter07_data_and_file_storage/media/image2.png" style="width:0.96528in;height:1.97506in" /></p>
+<td><p><img src="media/chapter07_data_and_file_storage/media/image2.png" style="width:0.96528in;height:1.97506in" /></p>
 <p>图 7‑2 按类别划分的偏好设置</p></td>
-<td><p><img src="md-media/chapter07_data_and_file_storage/media/image3.png" style="width:0.91553in;height:1.875in" /></p>
+<td><p><img src="media/chapter07_data_and_file_storage/media/image3.png" style="width:0.91553in;height:1.875in" /></p>
 <p>图 7‑3 包含两个类别的简单层次结构</p></td>
-<td><p><img src="md-media/chapter07_data_and_file_storage/media/image4.png" style="width:2.21964in;height:2.01025in" /></p>
+<td><p><img src="media/chapter07_data_and_file_storage/media/image4.png" style="width:2.21964in;height:2.01025in" /></p>
 <p>图 7‑4 拆分为多个屏幕的层次结构</p></td>
 </tr>
 </tbody>
@@ -2231,7 +2231,7 @@ editTextPreference.setSummaryProvider(EditTextPreference.SimpleSummaryProvider.g
 provideSummary()，以便对摘要进行自定义。例如，下面的
 EditTextPreference 会将已保存值的长度显示为摘要：
 
-![](md-media/chapter07_data_and_file_storage/media/image5.png)
+![](media/chapter07_data_and_file_storage/media/image5.png)
 
 图 7‑5
 
@@ -2683,7 +2683,7 @@ Room 包含三个主要组件：
 从数据库中检索数据，作为关联的数据实体对象的实例。此外，应用还可以使用定义的数据实体更新相应表中的行，或者创建新行供插入。图
 7‑6说明了 Room 的不同组件之间的关系。
 
-![](md-media/chapter07_data_and_file_storage/media/image6.png)
+![](media/chapter07_data_and_file_storage/media/image6.png)
 
 图 7‑6 Room 库架构的示意图。
 
@@ -3850,7 +3850,7 @@ UserWithPlaylistsAndSongs 类间接地在以下三个实体类之间建立了关
 
 ![UserWithPlaylistsAndSongs 在 User 和 PlaylistWithSongs 之间建立了关系，而
 PlaylistWithSongs 又在 Playlist 和 Song
-之间建立了关系。](md-media/chapter07_data_and_file_storage/media/image7.png)
+之间建立了关系。](media/chapter07_data_and_file_storage/media/image7.png)
 
 图 7‑7 音乐在线播放应用示例中关系类的示意图。
 

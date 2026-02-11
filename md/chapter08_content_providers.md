@@ -29,9 +29,9 @@
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter08_content_providers/media/image1.png" style="width:2.13194in;height:1.63555in" /></p>
+<td><p><img src="media/chapter08_content_providers/media/image1.png" style="width:2.13194in;height:1.63555in" /></p>
 <p>图 8‑1 内容提供程序如何管理存储空间访问</p></td>
-<td><p><img src="md-media/chapter08_content_providers/media/image2.png" style="width:3.00347in;height:1.65287in" /></p>
+<td><p><img src="media/chapter08_content_providers/media/image2.png" style="width:3.00347in;height:1.65287in" /></p>
 <p>图 8‑2迁移内容提供程序存储空间</p></td>
 </tr>
 </tbody>
@@ -72,7 +72,7 @@ URI的类。什么是Content URI呢？通用资源标志符Universal Resource Id
 URI就是内容提供器中数据的内容统一资源标识，能够在存储介质中唯一标识内容提供器中数据所在的具体位置。这有点类似通过web地址去访问网页。内容提供器对象通过URI来选择要访问内容提供器的表和数据，当调用内容访问器客户端的方法来访问内容提供器中的一个表时，会把这个表对应的URI标识作为参数传递给调用的方法。在安卓系统中，Content
 URI主要分三个部分：scheme、authority 和path。其中authority又分为host和port（见**图 8.1**）。
 
-![](md-media/chapter08_content_providers/media/image3.png)
+![](media/chapter08_content_providers/media/image3.png)
 
 **图** **8‑3 通用资源标识符URI结构**
 
@@ -164,9 +164,9 @@ API 和组件对应用数据存储层的访问（如图 1 所示），其中包�
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter08_content_providers/media/image4.png" style="width:2.89583in;height:1.85531in" /></p>
+<td><p><img src="media/chapter08_content_providers/media/image4.png" style="width:2.89583in;height:1.85531in" /></p>
 <p>图 8‑4内容提供程序与其他组件的关系</p></td>
-<td><p><img src="md-media/chapter08_content_providers/media/image5.png" style="width:1.64583in;height:1.82155in" /></p>
+<td><p><img src="media/chapter08_content_providers/media/image5.png" style="width:1.64583in;height:1.82155in" /></p>
 <p>图 8‑5 内容提供程序、其他类和存储空间之间的交互</p></td>
 </tr>
 </tbody>
@@ -1852,7 +1852,7 @@ android:authorities="com.androidbook.provider.StudentsProvider " /\>
 查看数据库的查询结果或内容提供器获取数据时，每次查询的结果并不确定，需要实现数据的动态加载。安卓针对这一类的数据提供了一个机制，叫数据绑定。通过数据绑定，可以把动态的数据与称为AdapterView的图形控件连接起来，并自动根据数据的内容进行布局调整，按照某种规则显示给用户。在数据源和AdapterView之间起连接作用的类，在安卓系统中成为适配器。当想用合适的方式显示并操作一些数据（如数组，链表，数据库等）时，可以使用提供安卓适配器的视图（AdapterView），这种方式叫数据绑定（见**图
 8.2**）。
 
-![](md-media/chapter08_content_providers/media/image6.png)
+![](media/chapter08_content_providers/media/image6.png)
 
 **图** **8‑6 Adapter工作原理**
 
@@ -1991,7 +1991,7 @@ s.setAdapter(adapter);
 运行这个例子程序，就得到**图
 8.3**显示的界面。这里的数据源，也就是arrays中定义的planets数组，通过ArrayAdapter这个适配器，与Spinner这个图形显示控件联系起来，使数组数据直接按照列表的形式显示，不必再做布局的设计。这个功能就是填充布局的作用。
 
-![](md-media/chapter08_content_providers/media/image7.png)![](md-media/chapter08_content_providers/media/image8.png)
+![](media/chapter08_content_providers/media/image7.png)![](media/chapter08_content_providers/media/image8.png)
 
 **图** **8‑7 通过数组给列表赋值**
 
@@ -2002,9 +2002,9 @@ View](http://developer.android.com/guide/topics/ui/layout/listview.html)（**图
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter08_content_providers/media/image9.png" style="width:1.76042in;height:1.30208in" /></p>
+<td><p><img src="media/chapter08_content_providers/media/image9.png" style="width:1.76042in;height:1.30208in" /></p>
 <p>a</p></td>
-<td><p><img src="md-media/chapter08_content_providers/media/image10.png" style="width:1.76042in;height:1.3125in" /></p>
+<td><p><img src="media/chapter08_content_providers/media/image10.png" style="width:1.76042in;height:1.3125in" /></p>
 <p>b</p></td>
 </tr>
 </tbody>

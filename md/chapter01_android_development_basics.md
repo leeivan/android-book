@@ -344,9 +344,9 @@ OpenGL ES，并且需要合适的 GPU 硬件来运行此类应用程序。2021 �
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter01_android_development_basics/media/image1.png" style="width:2.5149in;height:1.57055in" alt="https://chart.googleapis.com/chart?cht=p&amp;chs=400x250&amp;chco=c4df9b%2C6fad0c&amp;chf=bg%2Cs%2C00000000&amp;chd=t%3A7.7%2C11.5%2C80.6%2C0.3&amp;chl=Xlarge%7CLarge%7CNormal%7CSmall" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image1.png" style="width:2.5149in;height:1.57055in" alt="https://chart.googleapis.com/chart?cht=p&amp;chs=400x250&amp;chco=c4df9b%2C6fad0c&amp;chf=bg%2Cs%2C00000000&amp;chd=t%3A7.7%2C11.5%2C80.6%2C0.3&amp;chl=Xlarge%7CLarge%7CNormal%7CSmall" /></p>
 <p>图 1‑1</p></td>
-<td><p><img src="md-media/chapter01_android_development_basics/media/image2.png" style="width:2.43631in;height:1.52147in" alt="https://chart.googleapis.com/chart?cht=p&amp;chs=400x250&amp;chco=c4df9b%2C6fad0c&amp;chf=bg%2Cs%2C00000000&amp;chd=t%3A0.1%2C5.7%2C2.9%2C15.1%2C48.8%2C27.5&amp;chl=ldpi%7Cmdpi%7Ctvdpi%7Chdpi%7Cxhdpi%7Cxxhdpi" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image2.png" style="width:2.43631in;height:1.52147in" alt="https://chart.googleapis.com/chart?cht=p&amp;chs=400x250&amp;chco=c4df9b%2C6fad0c&amp;chf=bg%2Cs%2C00000000&amp;chd=t%3A0.1%2C5.7%2C2.9%2C15.1%2C48.8%2C27.5&amp;chl=ldpi%7Cmdpi%7Ctvdpi%7Chdpi%7Cxhdpi%7Cxxhdpi" /></p>
 <p>图 1‑2</p></td>
 </tr>
 </tbody>
@@ -375,9 +375,9 @@ Group）在2015年游戏开发者大会（GDC）上发表。科纳斯最先把Vu
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter01_android_development_basics/media/image3.png" style="width:2.48542in;height:1.55215in" alt="https://chart.googleapis.com/chart?chs=400x250&amp;cht=p&amp;chco=c4df9b%2C6fad0c&amp;chd=t%3A29.0%2C17.0%2C54.0&amp;chf=bg%2Cs%2C00000000&amp;chl=None%7CVulkan%201.0.3%7CVulkan%201.1" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image3.png" style="width:2.48542in;height:1.55215in" alt="https://chart.googleapis.com/chart?chs=400x250&amp;cht=p&amp;chco=c4df9b%2C6fad0c&amp;chd=t%3A29.0%2C17.0%2C54.0&amp;chf=bg%2Cs%2C00000000&amp;chl=None%7CVulkan%201.0.3%7CVulkan%201.1" /></p>
 <p>图 1‑3</p></td>
-<td><p><img src="md-media/chapter01_android_development_basics/media/image4.png" style="width:2.40684in;height:1.50307in" alt="https://chart.googleapis.com/chart?chco=c4df9b%2C6fad0c&amp;chl=GL%202.0%7CGL%203.0%7CGL%203.1%7CGL%203.2&amp;chd=t%3A7.50%2C9.95%2C6.63%2C75.92&amp;chf=bg%2Cs%2C00000000&amp;chs=400x250&amp;cht=p" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image4.png" style="width:2.40684in;height:1.50307in" alt="https://chart.googleapis.com/chart?chco=c4df9b%2C6fad0c&amp;chl=GL%202.0%7CGL%203.0%7CGL%203.1%7CGL%203.2&amp;chd=t%3A7.50%2C9.95%2C6.63%2C75.92&amp;chf=bg%2Cs%2C00000000&amp;chs=400x250&amp;cht=p" /></p>
 <p>图 1‑4</p></td>
 </tr>
 </tbody>
@@ -393,7 +393,7 @@ Libraries、Android Runtime、Hardware Abstraction Layer (HAL)和Linux
 kernel这几个部分。这本书的内容主要涉及框架中上面两个层次的技术。
 
 ![Android
-软件堆栈](md-media/chapter01_android_development_basics/media/image5.png)
+软件堆栈](media/chapter01_android_development_basics/media/image5.png)
 
 图 1‑5安卓技术框架
 
@@ -446,7 +446,7 @@ Studio平台把开发过程中所需的一些设计和开发的专用工具统�
 SDK、安卓虚拟机等，安装后就具有的开发中所需要的工具，下面是在Android Studio中开发应用的流程，见**图
 1.23**。
 
-![](md-media/chapter01_android_development_basics/media/image6.png)
+![](media/chapter01_android_development_basics/media/image6.png)
 
 图 1‑6 App开发流程图
 
@@ -526,9 +526,9 @@ Studio安装脚本找不到JDK的路径，如果遇到这种情况，需要在�
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter01_android_development_basics/media/image7.jpeg" style="width:2.84063in;height:1.26005in" alt="Android Studio Setup" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image7.jpeg" style="width:2.84063in;height:1.26005in" alt="Android Studio Setup" /></p>
 <p>图 1‑7 导入设置</p></td>
-<td><p><img src="md-media/chapter01_android_development_basics/media/image8.png" style="width:2.47437in;height:1.86503in" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image8.png" style="width:2.47437in;height:1.86503in" /></p>
 <p>图 1‑8 配置选择</p></td>
 </tr>
 </tbody>
@@ -537,15 +537,15 @@ Studio安装脚本找不到JDK的路径，如果遇到这种情况，需要在�
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter01_android_development_basics/media/image9.png" style="width:2.76074in;height:2.08264in" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image9.png" style="width:2.76074in;height:2.08264in" /></p>
 <p>图 1‑9</p></td>
-<td><p><img src="md-media/chapter01_android_development_basics/media/image10.jpeg" style="width:2.71624in;height:2.04908in" alt="Android Studio Setup" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image10.jpeg" style="width:2.71624in;height:2.04908in" alt="Android Studio Setup" /></p>
 <p>图 1‑10</p></td>
 </tr>
 </tbody>
 </table>
 
-![](md-media/chapter01_android_development_basics/media/image11.png)
+![](media/chapter01_android_development_basics/media/image11.png)
 
 图 1‑11Android Studio启动界面
 
@@ -580,7 +580,7 @@ Java 垃圾收集开关。要创建新studio.vmoptions文件或打开现有文�
 会自动检查可能的堆大小优化，并在检测到性能可以提高时通知您。
 
 ![内存设置，可让您为 Android Studio 进程配置最大 RAM
-量。](md-media/chapter01_android_development_basics/media/image12.png)
+量。](media/chapter01_android_development_basics/media/image12.png)
 
 图 1‑12关于推荐内存设置的通知
 
@@ -591,7 +591,7 @@ Java 垃圾收集开关。要创建新studio.vmoptions文件或打开现有文�
 （2）单击Appearance & Behavior \> System Settings \> Memory Settings。
 
 ![内存设置，可让您为 Android Studio 进程配置最大 RAM
-量。](md-media/chapter01_android_development_basics/media/image13.png)
+量。](media/chapter01_android_development_basics/media/image13.png)
 
 图 1‑13
 
@@ -905,9 +905,9 @@ New Module” 窗口中，Android Studio 提供了以下库模块：
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter01_android_development_basics/media/image14.png" style="width:1.72739in;height:2.4908in" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image14.png" style="width:1.72739in;height:2.4908in" /></p>
 <p>图 1‑14</p></td>
-<td><p><img src="md-media/chapter01_android_development_basics/media/image15.png" style="width:1.26994in;height:2.77842in" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image15.png" style="width:1.26994in;height:2.77842in" /></p>
 <p>图 1‑15</p></td>
 </tr>
 </tbody>
@@ -1048,7 +1048,7 @@ World”的字符，编写安卓应用程序需要完成四个步骤：
 穿戴设备）创建安卓应用。如果未打开任何项目，Android
 Studio会显示欢迎屏幕，可在其中点击“New Project”创建新项目。
 
-![](md-media/chapter01_android_development_basics/media/image16.png)
+![](media/chapter01_android_development_basics/media/image16.png)
 
 图 1‑16
 
@@ -1061,9 +1061,9 @@ project”屏幕顶部显示了各种设备类型对应的项目类别标签页�
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter01_android_development_basics/media/image17.png" style="width:2.65096in;height:1.90184in" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image17.png" style="width:2.65096in;height:1.90184in" /></p>
 <p>图 1‑17</p></td>
-<td><p><img src="md-media/chapter01_android_development_basics/media/image18.png" style="width:2.49693in;height:1.80574in" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image18.png" style="width:2.49693in;height:1.80574in" /></p>
 <p>图 1‑18</p></td>
 </tr>
 </tbody>
@@ -1091,7 +1091,7 @@ Android Studio
 点击开发界面左边界的Project标签，打开安卓项目的内容，在左边的窗口可以看到刚才所创建项目的目录结构。展开相应的目录，双击java目录下的MainActivity，和res/layout目录下的activity\_main.xml文件，在右边的窗口可以看到文件的内容，见（图
 1‑19）。
 
-![](md-media/chapter01_android_development_basics/media/image19.png)
+![](media/chapter01_android_development_basics/media/image19.png)
 
 图 1‑19 Android Studio开发界面
 
@@ -1162,7 +1162,7 @@ XML 文件），下面将探讨如何向项目中添加像活动一样的安卓�
 中的常用活动模板，大多数模板都依赖于安卓支持库来包含基于 Material
 Design 的界面原则。
 
-![](md-media/chapter01_android_development_basics/media/image20.png)
+![](media/chapter01_android_development_basics/media/image20.png)
 
 图 1‑20模板菜单
 
@@ -1187,7 +1187,7 @@ Studio 还为各种不同的应用模块类型提供了模板，包括穿戴设�
 <table>
 <tbody>
 <tr class="odd">
-<td><img src="md-media/chapter01_android_development_basics/media/image21.png" style="width:1.43056in;height:2.06636in" /></td>
+<td><img src="media/chapter01_android_development_basics/media/image21.png" style="width:1.43056in;height:2.06636in" /></td>
 <td><p>此模板可以创建一个带应用栏和浮动操作按钮的简单应用，供了常用的界面组件，以从这个模板入手创建项目，此模板包括：</p>
 <ul>
 <li><p>AppBar</p></li>
@@ -1203,7 +1203,7 @@ Studio 还为各种不同的应用模块类型提供了模板，包括穿戴设�
 <table>
 <tbody>
 <tr class="odd">
-<td><img src="md-media/chapter01_android_development_basics/media/image22.png" style="width:1.48702in;height:2.15094in" /></td>
+<td><img src="media/chapter01_android_development_basics/media/image22.png" style="width:1.48702in;height:2.15094in" /></td>
 <td><p>此模板提供一个用于活动 的标准底部导航栏，借助此栏用户点按一下便可轻松浏览顶级视图并在这些视图之间切换，当应用有 3-5 个顶级目标时，可以使用此模板，此模板包括：</p>
 <ul>
 <li><p>AppBar</p></li>
@@ -1218,7 +1218,7 @@ Studio 还为各种不同的应用模块类型提供了模板，包括穿戴设�
 <table>
 <tbody>
 <tr class="odd">
-<td><img src="md-media/chapter01_android_development_basics/media/image23.png" style="width:1.51923in;height:2.19444in" /></td>
+<td><img src="media/chapter01_android_development_basics/media/image23.png" style="width:1.51923in;height:2.19444in" /></td>
 <td><p>此模板可以创建一个空活动 和一个带示例文本内容的布局文件，可以使用此模板从头开始构建应用模块或活动，此模板包括：</p>
 <ul>
 <li><p>一个带文本内容的布局文件</p></li>
@@ -1232,7 +1232,7 @@ Studio 还为各种不同的应用模块类型提供了模板，包括穿戴设�
 <table>
 <tbody>
 <tr class="odd">
-<td><img src="md-media/chapter01_android_development_basics/media/image24.png" style="width:1.54808in;height:2.23611in" /></td>
+<td><img src="media/chapter01_android_development_basics/media/image24.png" style="width:1.54808in;height:2.23611in" /></td>
 <td><p>此模板可以创建一个能够在主要全屏视图与带有标准界面 (UI) 控件的视图之间切换的应用。全屏视图是默认视图，用户可以通过触摸设备屏幕激活标准视图，此模板包括：</p>
 <ul>
 <li><p>触摸监听程序实现，用于隐藏标准视图元素</p></li>
@@ -1249,7 +1249,7 @@ Studio 还为各种不同的应用模块类型提供了模板，包括穿戴设�
 <table>
 <tbody>
 <tr class="odd">
-<td><img src="md-media/chapter01_android_development_basics/media/image25.png" style="width:1.55769in;height:2.25in" /></td>
+<td><img src="media/chapter01_android_development_basics/media/image25.png" style="width:1.55769in;height:2.25in" /></td>
 <td><p>此模板将创建一个标准登录屏幕。界面包括电子邮件和密码字段以及一个登录按钮，被用作活动 模板的频率要比用作应用模块模板的频率高，此模板包括：</p>
 <ul>
 <li><p>AsyncTask 实现，用于独立于主界面线程处理网络操作</p></li>
@@ -1267,7 +1267,7 @@ Studio 还为各种不同的应用模块类型提供了模板，包括穿戴设�
 <table>
 <tbody>
 <tr class="odd">
-<td><img src="md-media/chapter01_android_development_basics/media/image26.png" style="width:1.58071in;height:1.09434in" /></td>
+<td><img src="media/chapter01_android_development_basics/media/image26.png" style="width:1.58071in;height:1.09434in" /></td>
 <td><p>此模板可以创建拥有项目列表显示画面和单独项目详情显示画面的应用，点击列表屏幕上的项目可以打开一个带项目详情的屏幕，两种显示画面的布局取决于运行应用的设备，此模板还提供了一些 API代码，用于处理某些鼠标和键盘输入，例如对列表项的右键点击操作，以及常见的键盘快捷键，此模板包括：</p>
 <ul>
 <li><p>代表项目列表的 Fragment</p></li>
@@ -1287,7 +1287,7 @@ Studio 还为各种不同的应用模块类型提供了模板，包括穿戴设�
 <table>
 <tbody>
 <tr class="odd">
-<td><img src="md-media/chapter01_android_development_basics/media/image27.png" style="width:1.59434in;height:2.30294in" /></td>
+<td><img src="media/chapter01_android_development_basics/media/image27.png" style="width:1.59434in;height:2.30294in" /></td>
 <td><p>此模板可以创建一个带抽屉式导航栏菜单的基本活动，导航栏可以从应用的左侧或右侧展开，作为对常规应用栏的补充，此模板包括：</p>
 <ul>
 <li><p>带 DrawerLayout、对应事件处理程序和示例菜单选项的抽屉式导航栏实现</p></li>
@@ -1304,7 +1304,7 @@ Studio 还为各种不同的应用模块类型提供了模板，包括穿戴设�
 <table>
 <tbody>
 <tr class="odd">
-<td><img src="md-media/chapter01_android_development_basics/media/image28.png" style="width:1.60377in;height:2.31656in" /></td>
+<td><img src="media/chapter01_android_development_basics/media/image28.png" style="width:1.60377in;height:2.31656in" /></td>
 <td><p>此模板可以创建一个带折叠式工具栏和长文本内容滚动视图的应用，在页面中向下滚动时，工具栏（可以作为标题）将自动缩短，并且浮动操作按钮将消失，此模板包括：</p>
 <ul>
 <li><p>折叠式工具栏，用于替代常规的 AppBar</p></li>
@@ -1320,7 +1320,7 @@ Studio 还为各种不同的应用模块类型提供了模板，包括穿戴设�
 <table>
 <tbody>
 <tr class="odd">
-<td><img src="md-media/chapter01_android_development_basics/media/image29.png" style="width:1.56731in;height:2.26389in" /></td>
+<td><img src="media/chapter01_android_development_basics/media/image29.png" style="width:1.56731in;height:2.26389in" /></td>
 <td><p>此模板可以为应用创建一个显示用户偏好设置或设置的活动，扩展了 PreferenceActivity 类，用作活动 模板的频率要比用作应用模块模板的频率高，此模板包括：</p>
 <ul>
 <li><p>Activity，可以扩展 PreferenceActivity</p></li>
@@ -1335,7 +1335,7 @@ Studio 还为各种不同的应用模块类型提供了模板，包括穿戴设�
 <table>
 <tbody>
 <tr class="odd">
-<td><img src="md-media/chapter01_android_development_basics/media/image30.png" style="width:1.57692in;height:2.27778in" /></td>
+<td><img src="media/chapter01_android_development_basics/media/image30.png" style="width:1.57692in;height:2.27778in" /></td>
 <td><p>此模板可以创建一个带多个部分、滑动导航和应用栏的应用，这些部分以 Fragment 形式定义，可以在两个 Fragment 之间左右滑动进行导航，此模板包括：</p>
 <ul>
 <li><p>AppBar</p></li>
@@ -1360,7 +1360,7 @@ ConstraintLayout
 Studio载渲染布局文件所需的组件，因此打开可能需要几秒钟的时间。默认情况下，Android
 Studio提供布局文件的图形视图，也可以切换到源代码视图，或同时排查看文本和图形表示，使用界面设计器右上角的图标窗格。
 
-![](md-media/chapter01_android_development_basics/media/image31.png)
+![](media/chapter01_android_development_basics/media/image31.png)
 
 图 1‑21
 
@@ -1369,13 +1369,13 @@ ConstraintLayout 构建响应式界面中了解有关设计界面的更多信息
 
 （2）要消除干扰并仅查看布局是如何表示的，单击左上角的“Select Design Surface”图标并选择“Design”：
 
-![](md-media/chapter01_android_development_basics/media/image32.png)
+![](media/chapter01_android_development_basics/media/image32.png)
 
 图 1‑22
 
 （3）现在删除现有的文本元素，为此右键单击文本标签并从上下文菜单中选择删除。
 
-![](md-media/chapter01_android_development_basics/media/image33.png)
+![](media/chapter01_android_development_basics/media/image33.png)
 
 图 1‑23
 
@@ -1389,7 +1389,7 @@ Droid”图像，并将其保存为 50x50 像素的尺寸。
 
 （3）在打开的Pick a Resource对话框中，选择添加的资源文件，然后单击OK：
 
-![](md-media/chapter01_android_development_basics/media/image34.png)
+![](media/chapter01_android_development_basics/media/image34.png)
 
 图 1‑24
 
@@ -1397,7 +1397,7 @@ Droid”图像，并将其保存为 50x50 像素的尺寸。
 中选择它，然后在右侧的Attributes窗格中，在id字段中输入新标识符：“helloImage”，按Enter；在打开的对话框中，确认要更新对图像元素
 ID 的所有引用：
 
-![](md-media/chapter01_android_development_basics/media/image35.png)
+![](media/chapter01_android_development_basics/media/image35.png)
 
 图 1‑25
 
@@ -1412,9 +1412,9 @@ ID 的所有引用：
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter01_android_development_basics/media/image36.png" style="width:3.6398in;height:2.66258in" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image36.png" style="width:3.6398in;height:2.66258in" /></p>
 <p>图 1‑26</p></td>
-<td><p><img src="md-media/chapter01_android_development_basics/media/image37.png" style="width:2.07378in;height:2.42945in" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image37.png" style="width:2.07378in;height:2.42945in" /></p>
 <p>图 1‑27</p></td>
 </tr>
 </tbody>
@@ -1438,9 +1438,9 @@ ID 的所有引用：
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter01_android_development_basics/media/image38.png" style="width:2.34969in;height:1.39997in" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image38.png" style="width:2.34969in;height:1.39997in" /></p>
 <p>图 1‑28</p></td>
-<td><p><img src="md-media/chapter01_android_development_basics/media/image39.png" style="width:1.97408in;height:2.29448in" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image39.png" style="width:1.97408in;height:2.29448in" /></p>
 <p>图 1‑29</p></td>
 </tr>
 </tbody>
@@ -1457,9 +1457,9 @@ resource to the module”图标，然后选择“Dimension Value”，输入资�
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter01_android_development_basics/media/image40.png" style="width:2.57702in;height:2.96933in" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image40.png" style="width:2.57702in;height:2.96933in" /></p>
 <p>图 1‑30</p></td>
-<td><p><img src="md-media/chapter01_android_development_basics/media/image41.png" style="width:3.56694in;height:2.42331in" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image41.png" style="width:3.56694in;height:2.42331in" /></p>
 <p>图 1‑31</p></td>
 </tr>
 </tbody>
@@ -1472,9 +1472,9 @@ resource to the module”图标，然后选择“Dimension Value”，输入资�
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter01_android_development_basics/media/image42.png" style="width:2.75937in;height:1.7546in" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image42.png" style="width:2.75937in;height:1.7546in" /></p>
 <p>图 1‑32</p></td>
-<td><p><img src="md-media/chapter01_android_development_basics/media/image43.png" style="width:2.0645in;height:2.12883in" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image43.png" style="width:2.0645in;height:2.12883in" /></p>
 <p>图 1‑33</p></td>
 </tr>
 </tbody>
@@ -1491,13 +1491,13 @@ resource to the module”图标，然后选择“Dimension Value”，输入资�
 （2）MainActivity不是一个很有意义的类名，所以重命名。在Android项目视图中右键单击此文件并从上下文菜单选择“Refactor
 | Rename”重命名或按Shift+F6。在打开的对话框中，更改类名HelloDroidActivity并单击Refactor：
 
-![](md-media/chapter01_android_development_basics/media/image44.png)
+![](media/chapter01_android_development_basics/media/image44.png)
 
 图 1‑34
 
 对此类的所有引用都将自动更新，应用程序的源代码将如下所示：
 
-![安卓应用源代码](md-media/chapter01_android_development_basics/media/image45.png)
+![安卓应用源代码](media/chapter01_android_development_basics/media/image45.png)
 
 图 1‑35
 
@@ -1635,9 +1635,9 @@ Google Play
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter01_android_development_basics/media/image46.png" style="width:3.04294in;height:0.7771in" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image46.png" style="width:3.04294in;height:0.7771in" /></p>
 <p>图 1‑36</p></td>
-<td><p><img src="md-media/chapter01_android_development_basics/media/image47.png" style="width:3.01395in;height:2.22086in" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image47.png" style="width:3.01395in;height:2.22086in" /></p>
 <p>图 1‑37</p></td>
 </tr>
 </tbody>
@@ -1647,13 +1647,13 @@ Google Play
 
 (3)在下一步中，需要选择虚拟设备将模拟的硬件，选择左侧的Phone，然后选择Pixel 2作为目标设备：
 
-![](md-media/chapter01_android_development_basics/media/image48.png)
+![](media/chapter01_android_development_basics/media/image48.png)
 
 图 1‑38
 
 (4)选择要在虚拟设备上模仿的系统映像，即操作系统版本、Android API 级别、应用程序二进制接口 (ABI) 和目标 SDK 版本：
 
-![](md-media/chapter01_android_development_basics/media/image49.png)
+![](media/chapter01_android_development_basics/media/image49.png)
 
 图 1‑39
 
@@ -1661,7 +1661,7 @@ Google Play
 
 (6)在最后一步，您可以修改您的虚拟设备名称并选择屏幕的启动大小和方向。选择纵向布局，然后单击完成：
 
-![](md-media/chapter01_android_development_basics/media/image50.png)
+![](media/chapter01_android_development_basics/media/image50.png)
 
 图 1‑40
 
@@ -1671,7 +1671,7 @@ Google Play
 
 （1）在Android Studio主工具栏上，确保选择了自动创建的运行配置和刚刚配置的虚拟设备，然后单击。
 
-![](md-media/chapter01_android_development_basics/media/image51.png)
+![](media/chapter01_android_development_basics/media/image51.png)
 
 图 1‑41
 
@@ -1680,9 +1680,9 @@ Google Play
 <table>
 <tbody>
 <tr class="odd">
-<td><p><img src="md-media/chapter01_android_development_basics/media/image52.png" style="width:1.5252in;height:2.68712in" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image52.png" style="width:1.5252in;height:2.68712in" /></p>
 <p>图 1‑42</p></td>
-<td><p><img src="md-media/chapter01_android_development_basics/media/image53.png" style="width:1.5202in;height:2.65644in" /></p>
+<td><p><img src="media/chapter01_android_development_basics/media/image53.png" style="width:1.5202in;height:2.65644in" /></p>
 <p>图 1‑43</p></td>
 </tr>
 </tbody>
@@ -1744,7 +1744,7 @@ JavaScript，例如用于使用 React 的前端 Web 应用程序或通过LLVM的
 构建流程涉及许多将项目转换成 Android 应用软件包 (APK) 或 Android App Bundle (AAB)
 的工具和流程。构建流程非常灵活，因此了解它的一些底层工作原理会很有帮助。
 
-> ![](md-media/chapter01_android_development_basics/media/image54.png)
+> ![](media/chapter01_android_development_basics/media/image54.png)
 
 图 1‑44典型安卓应用模块的构建流程。
 
@@ -1814,7 +1814,7 @@ Groovy 是一种适用于 Java 虚拟机 (JVM) 的动态语言。无需了解 Gr
 Plugin for Gradle”引入了需要的大多数 DSL 元素。开始新项目时，Android Studio会自动创建其中的部分文件，如图
 1‑45所示，并为其填充合理的默认值。
 
-> ![](md-media/chapter01_android_development_basics/media/image55.png)
+> ![](media/chapter01_android_development_basics/media/image55.png)
 
 图 1‑45 安卓应用模块的默认项目结构。
 

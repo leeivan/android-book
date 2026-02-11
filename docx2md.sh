@@ -16,12 +16,12 @@ for f in doc/*.docx; do
   echo "--------------------------------------"
   echo "[$count] 正在转换: $f"
   echo "输出文件: md/$name.md"
-  echo "图片目录: md-media/$name"
+  echo "图片目录: media/$name"
 
   if pandoc "$f" \
     -t gfm \
     -o "md/$name.md" \
-    --extract-media="md-media/$name" \
+    --extract-media="media/$name" \
     --mathjax; then
 
     echo "✅ 转换成功: $name"
