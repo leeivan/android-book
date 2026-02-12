@@ -1,18 +1,9 @@
 # 安卓开发基础
 
-安卓是一种以Linux为基础的开放源代码操作系统，主要使用于便携设备。安卓12是第十二个主要发布版本，也是安卓第19版本，是由谷歌领导的开放手机联盟（Open
-Handset Alliance，OHA）开发的移动设备操作系统。安卓 12第一个测试版于 2021年5月18日发布，于 2021 年 10 月
-4 日通过安卓开源项目公开发布，并于 2021年10月19日发布以支持谷歌设备。安卓12 对手机操作系统的质感设计语言（Material
-Design）进行了重大更新，称为“个性质感（Material
-You）”，具有更大的按钮、更多的动画以及主屏幕小部件的新样式，允许操作系统使用用户壁纸的颜色为系统菜单和支持的应用程序自动生成颜色主题。安卓
-12 还具有对滚动屏幕截图的原生支持。除了用户界面之外，安卓 12
-上的小部件还使用新的个性质感设计语言进行了更新。安卓12对系统服务进行了性能改进，例如
-WindowManager、PackageManager、系统服务器和中断，还为视障人士增加了可访问性改进，安卓Runtime已添加到
-Project Mainline，允许通过Play Store为其提供服务。安卓 12 添加了对空间音频和MPEG-H 3D
-音频的支持，并将支持HEVC视频转码，以便向后兼容不支持它的应用程序，丰富的内容插入API
-简化了在应用程序之间传输格式化文本和媒体的能力，例如通过剪贴板。第三方应用程序商店现在可以更新应用程序，而无需不断征求用户的许可。
+安卓是一种基于 Linux 的开源操作系统，主要用于手机、平板、可穿戴设备等移动终端。当前稳定主版本为安卓 15（API 35），由谷歌领导的开放手机联盟（Open
+Handset Alliance，OHA）持续维护与演进。
 
-操作系统级别的机器学习功能被沙盒化在安卓私有计算核心中，明确禁止访问网络。现在可以将请求位置数据的应用程序限制为只能访问近似位置数据，而不是精确位置数据。阻止应用程序在系统范围内使用相机和麦克风的控件已添加到快速设置切换中，如果它们处于活动状态屏幕上也会显示一个指示器。
+对开发者来说，近几年安卓更新的重点可以概括为三点：界面体验更统一（如 Material Design 的持续完善）、大屏和折叠屏适配更重要、隐私和安全规则更严格。实际开发中，最需要关注的是 targetSdk 升级后带来的行为变化，并在发布前做好兼容性测试与回归测试。
 
 ## 安卓入门
 
@@ -305,17 +296,43 @@ Vulkan 扩展程序等。
 <td>31</td>
 </tr>
 <tr class="even">
-<td>安卓12L</td>
+<td><a href="https://en.wikipedia.org/wiki/Android_12#Android_12L">安卓 12L</a></td>
 <td>雪锥 v2</td>
-<td>待定</td>
-<td>2022 年第一季度</td>
-<td>预支撑</td>
+<td>12L</td>
+<td>2022 年 3 月 7 日</td>
+<td>是的</td>
 <td>32</td>
+</tr>
+<tr class="odd">
+<td><a href="https://en.wikipedia.org/wiki/Android_13">安卓 13</a></td>
+<td>提拉米苏</td>
+<td>13</td>
+<td>2022 年 8 月 15 日</td>
+<td>是的</td>
+<td>33</td>
+</tr>
+<tr class="even">
+<td><a href="https://en.wikipedia.org/wiki/Android_14">安卓 14</a></td>
+<td>倒置蛋糕</td>
+<td>14</td>
+<td>2023 年 10 月 4 日</td>
+<td>是的</td>
+<td>34</td>
+</tr>
+<tr class="odd">
+<td><a href="https://en.wikipedia.org/wiki/Android_15">安卓 15</a></td>
+<td>香草冰淇淋</td>
+<td>15</td>
+<td>2024 年 10 月 15 日</td>
+<td>是的</td>
+<td>35</td>
 </tr>
 </tbody>
 </table>
 
 表 1‑1 安卓的各个版本
+
+注：上表“支持（安全修复）”用于说明该版本在发布时段内是否仍可获得官方安全更新。
 
 ### 硬件要求
 
@@ -467,10 +484,9 @@ Studio都提供有相应工具来帮助程序员进行。
 
 ## 安装设置
 
-在进行安卓应用程序开发之前，需要搭建安卓应用程序开发环境。本书使用Android Studio
-2021.1.1版本来执行创建应用程序的任务。Android
-Studio是用于开发安卓应用的官方集成开发环境，以 IntelliJ IDEA 为基础构建而成。除了IntelliJ
-强大的代码编辑器和开发者工具，Android Studio 还提供更多可提高安卓应用构建效率的功能，例如：
+在进行安卓应用程序开发之前，需要先搭建开发环境。本书建议使用 Android Studio 的最新稳定版
+（如 Koala 2024.1.1 及后续版本）来创建和管理项目。Android
+Studio 是官方推荐的安卓集成开发环境，基于 IntelliJ IDEA 构建。除代码编辑功能外，它还提供了完整的构建、调试和测试工具，例如：
 
   - 基于 Gradle 的灵活构建系统
 
@@ -500,11 +516,10 @@ Studio 是安卓开发的官方集成开发环境，提供开发安卓应用所�
 
   - 安卓开发平台
 
-由于Android Studio把安卓应用程序开发所需的运行环境、开发库、开发工具和界面都集成为一个包，所以安装比较简单。Android
-Studio针对Windows、Mac、Linux、Chrome OS不同的操作系统，提供相应的安装包。在下载完成Android
-Studio安装包之后，首先需要确认操作系统已经安装了JDK，并且版本在1.8以上。下面介绍Android
-Studio基于Windows的安装步骤。不必立即下载和安装离线工具，必须至少启动一次 Android Studio 才能下载
-Gradle 构建工具，如果连接速度足够快会发现使用标准配置更容易。步骤如下：
+Android Studio 已将安卓开发常用工具集成在同一安装包中，因此整体安装流程较为简单。它为 Windows、Mac、Linux、Chrome OS
+都提供了对应安装包。下载完成后，请先确认系统已安装 JDK，建议使用 JDK 17 及以上版本。下面以 Windows 为例介绍安装步骤。
+
+通常不需要提前下载离线组件：首次启动 Android Studio 时，会自动下载必要的 SDK 与 Gradle 构建工具。网络条件允许时，使用默认配置通常更省心。步骤如下：
 
 (1)如果下载了 .exe 文件，双击以启动。如果下载了 .zip 文件，解压 ZIP，将 android-studio 文件夹复制到您的
 Program Files 文件夹中，然后打开 android-studio \> bin 文件夹并启动 studio64.exe（对于 64
@@ -1890,105 +1905,70 @@ Central定义为 Gradle 用于查找其依赖项的存储库。
 
 对于包含多个模块的安卓项目，可能有必要在项目级别定义某些属性并在所有模块之间共享这些属性。为此可以将额外的属性添加到顶层 build.gradle 文件内的 ext 代码块中。
 
-> buildscript {...}
-> 
-> allprojects {...}
-> 
-> // This block encapsulates custom properties and makes them available
-> to all
-> 
-> // modules in the project.
-> 
-> ext {
-> 
-> // The following are only a few examples of the types of properties
-> you can define.
-> 
-> sdkVersion = 28
-> 
-> // You can also create properties to specify versions for
-> dependencies.
-> 
-> // Having consistent versions between modules can avoid conflicts with
-> behavior.
-> 
-> supportLibVersion = "28.0.0"
-> 
-> ...
-> 
-> }
-> 
-> ...
+```groovy
+buildscript {...}
+allprojects {...}
+
+// This block encapsulates custom properties and makes them available to all
+// modules in the project.
+ext {
+    // The following are only a few examples of the types of properties you can define.
+    sdkVersion = 28
+
+    // You can also create properties to specify versions for dependencies.
+    // Having consistent versions between modules can avoid conflicts with behavior.
+    supportLibVersion = "28.0.0"
+    ...
+}
+...
+```
 
 码 1‑9
 
 模块级 build.gradle 文件位于每个 project/module/ 目录下，用于为其所在的特定模块配置构建设置。可以通过配置这些构建设置提供自定义打包选项，以及替换 main/ 应用清单或顶层 build.gradle 文件中的设置。以下安卓应用模块 build.gradle 文件示例简要说明了应该了解的一些基础
 DSL 元素和设置。
 
-> plugins {
-> 
-> id 'com.android.application'
-> 
-> }
-> 
-> android {
-> 
-> compileSdk 32
-> 
-> defaultConfig {
-> 
-> applicationId "com.example.helloworld"
-> 
-> minSdk 21
-> 
-> targetSdk 32
-> 
-> versionCode 1
-> 
-> versionName "1.0"
-> 
-> testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-> 
-> }
-> 
-> buildTypes {
-> 
-> release {
-> 
-> minifyEnabled false
-> 
-> proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
-> 'proguard-rules.pro'
-> 
-> }
-> 
-> }
-> 
-> compileOptions {
-> 
-> sourceCompatibility JavaVersion.VERSION\_1\_8
-> 
-> targetCompatibility JavaVersion.VERSION\_1\_8
-> 
-> }
-> 
-> }
-> 
-> dependencies {
-> 
-> implementation 'androidx.appcompat:appcompat:1.4.0'
-> 
-> implementation 'com.google.android.material:material:1.4.0'
-> 
-> implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
-> 
-> testImplementation 'junit:junit:4.+'
-> 
-> androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-> 
-> androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-> 
-> }
+```groovy
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.example.helloworld"
+        minSdk 21
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+}
+```
 
 码 1‑10
 
