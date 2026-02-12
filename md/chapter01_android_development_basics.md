@@ -1907,105 +1907,70 @@ Central定义为 Gradle 用于查找其依赖项的存储库。
 
 对于包含多个模块的安卓项目，可能有必要在项目级别定义某些属性并在所有模块之间共享这些属性。为此可以将额外的属性添加到顶层 build.gradle 文件内的 ext 代码块中。
 
-> buildscript {...}
-> 
-> allprojects {...}
-> 
-> // This block encapsulates custom properties and makes them available
-> to all
-> 
-> // modules in the project.
-> 
-> ext {
-> 
-> // The following are only a few examples of the types of properties
-> you can define.
-> 
-> sdkVersion = 28
-> 
-> // You can also create properties to specify versions for
-> dependencies.
-> 
-> // Having consistent versions between modules can avoid conflicts with
-> behavior.
-> 
-> supportLibVersion = "28.0.0"
-> 
-> ...
-> 
-> }
-> 
-> ...
+```groovy
+buildscript {...}
+allprojects {...}
+
+// This block encapsulates custom properties and makes them available to all
+// modules in the project.
+ext {
+    // The following are only a few examples of the types of properties you can define.
+    sdkVersion = 28
+
+    // You can also create properties to specify versions for dependencies.
+    // Having consistent versions between modules can avoid conflicts with behavior.
+    supportLibVersion = "28.0.0"
+    ...
+}
+...
+```
 
 码 1‑9
 
 模块级 build.gradle 文件位于每个 project/module/ 目录下，用于为其所在的特定模块配置构建设置。可以通过配置这些构建设置提供自定义打包选项，以及替换 main/ 应用清单或顶层 build.gradle 文件中的设置。以下安卓应用模块 build.gradle 文件示例简要说明了应该了解的一些基础
 DSL 元素和设置。
 
-> plugins {
-> 
-> id 'com.android.application'
-> 
-> }
-> 
-> android {
-> 
-> compileSdk 35
-> 
-> defaultConfig {
-> 
-> applicationId "com.example.helloworld"
-> 
-> minSdk 21
-> 
-> targetSdk 35
-> 
-> versionCode 1
-> 
-> versionName "1.0"
-> 
-> testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-> 
-> }
-> 
-> buildTypes {
-> 
-> release {
-> 
-> minifyEnabled false
-> 
-> proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
-> 'proguard-rules.pro'
-> 
-> }
-> 
-> }
-> 
-> compileOptions {
-> 
-> sourceCompatibility JavaVersion.VERSION\_17
-> 
-> targetCompatibility JavaVersion.VERSION\_17
-> 
-> }
-> 
-> }
-> 
-> dependencies {
-> 
-> implementation 'androidx.appcompat:appcompat:1.7.0'
-> 
-> implementation 'com.google.android.material:material:1.12.0'
-> 
-> implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
-> 
-> testImplementation 'junit:junit:4.+'
-> 
-> androidTestImplementation 'androidx.test.ext:junit:1.2.1'
-> 
-> androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
-> 
-> }
+```groovy
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.example.helloworld"
+        minSdk 21
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+}
+```
 
 码 1‑10
 
