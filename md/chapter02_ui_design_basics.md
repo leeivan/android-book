@@ -75,8 +75,8 @@ APK（Android 软件包），即带有 .apk 后缀的归档文件。一个 APK
 是用户关心的内容，系统随即也知道将进程 B
 视为用户关心的内容。由于存在灵活性，服务已成为非常有用的构建块，并且可实现各种高级系统概念。动态壁纸、通知侦听器、屏幕保护程序、输入方法、无障碍功能服务以及众多其他核心系统功能均可构建为在其运行时由应用实现、系统绑定的服务。
 
-如果应用面向 Android 5.0（API 级别 21）或更高版本，使用 JobScheduler 类来调度操作。JobScheduler
-的优势在于，其能通过优化作业调度来降低功耗，以及使用 Doze API，从而达到省电目的。
+如果应用需要执行可延迟的后台任务，建议优先使用 WorkManager。WorkManager
+会在不同安卓版本上自动选择合适的底层调度机制（如 JobScheduler），并更便于统一管理任务重试、约束和持久化。
 
   - 广播接收器
 
@@ -122,15 +122,13 @@ URI。对于广播接收器，意图只会定义待广播的通知，例如指�
 与活动、服务和广播接收器不同，内容提供程序并非由意图启动，相反其会在成为ContentResolver的请求目标时启动。内容解析程序会通过内容提供程序处理所有直接事务，因此通过提供程序执行事务的组件便无需执行事务，而是改为在
 ContentResolver 对象上调用方法。这会在内容提供程序与请求信息的组件之间留出一个抽象层以确保安全。每种组件都有不同的启动方法：
 
-  - 如要启动活动，可以向 startActivity()或startActivityForResult()
-    传递意图（当想让活动返回结果时），或者为其安排新任务。
+  - 如要启动活动，可以向 startActivity() 传递意图；如果希望接收返回结果，建议使用 Activity Result API
+    （registerForActivityResult），而不是已弃用的 startActivityForResult()。
 
-  - 在 Android 5.0（API 级别 21）及更高版本中，可以使用 JobScheduler 类来调度操作。对于早期 Android
-    版本，可以通过向 startService()传递Intent来启动服务（或对执行中的服务下达新指令），也可通过向将
-    bindService()传递Intent来绑定到该服务。
+  - 对需要延迟执行或有约束条件的后台工作，建议使用 WorkManager；需要与界面强相关的长期任务时再结合前台服务使用。
 
-  - 可以通过向sendBroadcast()、sendOrderedBroadcast() 或 sendStickyBroadcast()
-    等方法传递意图来发起广播。
+  - 可以通过 sendBroadcast() 或 sendOrderedBroadcast() 传递意图来发起广播。常规应用不建议使用
+    sendStickyBroadcast() 这类过时接口。
 
   - 可以通过在ContentResolver上调用query()，对内容提供程序执行查询。
 
@@ -276,24 +274,15 @@ res/values-fr/）和用户的语言设置，对界面应用相应的语言字符
 连接的设备更快。模拟器随附了针对各种 安卓手机、平板电脑、Wear OS 和 Android
 TV 设备的预定义配置。安卓模拟器除了需要满足 Android Studio 的基本系统要求之外，还需要满足下述其他要求：
 
-  - SDK 工具 26.1.1 或更高版本
+  - 64 位处理器与支持硬件虚拟化的 BIOS/UEFI 配置（Intel VT-x 或 AMD-V）
 
-  - 64 位处理器
+  - 推荐使用最新稳定版 Android Emulator 与 SDK Platform-Tools
 
-  - Windows：支持 UG（无限制访客）的 CPU
+  - Windows 建议启用 Hyper-V / Windows Hypervisor Platform（WHPX）或 Android Emulator Hypervisor Driver
 
-  - HAXM 6.2.1 或更高版本（建议使用 HAXM 7.2.0 或更高版本）
+  - Linux 建议使用 KVM；macOS 使用 Apple Hypervisor Framework
 
-如果要在 Windows 和 Linux 上使用硬件加速，还需要满足以下额外要求：
-
-  - 搭载 Intel 处理器的 Windows 或 Linux 系统：Intel 处理器需要支持 Intel VT-x、Intel
-    EM64T (Intel 64) 和 Execute Disable (XD) Bit 功能
-
-  - 搭载 AMD 处理器的 Linux 系统：AMD 处理器需要支持 AMD 虚拟化 (AMD-V) 和 Supplemental
-    Streaming SIMD Extensions 3 (SSSE3)
-
-  - 搭载 AMD 处理器的 Windows 系统：需要 Android Studio 3.2 或更高版本以及 2018 年 4 月发布的支持
-    Windows Hypervisor Platform (WHPX) 功能的 Windows 10 或更高版本
+如果硬件加速不可用，模拟器可运行但性能会明显下降，建议优先排查虚拟化相关配置。
 
 如需与 Android 8.1（API 级别 27）及更高版本的系统映像配合使用，连接的摄像头必须能够捕捉 720p
 的画面。如需在模拟设备上安装 APK 文件，请将 APK
@@ -506,11 +495,9 @@ New Project”；
 
   - 如果您想将项目放在其他文件夹中，请更改其 Save 位置。
 
-  - 从 Language 下拉菜单中选择 Java。
+  - 从 Language 下拉菜单中选择 Kotlin（新项目推荐）。
 
   - 在 Minimum SDK 字段中选择您希望应用支持的最低 Android 版本。
-
-  - 如果应用需要旧版库支持，请选中 Use legacy android.support libraries 复选框。
 
   - 其他选项保持原样。
 
@@ -531,11 +518,11 @@ Project”），并从该窗口顶部的下拉列表中选择“Android”视图
 
 清单文件描述了应用的基本特性并定义了每个应用组件。
 
-  - Gradle Scripts \> build.gradle
+  - Gradle Scripts \> build.gradle(.kts)
 
 有两个使用此名称的文件：一个针对项目“Project: My First App”，另一个针对应用模块“Module:
-My\_First\_App.app”。每个模块均有自己的 build.gradle 文件，但此项目当前仅有一个模块。使用每个模块的
-build.gradle 文件控制 Gradle 插件构建应用的方式。
+My\_First\_App.app”。每个模块均有自己的 build.gradle(.kts) 文件，但此项目当前仅有一个模块。使用每个模块的
+build.gradle(.kts) 文件控制 Gradle 插件构建应用的方式。
 
 ### 构建简单界面
 
@@ -554,7 +541,7 @@ Studio的XML文件编辑器打开活动对应的XML布局文件，在文件中�
 图形化界面设计是使用Android
 Studio提供的图形化界面设计工具，能够把工具提供的布局和控件直接拖拽到手机界面上合适的位置，直观显示出来，并且通过属性设置界面，直接设置组件的属性。在设计过程中，随着布局和控件的添加，属性的修改，XML布局文件的代码也自动生成。使用第二种方式直接编写代码的XML布局文件，也可以通过手机的模拟界面，直观看到实际显示效果。
 
-如果要使用Android Studio的图形化界面设计工具，首先打开需要设计的XML布局文件，然后点击右上角标注的Design标签（图
+如果要使用Android Studio的图形化界面设计工具，首先打开需要设计的XML布局文件，然后点击编辑器右上角的“Design”或“Split”标签（图
 2‑2），就可以看到手机模拟界面的窗口了。从Palette拖拽组件到手机屏幕，在Palette窗口中（图
 2‑3），列出了Layouts、Widgets、Text、Buttons和Containers等布局和控件。
 
@@ -1045,15 +1032,6 @@ AndroidManifest.xml” 文件，找到 DisplayMessageActivity 的 \<activity
 > \<activity android:name=".DisplayMessageActivity"
 > 
 > android:parentActivityName=".MainActivity"\>
-> 
-> \<\!-- The meta-data tag is required if you support API level 15 and
-> lower --\>
-> 
-> \<meta-data
-> 
-> android:name="android.support.PARENT\_ACTIVITY"
-> 
-> android:value=".MainActivity" /\>
 > 
 > \</activity\>
 
@@ -1686,8 +1664,8 @@ A的堆栈中有Activity\_Y和Activity\_X，用户按主屏幕按钮，然后从
 
 ### 创建片段
 
-片段需要对AndroidX Fragment库的依赖 ，需要将Google Maven
-存储库添加到项目settings.gradle文件中才能包含此依赖项。
+片段需要依赖 AndroidX Fragment 库。通常新项目默认已在 `settings.gradle(.kts)` 中配置 `google()` 与
+`mavenCentral()`，如未配置请补充：
 
 > dependencyResolutionManagement {
 > 
@@ -1705,11 +1683,11 @@ A的堆栈中有Activity\_Y和Activity\_X，用户按主屏幕按钮，然后从
 
 码 2‑18
 
-要将AndroidX片段库包含到项目中，在应用build.gradle文件中添加以下依赖项：
+要将 AndroidX 片段库包含到项目中，在应用 `build.gradle(.kts)` 文件中添加以下依赖项：
 
 > dependencies {
 > 
-> def fragment\_version = "1.4.0"
+> def fragment\_version = "x.y.z" // 请替换为最新稳定版
 > 
 > // Java language implementation
 > 
@@ -2586,8 +2564,7 @@ AdapterView 布局中的视图，适配器支持的常见布局包括列表视�
 约束布局可让使用扁平视图层次结构（无嵌套视图组）创建复杂的大型布局，与相对布局相似，其中所有的视图均根据同级视图与父布局之间的关系进行布局，但其灵活性要高于相对布局，并且更易于与
 Android Studio 的布局编辑器配合使用。约束布局的所有功能均可直接通过布局编辑器的可视化工具来使用，因为布局 API
 和布局编辑器是专为彼此构建的，因此完全可以使用约束布局通过拖放的形式（而非修改
-XML）来构建布局。本节提供了使用约束布局在 Android Studio 3.0
-或更高版本中构建布局的指南。
+XML）来构建布局。本节提供了在最新稳定版 Android Studio 中构建约束布局的指南。
 
 要在约束布局中定义某个视图的位置，必须为该视图添加至少一个水平约束条件和一个垂直约束条件。每个约束条件均表示与其他视图、父布局或隐形引导线之间连接或对齐方式。每个约束条件均定义了视图在竖轴或者横轴上的位置；因此每个视图在每个轴上都必须至少有一个约束条件，但通常情况下会需要更多约束条件。
 
@@ -2612,7 +2589,7 @@ Errors![](media/chapter02_ui_design_basics/media/image67.png)。
 为避免出现缺少约束条件这一问题，布局编辑器会使用 [Autoconnect 和 Infer
 Constraints](https://developer.android.com/training/constraint-layout?hl=zh-cn#use-autoconnect-and-infer-constraints) 功能自动添加约束条件。如需在项目中使用 约束布局，按以下步骤操作：
 
-(1)确保 maven.google.com 代码库已在模块级 build.gradle 文件中声明；
+(1)确保仓库已在 `settings.gradle(.kts)` 的 `dependencyResolutionManagement` 中声明（通常新项目已默认配置）：
 
 >    repositories {
 > 
@@ -2622,16 +2599,16 @@ Constraints](https://developer.android.com/training/constraint-layout?hl=zh-cn#u
 
 码 2‑56
 
-(2)将该库作为依赖项添加到同一个 build.gradle 文件中，如以下示例所示。请注意，最新版本可能与示例中显示的不同：
+(2)将该库作为依赖项添加到应用模块 `build.gradle(.kts)` 文件中，如以下示例所示：
 
 > dependencies {
 > 
-> implementation "androidx.constraintlayout:constraintlayout:2.1.2"
+> implementation "androidx.constraintlayout:constraintlayout:x.y.z" // 请替换为最新稳定版
 > 
-> // To use constraintlayout in compose
+> // 如需在 Compose 中使用 ConstraintLayout
 > 
 > implementation
-> "androidx.constraintlayout:constraintlayout-compose:1.0.0-rc02"
+> "androidx.constraintlayout:constraintlayout-compose:x.y.z" // 请替换为最新稳定版
 > 
 > }
 
