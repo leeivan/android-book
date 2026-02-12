@@ -1523,91 +1523,55 @@ resource to the module”图标，然后选择“Dimension Value”，输入资�
 > package com.example. helloworld;
 > 
 > import android.os.Bundle;
-> 
 > import android.view.View;
-> 
 > import android.widget.ImageView;
-> 
 > import android.widget.TextView;
 > 
 > import androidx.appcompat.app.AppCompatActivity;
 > 
 > public class HelloDroidActivity extends AppCompatActivity {
+>     private TextView message;
+>     private int counter = 0;
 > 
-> private TextView message;
+>     @Override
+>     protected void onCreate(Bundle savedInstanceState) {
+>         super.onCreate(savedInstanceState);
+>         setContentView(R.layout.activity\_main);
 > 
-> private int counter = 0;
+>         message = findViewById(R.id.clickCounter);
+>         ImageView droid = findViewById(R.id.helloImage);
 > 
-> @Override
+>         // Define and attach click listener
+>         droid.setOnClickListener(new View.OnClickListener() {
+>             @Override
+>             public void onClick(View v) {
+>                 tapDroid();
+>             }
+>         });
+>     }
 > 
-> protected void onCreate(Bundle savedInstanceState) {
+>     private void tapDroid() {
+>         counter++;
+>         String countAsText;
 > 
-> super.onCreate(savedInstanceState);
+>         /*
+>          * In real applications you should not write switch like the one below.
+>          * Use resource of type "Quantity strings (plurals)" instead.
+>          * See https://developer.android.com/guide/topics/resources/string-resource\#Plurals
+>          */
+>         switch (counter) {
+>             case 1:
+>                 countAsText = "1次";
+>                 break;
+>             case 2:
+>                 countAsText = "2次";
+>                 break;
+>             default:
+>                 countAsText = String.format("%d 次", counter);
+>         }
 > 
-> setContentView(R.layout.activity\_main);
-> 
-> message = findViewById(R.id.clickCounter);
-> 
-> ImageView droid = findViewById(R.id.helloImage);
-> 
-> //Define and attach click listener
-> 
-> droid.setOnClickListener(new View.OnClickListener() {
-> 
-> @Override
-> 
-> public void onClick(View v) {
-> 
-> tapDroid();
-> 
-> }
-> 
-> });
-> 
-> }
-> 
-> private void tapDroid() {
-> 
-> counter++;
-> 
-> String countAsText;
-> 
-> /\*
-> 
-> \* In real applications you should not write switch like the one
-> below.
-> 
-> \* Use resource of type "Quantity strings (plurals)" instead.
-> 
-> \* See
-> https://developer.android.com/guide/topics/resources/string-resource\#Plurals
-> 
-> \*/
-> 
-> switch (counter) {
-> 
-> case 1:
-> 
-> countAsText = "1次";
-> 
-> break;
-> 
-> case 2:
-> 
-> countAsText = "2次";
-> 
-> break;
-> 
-> default:
-> 
-> countAsText = String.format("%d 次", counter);
-> 
-> }
-> 
-> message.setText(String.format("您点击 %s", countAsText));
-> 
-> }
-> 
+>         message.setText(String.format("您点击 %s", countAsText));
+>     }
 > }
 
 码 1‑6
