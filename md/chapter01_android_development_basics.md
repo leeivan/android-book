@@ -296,12 +296,36 @@ Vulkan 扩展程序等。
 <td>31</td>
 </tr>
 <tr class="even">
-<td>安卓12L</td>
+<td><a href="https://en.wikipedia.org/wiki/Android_12#Android_12L">安卓 12L</a></td>
 <td>雪锥 v2</td>
-<td>待定</td>
-<td>2022 年第一季度</td>
-<td>预支撑</td>
+<td>12L</td>
+<td>2022 年 3 月 7 日</td>
+<td>是的</td>
 <td>32</td>
+</tr>
+<tr class="odd">
+<td><a href="https://en.wikipedia.org/wiki/Android_13">安卓 13</a></td>
+<td>提拉米苏</td>
+<td>13</td>
+<td>2022 年 8 月 15 日</td>
+<td>是的</td>
+<td>33</td>
+</tr>
+<tr class="even">
+<td><a href="https://en.wikipedia.org/wiki/Android_14">安卓 14</a></td>
+<td>倒置蛋糕</td>
+<td>14</td>
+<td>2023 年 10 月 4 日</td>
+<td>是的</td>
+<td>34</td>
+</tr>
+<tr class="odd">
+<td><a href="https://en.wikipedia.org/wiki/Android_15">安卓 15</a></td>
+<td>香草冰淇淋</td>
+<td>15</td>
+<td>2024 年 10 月 15 日</td>
+<td>是的</td>
+<td>35</td>
 </tr>
 </tbody>
 </table>
