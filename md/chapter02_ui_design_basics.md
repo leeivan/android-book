@@ -1,5 +1,7 @@
 # 界面设计基础
 
+> 版本说明（截至 2026 年）：本章示例和说明已按 AndroidX 与现代 Android 开发实践更新，重点覆盖活动/片段、布局、资源与多屏适配的当前推荐方式。
+
 每个安卓客户端应用首先面对的就是界面的开发。安卓系统提供了丰富界面控件。安卓提供的用户图形交互界面称为活动。本章主要介绍活动的基本知识和使用方法，如何在活动上实现不同的布局，如何理解字符串、图片等资源的使用。
 
 ## 开发基础知识
@@ -230,7 +232,8 @@ startActivity()，则系统可能会启动活动，以便用户能够草拟并�
 
 安卓设备多种多样，但并非所有设备都提供相同的特性和功能。以防将应用安装在缺少应用所需特性的设备上，必须通过在清单文件中声明设备和软件要求，为该应用支持的设备类型明确定义一个配置文件。其中的大多数声明只是为了提供信息，系统并不会读取其们，但
 Google Play 等外部服务会读取其们，以便在用户通过其设备搜索应用时为用户提供过滤功能。例如，如果应用需要相机功能，并使用
-Android 2.1（API 级别 7）中引入的 API，必须在清单文件中声明以下要求，如下方示例所示：
+某些特性可能依赖特定 API 级别，必须在项目配置和清单中正确声明要求。现代项目通常在 Gradle 中配置
+`minSdk`/`targetSdk`，如下方示例所示：
 
 > \<manifest ... \>
 > 
@@ -238,7 +241,7 @@ Android 2.1（API 级别 7）中引入的 API，必须在清单文件中声明�
 > 
 > android:required="true" /\>
 > 
-> \<uses-sdk android:minSdkVersion="7" android:targetSdkVersion="19" /\>
+> \<uses-sdk android:minSdkVersion="24" android:targetSdkVersion="34" /\>
 > 
 > ...
 > 
@@ -246,7 +249,7 @@ Android 2.1（API 级别 7）中引入的 API，必须在清单文件中声明�
 
 码 2‑3
 
-通过示例中所述的声明，没有相机且 Android 版本低于 2.1 的设备将无法从 Google Play
+通过示例中所述的声明，不满足最低版本或缺少必需硬件能力的设备将无法从 Google Play
 安装应用。不过可以声明应用使用相机，但并不要求必须使用，在此情况下应用必须将
 required 属性设置为 false，并在运行时检查设备是否拥有相机，然后根据需要停用任何相机功能。
 
@@ -1621,8 +1624,8 @@ A的堆栈中有Activity\_Y和Activity\_X，用户按主屏幕按钮，然后从
 
 在开发过程中，一般都是先基于手机开发一套应用，然后拷贝一份修改布局以适应什么超级大屏的。难道无法做到一种界面的布局可以同时适应手机和平板吗？在手机的界面布局设计过程中，主要是定义其中View和ViewGroup对象的层级结构。如果把这些结构模块化，就可以直接在屏幕转换角度或平板电脑等大屏幕的布局上使用了，片段（Fragment）出现的初衷就是为了解决这样的问题。片段是活动中用户界面的一部分，片段是一种灵活的、可重用界面组件，可以把一个片段看成是活动的一个布局模块，可以容纳具有某种层次结构的View和ViewGroup对象。
 
-安卓系统从Android 3.0（API level
-11）开始推出片段，主要目的是支持多屏幕更加动态和灵活的界面设计。用户界面设计时，把一个活动切分成多个片段，那么在把应用从手机屏幕迁移到大屏幕时，布局设计就不再需要改变和管理片段内部的视图层次结构，而可以重点考虑活动的显示外观了。
+片段最早在 Android 3.0（API level 11）引入。当前开发中通常应基于 AndroidX Fragment
+库使用片段，以获得一致的生命周期行为、事务管理和向后兼容能力。用户界面设计时，把一个活动切分成多个片段，那么在把应用从手机屏幕迁移到大屏幕时，布局设计就不再需要改变和管理片段内部的视图层次结构，而可以重点考虑活动的显示外观了。
 
 ![](media/chapter02_ui_design_basics/media/image55.png)
 
@@ -2254,9 +2257,9 @@ setMaxLifecycle()将屏幕外片段限制为启动状态。使用FragmentTransac
 
 ## 理解布局
 
-前一节对活动有了初步的理解，也在具体的例子中运用到了活动的布局与控件。从继承的概念上来说，活动中具体用户图形界面的组件由安卓定义的View类和ViewGroup类的子类对象组成，称为View和ViewGroup对象。View对象是安卓平台上用户界面中的基础单元，也可用称为微件。安卓系统提供了许多类型的View，例如TextView和Button等类，这些都是View类的子类。ViewGroup对象可以理解为一种容器，类似于Java中的Panel，用于容纳其他的控件对象，并规定这些控件对象按照特定的规则进行排列，即按照某种层次结构排列。安卓系统也提供了许多类型的ViewGroup，例如ScrollView、RelativeLayout和TabHost等，这些都是ViewGroup的子类。
+前一节对活动有了初步的理解，也在具体的例子中运用到了活动的布局与控件。从继承的概念上来说，活动中具体用户图形界面的组件由安卓定义的View类和ViewGroup类的子类对象组成，称为View和ViewGroup对象。View对象是安卓平台上用户界面中的基础单元，也可用称为微件。安卓系统提供了许多类型的View，例如TextView和Button等类，这些都是View类的子类。ViewGroup对象可以理解为一种容器，类似于Java中的Panel，用于容纳其他的控件对象，并规定这些控件对象按照特定的规则进行排列，即按照某种层次结构排列。安卓系统也提供了许多类型的ViewGroup，例如ScrollView、ConstraintLayout、LinearLayout和RelativeLayout等，这些都是ViewGroup的子类。
 
-那么什么是布局呢？View和ViewGroup对象在活动中的排列层次结构，称为用户界面的布局。最常用的是线性布局LinearLayout，表格布局TableLayout、相对布局RelativeLayout、网页布局WebView和列表ListView等。在安卓平台，一个活动的用户界面能够使用层次关系的View和ViewGroup对象组合来设计布局。
+那么什么是布局呢？View和ViewGroup对象在活动中的排列层次结构，称为用户界面的布局。当前最常见的是约束布局ConstraintLayout、线性布局LinearLayout、表格布局TableLayout和相对布局RelativeLayout等。在安卓平台，一个活动的用户界面能够使用层次关系的View和ViewGroup对象组合来设计布局。列表数据展示通常优先使用 RecyclerView，而非把 ListView 作为通用首选。
 
 ### 布局概述
 
@@ -2272,13 +2275,13 @@ setMaxLifecycle()将屏幕外片段限制为启动状态。使用FragmentTransac
 <p>&lt;?xml version="1.0" encoding="utf-8"?&gt;</p>
 <p>&lt;ViewGroup xmlns:android="http://schemas.android.com/apk/res/android"</p>
 <p><strong>android:</strong>id="@[+][package:]id/resource_name"</p>
-<p><strong>android:</strong>layout_height=["dimension" | "fill_parent" | "wrap_content"]</p>
-<p><strong>android:</strong>layout_width=["dimension" | "fill_parent" | "wrap_content"]</p>
+<p><strong>android:</strong>layout_height=["dimension" | "match_parent" | "wrap_content"]</p>
+<p><strong>android:</strong>layout_width=["dimension" | "match_parent" | "wrap_content"]</p>
 <p>[ViewGroup-specific attributes] &gt;</p>
 <p>&lt;View</p>
 <p><strong>android:</strong>id="@[+][package:]id/resource_name"</p>
-<p><strong>android:</strong>layout_height=["dimension" | "fill_parent" | "wrap_content"]</p>
-<p><strong>android:</strong>layout_width=["dimension" | "fill_parent" | "wrap_content"]</p>
+<p><strong>android:</strong>layout_height=["dimension" | "match_parent" | "wrap_content"]</p>
+<p><strong>android:</strong>layout_width=["dimension" | "match_parent" | "wrap_content"]</p>
 <p>[View-specific attributes] &gt;</p>
 <p>&lt;requestFocus/&gt;</p>
 <p>&lt;/View&gt;</p>
@@ -3121,7 +3124,8 @@ LinearLayoutActivity。
 > 
 > **android:**versionName="1.0" \>
 > 
-> \<uses-sdk **android:**minSdkVersion="14" /\>
+> \<uses-sdk **android:**minSdkVersion="24"
+> **android:**targetSdkVersion="34" /\>
 > 
 > \<application
 > 
@@ -3709,9 +3713,7 @@ res/的子目录中包含了所有资源，资源目录名是很重要的，表 
 
   - 为不同的屏幕尺寸提供不同的布局
 
-默认情况下，安卓可以重新调整应用程序的布局，以适应当前的设备屏幕。但有时候可能调整后的屏幕布局不太美观，这就需要应用程序针对特殊的屏幕（过大、或过小）设计不同的布局。在大多数情况下，这是可行的。使用配置限定符能够提供尺寸相关的资源，这些限定符包括small、normal、large和xlarge。如果应用程序运行在安卓
-3.2（API Level
-13）以上，则需要使用“sw\<N\>dp”配置限定符定义布局资源所需的最小可用宽度，例如600dp屏幕以上的布局，放置在layout-sw600dp/目录下，下面代码就是一个设定布局的简单例子。
+默认情况下，安卓可以重新调整应用程序的布局，以适应当前的设备屏幕。但有时候可能调整后的屏幕布局不太美观，这就需要应用程序针对特殊的屏幕（过大、或过小）设计不同的布局。在大多数情况下，这是可行的。现代开发中建议优先使用“sw\<N\>dp”配置限定符定义布局资源所需的最小可用宽度，例如600dp屏幕以上的布局，放置在layout-sw600dp/目录下。`small/normal/large/xlarge` 更适合历史兼容场景；新项目还可结合 Window Size Classes 做运行时界面分级。下面代码是一个设定布局的简单例子。
 
 > res/layout/my\_layout.xml // layout for normal screen size ("default")
 > 
@@ -3728,14 +3730,17 @@ res/的子目录中包含了所有资源，资源目录名是很重要的，表 
 
   - 为不同的屏幕尺寸提供不同的位图
 
-默认情况下，安卓系统会在应用程序运行时，根据运行设备的屏幕缩放位图文件（.png、.jpg和.gif）和Nine-Patch文件（.9.png），使其显示出合适的物理尺寸。但这种缩放有时会失真，最好的方法是为不同的屏幕密度提供不同分辨率的位图。安卓系统使用限定符ldpi(low)、mdpi(medium)、hdpi(high)和xhdpi(extra
-high)，来提供密度相关的资源。见如下代码，为高密度屏幕提供的位图放在drawable-hdpi/目录下。
+默认情况下，安卓系统会在应用程序运行时，根据运行设备的屏幕缩放位图文件（.png、.jpg和.gif）和Nine-Patch文件（.9.png），使其显示出合适的物理尺寸。但这种缩放有时会失真，最好的方法是为不同的屏幕密度提供不同分辨率的位图。安卓系统使用限定符ldpi(low)、mdpi(medium)、hdpi(high)、xhdpi、xxhdpi 和 xxxhdpi 来提供密度相关的资源。见如下代码，为不同密度屏幕提供位图资源。
 
 > res/drawable-mdpi/my\_icon.png // bitmap for medium density
 > 
 > res/drawable-hdpi/my\_icon.png // bitmap for high density
 > 
 > res/drawable-xhdpi/my\_icon.png // bitmap for extra high density
+> 
+> res/drawable-xxhdpi/my\_icon.png // bitmap for extra extra high density
+> 
+> res/drawable-xxxhdpi/my\_icon.png // bitmap for extra extra extra high density
 
 码 2‑83
 
