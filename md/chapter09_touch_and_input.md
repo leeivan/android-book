@@ -2,6 +2,8 @@
 
 触摸屏是智能手机和平板电脑最重要的输入输出工具，用户在与系统或应用程序交互过程中，大多数操作都是通过触摸屏来完成的。触摸屏由特殊材料制成，可以获取屏幕上的压力，并转换成屏幕坐标。这些信息可以被转换成数据，并被传递到软件里，所以应用程序需要经常处理用户的触摸输入，包括一个手指的触摸和多个手指的触摸。
 
+> 版本说明（截至 2026 年）：本章示例按当前主流 Android 版本更新，重点兼容 Android 7.0+ 拖放 API 与 AndroidX 实践；文中旧接口会给出替代建议。
+
 ## 输入事件
 
 在安卓中，从用户与应用的互动中截获事件的方法不止一种。对于界面内的事件，可以从用户与之互动的特定 View 对象中捕获事件。为此，View
@@ -148,6 +150,8 @@ View 对象中的默认事件处理程序。在返回 true 时确保需要终止
   - onKeyUp(int, KeyEvent)：在发生 key up 事件时调用。
 
   - onTrackballEvent(MotionEvent)：在发生轨迹球动作事件时调用。
+
+> 版本提示：轨迹球输入仅在早期设备常见，现代手机和平板几乎不再使用；新项目通常可忽略该回调。
 
   - onTouchEvent(MotionEvent)：在发生触屏动作事件时调用。
 
@@ -793,10 +797,9 @@ unit)方法，来设置跟踪速率时VelocityTracker所使用的时间单位。
 ## 多点触控
 
 在2006年的TED大会上，Jeff
-Han展示了一种具有多点触控技术的电脑屏幕。安卓也加入了多点触控功能，目前市面上只要使用电容屏触控原理的手机均可以支持多点触控技术，可以实现图片和页面缩放、手势操作等更好的用户体验。安卓的多点触控功能需要运行在安卓
-2.0版本以上（实际上第一个安卓设备支持两个手指的多点触控）。对于这个版本，可以在屏幕上同时使用三个手指完成缩放、旋转或者任何使用多点触控想做的事情。多点触控和单点触控的基本原理是一致的。当手指触摸屏幕时，MotionEvent对象被创建，并且被传递到前面介绍的方法中。还是可以通过上面介绍的MotionEvent的getAction()、getDownTime()和getX()等方法来获取触摸事件的数据。当在屏幕上有多个触点时，MotionEvent对象必须包含所有触点的信息，但是getAction()方法得到的只是一个触点的动作值，而不是全部的触点。getDownTime()方法表示第一个手指按下的时间，如果有多个手指同时触摸屏幕，之后可能有的手指离开了屏幕，但是只要屏幕上还存在最后一个触点，这个时间值就一直保持不变。当使用getX()和getY()方法获取触摸事件发生的位置，以及使用getPressure()方法和getSize()方法获取触点压力和大小时，如果传入触点索引参数，就可以获得对应触点的信息。对于不带参数的方法调用，只能获得第一个触点的信息。
+Han展示了一种具有多点触控技术的电脑屏幕。安卓也加入了多点触控功能，目前市面上只要使用电容屏触控原理的手机均可以支持多点触控技术，可以实现图片和页面缩放、手势操作等更好的用户体验。对于当前 Android 设备，多点触控已经是默认能力。多点触控和单点触控的基本原理是一致的。当手指触摸屏幕时，MotionEvent对象被创建，并且被传递到前面介绍的方法中。还是可以通过上面介绍的MotionEvent的getAction()、getDownTime()和getX()等方法来获取触摸事件的数据。当在屏幕上有多个触点时，MotionEvent对象必须包含所有触点的信息，但是getAction()方法得到的只是一个触点的动作值，而不是全部的触点。getDownTime()方法表示第一个手指按下的时间，如果有多个手指同时触摸屏幕，之后可能有的手指离开了屏幕，但是只要屏幕上还存在最后一个触点，这个时间值就一直保持不变。当使用getX()和getY()方法获取触摸事件发生的位置，以及使用getPressure()方法和getSize()方法获取触点压力和大小时，如果传入触点索引参数，就可以获得对应触点的信息。对于不带参数的方法调用，只能获得第一个触点的信息。
 
-如果希望使用多点触控，首先要知道使用getPointerCount()方法获取当前屏幕上的触点数量。只要获得的触点数量大于1的话，就需要处理触点索引和触点ID。MotionEvent对象中包含了当前从索引为0开始的触点信息，一直到getPointerCount()方法返回的最大索引值。触点索引始终从0开始，如果有三个触点，则他们的索引分别为0、1和2。调用类似getX()的方法必须使用触点索引作为参数才可以获得指定的触点信息。触点ID也是一个整数，可以表示哪个触点被跟踪。当第一个手指触摸屏幕时，触点ID也是从0开始的，但是随着手指从屏幕上的移走或放下，当前这个值就有可能不是从0开始的了。这是由于安卓系统使用触点ID作为跟踪屏幕上不同手指的运动，触点ID可以固定的指定某个手指。为了说明这一点，假设由两个手指产生的一对触摸序列。序列产生的过程为：首先从手指1触摸开始，然后是手指2触摸；接着手指1移走，然后手指2移走。手指1触摸时，会得到触点ID为0，手指2触摸时，会得到触点ID为1，而他们的触点索引也相同。当手指1移走时，手指2的ID仍然为1，而这时手指2的触点索引就会变成0，这就是上面说的触点索引始终从0开始。这样就可以在应用程序里使用触点ID将触摸事件与特定的手指关联起来，以及涉及到的其他手指。在一个手势中，可以使用getPointerId()方法获得触点ID，用来在后续的触摸事件中跟踪手指。发生一系列的动作后，可以使用findPointerInder()方法找到触点ID当前对应的触点索引，然后使用触点索引获取触摸事件的信息（见码
+如果希望使用多点触控，首先要知道使用getPointerCount()方法获取当前屏幕上的触点数量。只要获得的触点数量大于1的话，就需要处理触点索引和触点ID。MotionEvent对象中包含了当前从索引为0开始的触点信息，一直到getPointerCount()方法返回的最大索引值。触点索引始终从0开始，如果有三个触点，则他们的索引分别为0、1和2。调用类似getX()的方法必须使用触点索引作为参数才可以获得指定的触点信息。触点ID也是一个整数，可以表示哪个触点被跟踪。当第一个手指触摸屏幕时，触点ID也是从0开始的，但是随着手指从屏幕上的移走或放下，当前这个值就有可能不是从0开始的了。这是由于安卓系统使用触点ID作为跟踪屏幕上不同手指的运动，触点ID可以固定的指定某个手指。为了说明这一点，假设由两个手指产生的一对触摸序列。序列产生的过程为：首先从手指1触摸开始，然后是手指2触摸；接着手指1移走，然后手指2移走。手指1触摸时，会得到触点ID为0，手指2触摸时，会得到触点ID为1，而他们的触点索引也相同。当手指1移走时，手指2的ID仍然为1，而这时手指2的触点索引就会变成0，这就是上面说的触点索引始终从0开始。这样就可以在应用程序里使用触点ID将触摸事件与特定的手指关联起来，以及涉及到的其他手指。在一个手势中，可以使用getPointerId()方法获得触点ID，用来在后续的触摸事件中跟踪手指。发生一系列的动作后，可以使用findPointerIndex()方法找到触点ID当前对应的触点索引，然后使用触点索引获取触摸事件的信息（见码
 9‑11）。
 
 private int mActivePointerId;
@@ -829,14 +832,14 @@ public boolean onTouchEvent(MotionEvent event) {
 
 码 9‑14 **使用getPointerId()方法**
 
-另外，可以使用getActionMarked()方法获得触摸事件的动作。与getAction()方法不同，这个方法是为多点触控定义的。这个方法的返回结果经过掩码处理，去掉了触点索引的信息。可以使用getActionIndex()方法返回触摸事件的触点索引（见码
+另外，可以使用getActionMasked()方法获得触摸事件的动作。与getAction()方法不同，这个方法是为多点触控定义的。这个方法的返回结果经过掩码处理，去掉了触点索引的信息。可以使用getActionIndex()方法返回触摸事件的触点索引（见码
 9‑12）
 
-int action = MotionEvent.getActionMasked(event);
+int action = event.getActionMasked();
 
 // Get the index of the pointer associated with the action.
 
-int index = MotionEvent.getActionIndex(event);
+int index = event.getActionIndex();
 
 int xPos = -1;
 
@@ -854,9 +857,9 @@ if (event.getPointerCount() \> 1) {
 
     // the responding View or Activity.  
 
-    xPos = (int)MotionEvent.getX(event, index);
+    xPos = (int) event.getX(index);
 
-    yPos = (int)MotionEvent.getY(event, index);
+    yPos = (int) event.getY(index);
 
 } else {
 
@@ -864,9 +867,9 @@ if (event.getPointerCount() \> 1) {
 
     Log.d(DEBUG\_TAG,"Single touch event");
 
-    xPos = (int)MotionEvent.getX(event, index);
+    xPos = (int) event.getX(index);
 
-    yPos = (int)MotionEvent.getY(event, index);
+    yPos = (int) event.getY(index);
 
 }
 
@@ -1194,8 +1197,7 @@ return true;
 
 ## 拖放处理
 
-在对触摸屏操作中，将对象拖拽穿过屏幕是常用的操作。如果安卓系统是安卓
-3.0或以上的版本，可以使用安卓的拖放框架，使用拖放事件监听器View.OnDragListener来实现。
+在对触摸屏操作中，将对象拖拽穿过屏幕是常用的操作。安卓提供了拖放框架，可使用拖放事件监听器View.OnDragListener来实现。对于新项目，建议在 Android 7.0（API 24）及以上使用 startDragAndDrop()；旧版设备可兼容使用 startDrag()。
 
 使用安卓的拖放框架，允许用户通过一个图形化的拖放手势，把数据从当前布局中的一个视图上转移到另一个视图上。这个框架包含了一个拖动事件类，拖动监听器和一些辅助的方法和类。虽然这个框架主要是为了数据的移动而设计的，但是可以将这些移动的数据提供给其他的界面操作使用，例如可以创建一个当用户把一个彩色图标拖到另一个彩色图标上时，将颜色混合起来的应用。
 
@@ -1204,7 +1206,7 @@ return true;
 当用户执行一些被当作是开始拖动数据的信号的手势时，一个拖放动作就开始了。作为回应，应用程序告诉系统拖动动作开始了。系统回调应用程序，获取正在被拖动图形的数据，创建一个拖动图形的暗色代表图形，成为拖动阴影。当用户的手指将拖动阴影移动到当前布局上时，系统创建发送拖动事件，并传递给拖动事件监听器对象，以及与布局中[View](http://developer.android.com/reference/android/view/View.html)相联系的拖动事件回调方法。一旦用户释放这个拖动阴影，系统就结束拖动操作。
 
 安卓应用程序在处理拖放操作时，可以通过实现View.OnDragListener接口，创建拖动事件监听器。然后通过View类提供的setOnDragListener()方法，为View对象设置一个拖动事件监听器对象。每个View对象都可以有一个onDragEvent()
-回调方法。应用程序通过调用View.OnDragListener的startDrag()方法告诉系统开始一个拖动，也就是告诉系统可以开始发送拖动事件了。一旦的应用程序调用startDrag()方法，剩下的过程就是使用系统发送给布局中的视图对象的事件。
+回调方法。应用程序通过调用View的startDragAndDrop()（或兼容场景下的startDrag()）方法告诉系统开始一个拖动，也就是告诉系统可以开始发送拖动事件了。一旦应用程序调用该方法，剩下的过程就是使用系统发送给布局中的视图对象的事件。
 
 #### 拖放过程
 
@@ -1213,7 +1215,7 @@ return true;
   - 开始
 
 为了响应用户开始拖动的手势，应用程序通过调用
-[startDrag()](http://developer.android.com/reference/android/view/View.html#startDrag\(android.content.ClipData,android.view.View.DragShadowBuilder,java.lang.Object,int\))方法告诉系统开始一个拖动动作。[startDrag()](http://developer.android.com/reference/android/view/View.html#startDrag\(android.content.ClipData,android.view.View.DragShadowBuilder,java.lang.Object,int\))的参数提供被拖动的数据，描述被拖动数据的元数据以及一个绘制拖动阴影的回调方法。系统首先通过回调应用程序去获得一个拖动阴影。然后将这个拖动阴影显示在设备上。接着，系统发送一个操作类型为[ACTION\_DRAG\_STARTED](http://developer.android.com/reference/android/view/DragEvent.html#ACTION_DRAG_STARTED)的拖动事件，给当前布局中的所有视图对象的拖动事件监听器。为了继续接收拖动事件，包括一个可能的拖动事件，拖动事件监听器必须返回true。如果拖动事件监听器返回值为false，那么在当前操作中就接收不到拖动事件，直到系统发送一个操作类型为[ACTION\_DRAG\_ENDED](http://developer.android.com/reference/android/view/DragEvent.html#ACTION_DRAG_ENDED)的拖动事件。通过发送false，监听器告诉系统它对拖动操作不感兴趣，并且不想接收被拖动的数据。
+[startDragAndDrop()](https://developer.android.com/reference/android/view/View#startDragAndDrop\(android.content.ClipData,android.view.View.DragShadowBuilder,java.lang.Object,int\))（兼容旧版时可用 startDrag()）方法告诉系统开始一个拖动动作。该方法的参数提供被拖动的数据，描述被拖动数据的元数据以及一个绘制拖动阴影的回调方法。系统首先通过回调应用程序去获得一个拖动阴影。然后将这个拖动阴影显示在设备上。接着，系统发送一个操作类型为[ACTION\_DRAG\_STARTED](http://developer.android.com/reference/android/view/DragEvent.html#ACTION_DRAG_STARTED)的拖动事件，给当前布局中的所有视图对象的拖动事件监听器。为了继续接收拖动事件，包括一个可能的拖动事件，拖动事件监听器必须返回true。如果拖动事件监听器返回值为false，那么在当前操作中就接收不到拖动事件，直到系统发送一个操作类型为[ACTION\_DRAG\_ENDED](http://developer.android.com/reference/android/view/DragEvent.html#ACTION_DRAG_ENDED)的拖动事件。通过发送false，监听器告诉系统它对拖动操作不感兴趣，并且不想接收被拖动的数据。
 
   - 继续
 
@@ -1222,7 +1224,7 @@ return true;
   - 释放
 
 用户在可以接收数据的视图的边界框内释放拖动阴影。系统发送一个操作的类型为
-ACTION\_DROP拖动事件给视图对象的监听器。这个拖动事件包括调用startDrag()方法传给系统的数据。如果接收释放动作的代码执行成功，那么这个监听器会被期望返回true给系统。值得注意的是，只有接收拖动事件的视图已经注册了监听器，用户在这个视图的边界框内释放这个拖动阴影时，ACTION\_DROP事件才会发生。如果用户在其他情况下释放这个拖动阴影，[ACTION\_DROP](http://developer.android.com/reference/android/view/DragEvent.html#ACTION_DROP)的拖动事件就不会被发送。
+ACTION\_DROP拖动事件给视图对象的监听器。这个拖动事件包括调用 startDragAndDrop()/startDrag() 方法传给系统的数据。如果接收释放动作的代码执行成功，那么这个监听器会被期望返回true给系统。值得注意的是，只有接收拖动事件的视图已经注册了监听器，用户在这个视图的边界框内释放这个拖动阴影时，ACTION\_DROP事件才会发生。如果用户在其他情况下释放这个拖动阴影，[ACTION\_DROP](http://developer.android.com/reference/android/view/DragEvent.html#ACTION_DROP)的拖动事件就不会被发送。
 
   - 终止
 
@@ -1356,7 +1358,7 @@ myShadow = new MyDragShadowBuilder(imageView);
 
 // Starts the drag
 
-v.startDrag(dragData, // the data to be dragged
+v.startDragAndDrop(dragData, // the data to be dragged
 
 myShadow, // the drag shadow builder
 
@@ -1746,7 +1748,15 @@ ClipData data = ClipData.newPlainText("", "");
 
 DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
 
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+
+view.startDragAndDrop(data, shadowBuilder, view, 0);
+
+} else {
+
 view.startDrag(data, shadowBuilder, view, 0);
+
+}
 
 view.setVisibility(View.INVISIBLE);
 
@@ -1795,13 +1805,13 @@ break;
 
 case DragEvent.ACTION\_DRAG\_ENTERED:
 
-v.setBackgroundDrawable(enterShape);
+v.setBackground(enterShape);
 
 break;
 
 case DragEvent.ACTION\_DRAG\_EXITED:
 
-v.setBackgroundDrawable(normalShape);
+v.setBackground(normalShape);
 
 break;
 
@@ -1825,7 +1835,7 @@ break;
 
 case DragEvent.ACTION\_DRAG\_ENDED:
 
-v.setBackgroundDrawable(normalShape);
+v.setBackground(normalShape);
 
 default:
 
@@ -1885,7 +1895,15 @@ ClipData data = ClipData.newPlainText("", "");
 
 DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
 
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+
+view.startDragAndDrop(data, shadowBuilder, view, 0);
+
+} else {
+
 view.startDrag(data, shadowBuilder, view, 0);
+
+}
 
 view.setVisibility(View.INVISIBLE);
 
@@ -1924,13 +1942,13 @@ break;
 
 case DragEvent.ACTION\_DRAG\_ENTERED:
 
-v.setBackgroundDrawable(enterShape);
+v.setBackground(enterShape);
 
 break;
 
 case DragEvent.ACTION\_DRAG\_EXITED:
 
-v.setBackgroundDrawable(normalShape);
+v.setBackground(normalShape);
 
 break;
 
@@ -1954,7 +1972,7 @@ break;
 
 case DragEvent.ACTION\_DRAG\_ENDED:
 
-v.setBackgroundDrawable(normalShape);
+v.setBackground(normalShape);
 
 default:
 
