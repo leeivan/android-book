@@ -1,5 +1,7 @@
 # 外观与感觉
 
+> 版本说明（截至 2026 年）：本章示例已按 AndroidX 与现代 Android UI 实践补充更新，涉及进度反馈、选择器、可绘制对象与质感设计相关内容。
+
 ## 事件处理
 
 由于安卓应用使用Java程序编写，在应用程序运行中，用户对移动终端键盘、屏幕和位置的操作都转化成事件对象，安卓系统通过对这些事件的捕获后，执行相应的处理代码，实现与用户的交互完成预定的功能。这个过程是安卓的事件处理。安卓的事件处理机制有两种，基于监听接口和基于回调机制，这两种机制的原理和实现方法都有所不同。安卓的基于监听接口的事件处理机制，完全采用了Java的事件处理机制。
@@ -780,6 +782,8 @@ borderlessButtonStyle 样式，见码 3‑12。
 如果设置选项只有两种状态，可以使用开关按钮ToggleButton（见**图 3‑6**左图）。安卓 4.0（API
 级别14）提供了另外一种叫做Switch的开关按钮，这个按钮提供一个滑动控件，可以通过添加Switch对象来实现（见**图
 3‑6**右图）。
+
+在现代项目中，通常优先使用 `SwitchCompat`（AndroidX）或 Material Components 的 `MaterialSwitch`，以获得更一致的主题适配与兼容行为。
 
 ![](media/chapter03_look_and_feel/media/image6.png)
 ![](media/chapter03_look_and_feel/media/image7.png)
@@ -1739,6 +1743,8 @@ ImageView控件是安卓用于显示图片的控件，可以用于显示来自�
 
 下面使用ProgressBar实现进度条显示的例子，见码 3‑35。
 
+> 版本提示：`ProgressDialog` 已弃用。新项目建议在界面内使用 `ProgressBar` / `LinearProgressIndicator` / `CircularProgressIndicator`（Material Components），并结合协程或 `WorkManager` 驱动进度更新，而不是使用阻塞式对话框。
+
 > import android.app.ProgressDialog;
 > 
 > import android.os.Bundle;
@@ -2092,12 +2098,9 @@ AdapterView.OnItemSelectedListener 接口，则可以接口实例的形式传递
 
 安卓以可直接使用的对话框形式提供可供用户选择时间或日期的控件。每个选择器都提供一些控件，以用于选择时间的各个部分（小时、分钟、上午/下午）或日期的各个部分（月、日、年）。使用这些选择器有助于确保用户可以选择格式正确且已根据用户所在的语言区域进行调整的有效时间或日期。建议使用
 DialogFragment 托管每个时间或日期选择器。DialogFragment
-负责管理对话框生命周期，并可让以不同的布局配置显示选择器，例如在手机上显示为基本对话框，或在大屏幕上显示为布局的嵌入部分。DialogFragment
-最初是在 Android 3.0（API 级别 11）平台中添加的，但如果应用支持 Android 3.0 之前的版本，甚至低至 Android
-1.6，仍可以使用支持库中提供的 DialogFragment 类来确保向后兼容性。
+负责管理对话框生命周期，并可让以不同的布局配置显示选择器，例如在手机上显示为基本对话框，或在大屏幕上显示为布局的嵌入部分。当前项目通常直接使用 AndroidX 的 `DialogFragment`，无需区分历史“支持库/平台版”分支。
 
-注意：以下代码示例显示了如何使用适用于 DialogFragment 的支持库 API 为时间选择器和日期选择器创建对话框。如果应用的
-minSdkVersion为11或更高，可以改用 DialogFragment 的平台版本，关键类如下：
+注意：以下代码示例基于 AndroidX `DialogFragment` 为时间选择器和日期选择器创建对话框，关键类如下：
 
   - DatePickerDialog
 
@@ -2105,9 +2108,7 @@ minSdkVersion为11或更高，可以改用 DialogFragment 的平台版本，关�
 
 要使用 DialogFragment 显示 TimePickerDialog，需要定义一个 Fragment 类，用于扩展
 DialogFragment 并从 Fragment 的 onCreateDialog() 方法返回
-TimePickerDialog。注意：如果应用支持 Android 3.0
-之前的版本，请务必使用支持库来设置安卓项目，如设置项目以使用库中所述。扩展时间选择器的
-DialogFragment，要为 TimePickerDialog 定义 DialogFragment，必须执行以下操作：
+TimePickerDialog。扩展时间选择器的 DialogFragment 时，必须执行以下操作：
 
   - 定义 onCreateDialog() 方法，以返回 TimePickerDialog 的实例
 
@@ -2993,7 +2994,7 @@ EditText 类的子类，MultiAutoCompleteTextView 是 AutoCompleteTextView 类�
 
 ### 可绘制对象
 
-可绘制对象资源是图形的一般概念，是指可在屏幕上绘制的图形，以及可使用 getDrawable(int) 等 API 检索，或应用到拥有
+可绘制对象资源是图形的一般概念，是指可在屏幕上绘制的图形，以及可使用 `ContextCompat.getDrawable()` / `AppCompatResources.getDrawable()` 等 API 检索，或应用到拥有
 android:drawable 和 android:icon 等属性的其他 XML 资源的图形。可绘制对象包含以下多种类型：
 
   - 位图文件：位图图形文件（.png、.jpg 或 .gif），创建 BitmapDrawable。
@@ -4283,7 +4284,7 @@ XML 文件保存在 res/drawable/gradient\_box.xml 中：
 ## 质感设计
 
 质感设计（Material
-Design）是由谷歌推出的设计语言，这种设计语言旨在为手机、平板电脑、台式机和其他平台提供更一致、更广泛的外观和感觉。质感设计是用于指导用户在各种平台和设备上进行视觉、动作和互动设计的全面指南。如需在安卓应用中使用质感设计，需要遵循质感设计规范中定义的准则，并使用质感设计支持库中提供的新组件和样式，安卓提供了以下功能来帮助构建质感设计应用：
+Design）是由谷歌推出的设计语言，这种设计语言旨在为手机、平板电脑、台式机和其他平台提供更一致、更广泛的外观和感觉。当前 Android 项目通常以 Material Components/Material 3 为实现基础。质感设计是用于指导用户在各种平台和设备上进行视觉、动作和互动设计的全面指南。如需在安卓应用中使用质感设计，需要遵循质感设计规范中定义的准则，并使用对应组件库中提供的组件和样式，安卓提供了以下功能来帮助构建质感设计应用：
 
   - 质感设计应用主题背景，用于设置所有界面微件的样式
 
