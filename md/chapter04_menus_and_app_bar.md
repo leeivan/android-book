@@ -1,11 +1,12 @@
 # 菜单和应用栏
 
-设计应用程序的浏览模式是完善用户体验需要考虑的重要一环。如果浏览模式设计的不佳，用户无法快速定位所需的功能，或者出现错误定位使用户无法得到所需的功能，这些都会产生不好的用户体验。从安卓
-3.0开始，安卓系统的应用浏览模式发生了较大的改变，引入了向上和返回的设计原则，并且提供了相应的设计组件，其中包含菜单、应用栏和浏览抽屉等。如果要实现准确的、一致的应用程序浏览，还需要理解浏览模式的原则，并且学会组件的使用。
+设计应用程序的浏览模式是完善用户体验需要考虑的重要一环。如果浏览模式设计的不佳，用户无法快速定位所需的功能，或者出现错误定位使用户无法得到所需的功能，这些都会产生不好的用户体验。
+
+在最新 Android（Android 14/15）开发中，菜单与应用栏依然是导航和操作入口的重要组成部分，但工程实践已经从早期的原生 ActionBar 逐步迁移到 AndroidX、Material 3 与 Kotlin。要实现准确且一致的应用导航，除了理解“向上（Up）”与“返回（Back）”的原则，还需要掌握 `AppCompat/Toolbar`、`MenuHost/MenuProvider`、`NavigationUI` 以及在 Jetpack Compose 中使用 `TopAppBar` 等现代方案。
 
 ## 菜单
 
-在安卓中，支持菜单视图元素的关键类是android.view.Menu，每个活动都会关联一个这种类型的菜单对象。一个菜单对象包含了一些菜单项和子菜单。菜单项由android.view.MenuItem类表示，子菜单由android.view.SubMenu类表示。菜单项具有的属性包括名称、菜单项ID、分组ID、顺序等等。菜单的定义与用户界面的其他可视控件类似，可以通过XML文件定义菜单资源，保存在res目录下的menu文件夹中，在Java程序中可以通过ID来获取定义的对象进行操作。
+在安卓中，支持菜单视图元素的关键类是 `android.view.Menu`，每个 Activity 都会关联一个该类型的菜单对象。一个菜单对象包含菜单项和子菜单，菜单项由 `android.view.MenuItem` 类表示，子菜单由 `android.view.SubMenu` 类表示。菜单项具有名称、菜单项 ID、分组 ID、顺序等属性。菜单和其他可视控件一样，可以通过 XML 定义在 `res/menu` 目录中，并在 Kotlin/Java 代码中通过资源 ID 加载。
 
 ### 菜单资源
 
@@ -281,22 +282,21 @@ android:title="@string/open" /\>
 
 ### 菜单类型
 
-安卓支持丰富的菜单类型，包括常规的菜单、子菜单、上下文菜单、图标菜单、二级菜单和替代菜单。安卓
-3.0推出了应用栏，可以与菜单进行交互，安卓4.0已经推出弹出式菜单，可以随时响应按钮点击或任何其他界面事件。安卓提供的菜单有如下三种基本类型：
+Android 提供丰富的菜单能力。虽然早期文档会按系统版本介绍差异，但在当前开发中，建议统一基于 AndroidX API 理解：菜单可以与应用栏（App Bar/Toolbar）联动，也可以作为上下文操作或弹出菜单响应用户交互。常见的三种基础类型如下：
 
   - 选项菜单
 
-选项菜单是一个活动菜单项的主要集合，如果在这里加入操作，将会影响应用程序的全局。如果使用安卓2.3或者之前版本开发，用户可以使用菜单键打开选项菜单，但是对于安卓3.0或者更高的版本来说，选项菜单中的菜单项目是通过应用栏与其它屏幕动作项目一起展现的。从安卓3.0开始，一些设备已经不支持菜单键，需要使用应用栏来开发应用。
+选项菜单是 Activity 级别的主要菜单集合，通常用于全局操作。在现代 Android 设备上已不再依赖物理菜单键，菜单项通常通过应用栏（Toolbar/Top App Bar）的动作按钮与溢出菜单展示。
 
   - 上下文菜单
 
-当长按某个视图或视图元素后出现的浮动菜单，菜单中包含的动作是与用户所选择视图元素相关的。在安卓3.0和更高版本上进行开发，可以在选定的内容上使用上下文操作模式，显示相应的操作。这种模式在屏幕上方的操作条中显示影响所选的内容的操作项，并允许用户选择多个项目。
+当长按某个视图后出现的浮动菜单，菜单中包含与当前选中内容相关的动作。当前仍可使用上下文菜单或上下文操作模式（Contextual Action Mode）来支持单选/多选场景。
 
   - 弹出菜单
 
 弹出菜单被固定在调用菜单的视图元素上，并且在一个垂直列表中显示菜单项目。
 
-在安卓中，这些菜单都可以在XML资源文件中定义，并通过菜单资源文件中的ID加载到Java程序中。
+这些菜单既可以在 XML 资源文件中定义，也可以在 Kotlin/Java 中动态创建。对于基于 Fragment 的现代项目，推荐结合 `MenuHost/MenuProvider` 生命周期安全地注册菜单。
 
 #### 选项菜单
 
@@ -1665,24 +1665,23 @@ public boolean onCreateOptionsMenu(Menu menu){
 3.0 (API level 11)系统使用 ，但是要在安卓 2.1 (API level 7)
 的版本中运行时，也可以导入相应的库兼容支持。在不同的安卓版本中，大多数API都是相同的，只是所在的包不同。
 
-  - 如果支持API level 11低的版本：import android.support.v7.app.ActionBar
+  - 现代项目统一使用 AndroidX：`import androidx.appcompat.app.ActionBar`。
 
-  - 如果支持API level 11高的版本：import android.app.ActionBar
+  - 不再建议新增 `android.support.*` 包；旧工程应迁移到 AndroidX。
 
 默认状态下，应用栏跟在应用程序标题后面，显示在应用程序的顶部。如果活动设置了弹出菜单，就可以直接从应用栏以动作选项的方式直接访问。使用应用栏可以与许多控件结合使用，应用栏支持的基本应用模式包括：项目、视图、动作提供器、导航标签、下拉菜单。
 
-### 添加项目
+### 添加项目（更新为 AndroidX/Material 方案）
 
-从安卓3.0（API Level
-11）开始，应用栏就被包含在使用Theme.Hole主题的活动中，或者是这些活动的子类中。应用栏只能运行在安卓3.0（API
-Level
-11）或更高的版本上，应用栏替代了选项菜单，并且替换了传统的应用程序标题栏。在添加项目到应用栏之前，因此需要打开Manifest文件，确认用户SDK的属性targetSdkVersion或minSdkVersion属性被设置为11或更大的数值。下面的代码是一个设置targetSdkVersion属性的例子。
+在当前 Android 开发中，推荐使用 AndroidX `AppCompatActivity` + `MaterialToolbar`（或 Compose 的 `TopAppBar`）来实现应用栏，而不是依赖早期 Holo 主题下的原生 ActionBar。
+
+在添加应用栏项目之前，需要在 Gradle 中明确 `compileSdk` 和 `targetSdk`（建议使用当前稳定版，例如 34+），`minSdk` 则按产品覆盖范围设置。下面给出一个现代化的 Manifest/SDK 示例（仅示意）：
 
 \<manifest ... \>
 
-    \<uses-sdk android:minSdkVersion="4"
+    \<uses-sdk android:minSdkVersion="24"
 
-              android:targetSdkVersion="11" /\>
+              android:targetSdkVersion="35" /\>
 
     ...
 
@@ -1690,30 +1689,25 @@ Level
 
 码 ‑21
 
-在这个例子中，应用程序运行要求的最小API版本是4（安卓 1.6），但是目标API版本是11（安卓 3.0），在安卓
-1.6版本支持下，应用程序可以完成基础重要的功能，但当应用程序运行在安卓3.0或更高的版本上时，系统就会给每个活动应用全景主题，支持所有设计的界面和功能，包括应用栏。如果要使用应用栏API来进行添加导航模式和修改应用栏样式的操作，就要把minSdkVersion属性设置为11或更大的值。在察看API版本的同时，还需要确认下面列出的代码不存在，否则应用程序运行时应用栏也不会显示。
+与旧版本“minSdk=4、targetSdk=11”的配置不同，现代项目通常不会再考虑 Android 1.x/2.x 兼容（示例中已更新为 minSdk=24、targetSdk=35）。请根据业务目标设定 `minSdk`，并保持 `targetSdk` 跟进 Google Play 要求。应用栏显示与否主要由主题（是否 NoActionBar）以及是否在布局中声明 Toolbar 决定。
 
 \<application android:theme="@android:style/Theme.NoTitleBar"
 
 码 ‑22
 
-若在应用程序界面中不需要应用栏，可把活动的主题设置为Theme.Holo.NoActionBar就可以了。具体代码如下：
+若界面不需要应用栏，推荐使用 Material 主题中的 `NoActionBar` 变体，而不是旧的 `Theme.Holo.NoActionBar`。例如：
 
-\<activity android:theme="@android:style/Theme.Holo.NoActionBar"\>
+\<activity android:theme="@style/Theme.Material3.DayNight.NoActionBar"\>
 
 码 ‑23
 
-应用栏的显示和隐藏也可以在应用程序运行中动态调整。在活动中使用getActionBar()获取应用栏对象后，使用ActionBar提供的hide()方法和show()方法可以直接改变应用栏的显示状态，代码如下。
+应用栏的显示和隐藏也可以在运行时动态调整。在 AndroidX 中通常通过 `supportActionBar` 或 `Toolbar` 本身控制显示状态，例如调用 `supportActionBar?.hide()` 与 `supportActionBar?.show()`。
 
-ActionBar actionBar =
-[getActionBar()](http://developer.android.com/reference/android/app/Activity.html#getActionBar\(\));
-
-actionBar.hide();
+supportActionBar?.hide()
 
 码 ‑24
 
-当应用栏隐藏时，系统会调整活动的显示大小，来填充当前有效的屏幕空间。在隐藏和删除应用栏时，为了填充被应用栏占用的空间，可能会导致的活动的重新布局。如果的活动有规律的隐藏和显示应用栏，使用覆盖模式是较好的选择。设置应用栏覆盖模式，需要给活动创建一个主题，并且把android:windowActionBarOverlay属性设置为true。缺省情况下，系统在应用栏中使用应用的图标，这是通过\<application\>和\<activity\>元素中的icon属性指定。如果设置了logo属性，应用栏会使用logo属性指定的图片资源，而代替icon属性指定的资源。由于安卓
-3.0及以上版本用应用栏替代了选项菜单，当活动首次启动时，系统会调用onCreateOptionsMenu()方法创建Action
+当应用栏隐藏时，系统会调整活动的显示大小，来填充当前有效的屏幕空间。在隐藏和删除应用栏时，为了填充被应用栏占用的空间，可能会导致的活动的重新布局。如果的活动有规律的隐藏和显示应用栏，使用覆盖模式是较好的选择。设置应用栏覆盖模式，需要给活动创建一个主题，并且把android:windowActionBarOverlay属性设置为true。缺省情况下，系统在应用栏中使用应用的图标，这是通过\<application\>和\<activity\>元素中的icon属性指定。如果设置了logo属性，应用栏会使用logo属性指定的图片资源，而代替icon属性指定的资源。在现代 Android 版本中，应用栏与选项菜单协同工作，当活动首次启动时，系统会调用onCreateOptionsMenu()方法创建Action
 Items类型的应用栏，可以在这个方法中获取定义好的XML菜单资源。而且当Action
 Items的某个选项被选中时，对用户操作事件的获取和处理，安卓系统同样调用onOptionsItemSelected()方法来进行处理。因此应用栏中Action
 Items的定义与菜单选项相同，创建Action
