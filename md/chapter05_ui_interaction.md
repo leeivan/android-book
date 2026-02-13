@@ -5,6 +5,8 @@ startActivity() 等方法将意图传递至系统时，系统会使用意图识�
 活动。意图可以为“显式”，以便启动特定组件（特定的活动实例）；也可为“隐式”，以便启动任何可以处理预期操作（例如“拍摄照片”）的组件。本章介绍了如何使用
 意图执行与其他应用的一些基本交互，例如启动另一个应用、接收来自该应用的结果以及使应用能够响应来自其他应用的意图。
 
+> 版本说明（2026年2月）：本章示例已按 Android 最新平台实践更新（Android 16 / API 36 可用，且兼容 Android 14/15 的主流行为约束）。在新项目中，建议统一使用 `registerForActivityResult()`、系统照片选择器（Photo Picker）与受限广播注册策略（`RECEIVER_EXPORTED` / `RECEIVER_NOT_EXPORTED`）。
+
 ## 理解意图
 
 意图（Intent）是连接安卓组件的纽带，专门用于携带需要传递的信息。当某个组件创建一个意图对象并发送后，安卓系统会根据这个意图携带的信息激活对应的其他组件，也就是启动这些组件，执行这些组件的代码。这个意图对象中同时携带触发其他组件执行的条件信息和触发后该组件执行时所需要的信息。
@@ -21,7 +23,7 @@ startActivity() 等方法将意图传递至系统时，系统会使用意图识�
 
   - ComponentName（组件名）：需要启动的活动的名字
 
-意图的组件名称对象由ComponentName类封装。也就是说，意图定义了一个属性描述意图将要激活或启动的安卓组件名称，这个组件可以是一个活动、服务、广播接收器或者内容提供器。意图的这个属性值是一个ComponentName类的对象，无法直接访问它，但可以通过getComponentName()获取。ComponentName类包含两个String成员，分别代表安卓组件的全称类名和包名，包名必须和AndroidManifest.xml文件中标记中的对应信息一致。这个意图对象所要激活或启动的安卓组件，已经在AndroidManifest.xml中进行了描述。对于意图，组件名并不是必须的。如果一个意图对象添加了组件名，则称该意图为“显示意图”，这样的意图在传递的时候会直接根据组件名去寻找目标组件。如果没有添加组件名，则称为“隐式意图”，安卓会根据意图中的其他信息来确定响应该意图的组件。这打个比方，老师在让学生回答问题时，老师说：“Tom回答问题”，这就是显示意图，直接指出了回答问题的人；老师说：“第二排第三个同学回答问题”，这就是隐式意图，给出了回答问题学生的条件，学生根据自己的座位来确认是谁来回答问题。
+意图的组件名称对象由ComponentName类封装。也就是说，意图定义了一个属性描述意图将要激活或启动的安卓组件名称，这个组件可以是一个活动、服务、广播接收器或者内容提供器。意图的这个属性值是一个ComponentName类的对象，无法直接访问它，但可以通过getComponentName()获取。ComponentName类包含两个String成员，分别代表安卓组件的全称类名和包名，包名必须和AndroidManifest.xml文件中标记中的对应信息一致。这个意图对象所要激活或启动的安卓组件，已经在AndroidManifest.xml中进行了描述。对于意图，组件名并不是必须的。如果一个意图对象添加了组件名，则称该意图为“显式意图”，这样的意图在传递的时候会直接根据组件名去寻找目标组件。如果没有添加组件名，则称为“隐式意图”，安卓会根据意图中的其他信息来确定响应该意图的组件。这打个比方，老师在让学生回答问题时，老师说：“Tom回答问题”，这就是显式意图，直接指出了回答问题的人；老师说：“第二排第三个同学回答问题”，这就是隐式意图，给出了回答问题学生的条件，学生根据自己的座位来确认是谁来回答问题。
 
   - Action（行为）：指定了要访问的活动需要做什么
 
@@ -83,17 +85,17 @@ startActivity() 等方法将意图传递至系统时，系统会使用意图识�
 
 下面是行为和后面携带相关数据的例子：
 
-  - > ACTION\_VIEW content://contacts/people/1 -- 显示标识为"1"的联系人信息
+  - > ACTION\_VIEW content://com.android.contacts/contacts/1 -- 显示标识为"1"的联系人信息
 
-  - > ACTION\_DIAL content://contacts/people/1 --显示可填写的电话拨号器
+  - > ACTION\_DIAL tel:123 -- 显示可填写的电话拨号器
 
   - > ACTION\_DIAL tel:123 -- 显示带有号码的拨号器
 
-  - > ACTION\_EDIT content://contacts/people/1 -- 编辑标识为"1"的联系人信息
+  - > ACTION\_EDIT content://com.android.contacts/contacts/1 -- 编辑标识为"1"的联系人信息
 
-  - > ACTION\_VIEW content://contacts/people/ -- 显示联系人列表
+  - > ACTION\_VIEW content://com.android.contacts/contacts -- 显示联系人列表
 
-当安卓系统根据一个意图匹配对应的组件时，通常知道数据的类型（它的MIME类型）和它的URI很重要。例如，一个能够显示图像数据的组件，就不应该在播放一个音频文件时被激活。在许多情况下，能够从URI中推测数据类型，特别是content:URIs，它表示位于设备上的数据且被ContentProvider控制。但是也能够显示地设置类型，使用意图的setData()方法指定数据的URI，setType()指定MIME类型，setDataAndType()指定数据的URI和MIME类型。被激活执行的活动中，获取意图对象后，通过意图的getData()读取URI，getType()读取类型。数据的类型是由行为的值决定的，下面给出几个例子可以看出行为部分的不同，决定了数据部分的值不同。
+当安卓系统根据一个意图匹配对应的组件时，通常知道数据的类型（它的MIME类型）和它的URI很重要。例如，一个能够显示图像数据的组件，就不应该在播放一个音频文件时被激活。在许多情况下，能够从URI中推测数据类型，特别是content:URIs，它表示位于设备上的数据且被ContentProvider控制。但是也能够显式地设置类型，使用意图的setData()方法指定数据的URI，setType()指定MIME类型，setDataAndType()指定数据的URI和MIME类型。被激活执行的活动中，获取意图对象后，通过意图的getData()读取URI，getType()读取类型。数据的类型是由行为的值决定的，下面给出几个例子可以看出行为部分的不同，决定了数据部分的值不同。
 
   - Category（类别）：给出一些行为的额外执行信息
 
@@ -196,7 +198,7 @@ startActivity() 等方法将意图传递至系统时，系统会使用意图识�
 
 码 5‑1
 
-这是在AndroidManifest.xml文件中IntentExampleActivity的声明代码。当系统中其他的活动发送出一个意图对象，并且这个意图对象的行为属性的值为“MY\_ACTION”时，安卓系统会启动IntentExampleActivity应用程序。如果一个组件没有声明任何意图过滤器，它仅能接收显式的意图，也就是被显示意图对象启动或激活；而声明了意图过滤器的组件可以接收显式和隐式的意图。并非意图对象中所有的信息都会用于过滤器的匹配，只有行为、数据（包括URI和数据类型）、类别三个字段才被考虑。下面具体讨论一下意图过滤器和它的检测方法。
+这是在AndroidManifest.xml文件中IntentExampleActivity的声明代码。当系统中其他的活动发送出一个意图对象，并且这个意图对象的行为属性的值为“MY\_ACTION”时，安卓系统会启动IntentExampleActivity应用程序。如果一个组件没有声明任何意图过滤器，它仅能接收显式的意图，也就是被显式意图对象启动或激活；而声明了意图过滤器的组件可以接收显式和隐式的意图。并非意图对象中所有的信息都会用于过滤器的匹配，只有行为、数据（包括URI和数据类型）、类别三个字段才被考虑。下面具体讨论一下意图过滤器和它的检测方法。
 
 意图过滤器是由\<intent-filter\>标记来设置的。活动、服务、广播接收器为了告知安卓系统能够处理哪些隐式意图，可以设置一个或多个条件，说明该组件可接收的意图对象，过滤掉不想接收的隐式意图对象。除了广播接收器通过调用Context.registerReceiver()动态地注册，直接创建一个IntentFilter对象外，其他的意图过滤器必须在AndroidManifest.xml文件中进行声明。可用于意图过滤器的意图字段有三个：行为、数据和类别。在安卓系统通过组件的意图过滤器检测隐式意图时，要检测所有这三个字段，其中任何一个字段匹配失败，系统都不会把这个隐式意图给该组件。但每个字段可以用意图过滤器设置多个条件，每个设定的条件之间相互独立，只要其他组件发送出的隐式意图对象符合其中的一个条件，就能够被安卓系统启动或接收。
 
@@ -639,11 +641,11 @@ vnd.android.cursor.item/vnd.google.note是指示vnd.android.cursor.item资源中
 
 码 5‑13 ExplicitSecondActivity.java
 
-完成上述4步之后，在AndroidManifest.xml中注册，运行此程序，可以看到通过显示意图的作用，可以在两个界面之间跳转。通过这个例子可以看出，所谓显示意图，就是通过创建意图对象，直接告诉系统要启动哪一个活动或其他组件。
+完成上述4步之后，在AndroidManifest.xml中注册，运行此程序，可以看到通过显式意图的作用，可以在两个界面之间跳转。通过这个例子可以看出，所谓显式意图，就是通过创建意图对象，直接告诉系统要启动哪一个活动或其他组件。
 
 #### 隐式定义
 
-在上面的例子中，我们使用显示意图实现了界面的跳转。下面尝试使用隐式意图来实现上个例子同样的功能，学习行为检测的使用,下面先给出关键的意图创建代码方便在完整的程序代码中查看。
+在上面的例子中，我们使用显式意图实现了界面的跳转。下面尝试使用隐式意图来实现上个例子同样的功能，学习行为检测的使用,下面先给出关键的意图创建代码方便在完整的程序代码中查看。
 
 > //实例化意图
 > 
@@ -1356,7 +1358,7 @@ ActivityResult，能够在回调中提取 resultCode 和 Intent，如以下示�
 ### 常用意图
 
 通过描述在某个意图对象中执行的简单操作（如“查看地图”或“拍摄照片”）来启动另一应用中的某个活动，这种称作隐式意图，因为它并不指定要启动的应用组件，而是指定一项操作并提供执行该操作所需的一些数据。当调用
-startActivity() 或 startActivityForResult()
+startActivity() 或通过 Activity Result API 启动器发起意图
 并向其传递隐式意图时，系统会将意图解析为可处理该意图的应用并启动其对应的活动。如果有多个应用可处理意图，系统会为用户显示一个对话框，供其选择要使用的应用。本节介绍几种可用于执行常见操作的隐式意图，按处理意图的应用类型分成不同部分。此外，每个部分还介绍如何创建意图过滤器来公布应用执行相应操作的能力。注意：如果设备上没有可接收隐式意图的应用，应用将在调用
 startActivity() 时崩溃，意图对象事先调用
 resolveActivity()验证是否存在可接收意图的应用，如果结果为非空，则至少有一个应用能够处理该意图，并且可以安全调用startActivity()。如果结果为空，则不应使用该意图，如有可能应禁用调用该意图的功能。
@@ -1606,47 +1608,31 @@ URI。然后就可以使用下文介绍的附加信息指定事件的各类详�
     
       - EXTRA\_OUTPUT：相机应用应将照片或视频文件保存到的 URI 位置（以 Uri 对象形式）。
 
-当相机应用成功将焦点归还给活动（应用收到 onActivityResult() 回调）时，可以按通过 EXTRA\_OUTPUT 值指定的
+当相机应用成功将焦点归还给活动（应用收到 Activity Result 回调）时，可以按通过 EXTRA\_OUTPUT 值指定的
 URI 访问照片或视频。注意：当使用 ACTION\_IMAGE\_CAPTURE
 拍摄照片时，相机可能还会在结果意图中返回缩小尺寸的照片副本（缩略图），这个副本以
 Bitmap 形式保存在名为 "data" 的附加信息字段中。示例 Intent：
 
-> static final int REQUEST\_IMAGE\_CAPTURE = 1;
+> private Uri pendingPhotoUri;
 > 
-> static final Uri locationForPhotos;
-> 
-> public void capturePhoto(String targetFilename) {
-> 
-> Intent intent = new Intent(MediaStore.ACTION\_IMAGE\_CAPTURE);
-> 
-> intent.putExtra(MediaStore.EXTRA\_OUTPUT,
-> 
-> Uri.withAppendedPath(locationForPhotos, targetFilename));
-> 
-> if (intent.resolveActivity(getPackageManager()) \!= null) {
-> 
-> startActivityForResult(intent, REQUEST\_IMAGE\_CAPTURE);
-> 
+> private final ActivityResultLauncher<Intent> capturePhotoLauncher =
+> registerForActivityResult(
+> new ActivityResultContracts.StartActivityForResult(),
+> result -> {
+> if (result.getResultCode() == RESULT_OK) {
+> // 通过 EXTRA_OUTPUT 指定的 Uri 读取原图
+> Uri fullPhotoUri = pendingPhotoUri;
+> // ...
 > }
+> });
 > 
+> public void capturePhoto(Uri outputUri) {
+> Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+> intent.putExtra(MediaStore.EXTRA_OUTPUT, outputUri);
+> if (intent.resolveActivity(getPackageManager()) != null) {
+> pendingPhotoUri = outputUri;
+> capturePhotoLauncher.launch(intent);
 > }
-> 
-> @Override
-> 
-> protected void onActivityResult(int requestCode, int resultCode,
-> Intent data) {
-> 
-> if (requestCode == REQUEST\_IMAGE\_CAPTURE && resultCode ==
-> RESULT\_OK) {
-> 
-> Bitmap thumbnail = data.getParcelableExtra("data");
-> 
-> // Do other work with full size photo saved in locationForPhotos
-> 
-> ...
-> 
-> }
-> 
 > }
 
 码 5‑32
@@ -1689,7 +1675,7 @@ setResult()，该意图将经过压缩的缩略图包括在名为 "data" 的附�
 > 
 > if (intent.resolveActivity(getPackageManager()) \!= null) {
 > 
-> startActivityForResult(intent, REQUEST\_IMAGE\_CAPTURE);
+> startActivity(intent);
 > 
 > }
 > 
@@ -1731,7 +1717,7 @@ setResult()，该意图将经过压缩的缩略图包括在名为 "data" 的附�
 > 
 > if (intent.resolveActivity(getPackageManager()) \!= null) {
 > 
-> startActivityForResult(intent, REQUEST\_IMAGE\_CAPTURE);
+> startActivity(intent);
 > 
 > }
 > 
@@ -1758,7 +1744,7 @@ setResult()，该意图将经过压缩的缩略图包括在名为 "data" 的附�
 #### 联系人
 
 如需让用户选择联系人和为应用提供对所有联系人信息的访问权限，使用 ACTION\_PICK 行为，并将 MIME 类型指定为
-Contacts.CONTENT\_TYPE。传送至onActivityResult() 回调的结果意图包含指向所选联系人的 content:
+Contacts.CONTENT\_TYPE。传送至 Activity Result 回调的结果意图包含指向所选联系人的 content:
 URI。响应会利用 Contacts Provider API 为应用授予该联系人的临时读取权限，即使应用不具备 READ\_CONTACTS
 权限也没有关系。提示：如果只需要访问某一条联系人信息（如电话号码或电子邮件地址），改为参见下一节中如何选择特定联系人数据的内容。
 
@@ -1770,38 +1756,23 @@ URI。响应会利用 Contacts Provider API 为应用授予该联系人的临时
 
 示例 Intent：
 
-> static final int REQUEST\_SELECT\_CONTACT = 1;
+> private final ActivityResultLauncher<Intent> pickContactLauncher =
+> registerForActivityResult(
+> new ActivityResultContracts.StartActivityForResult(),
+> result -> {
+> if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+> Uri contactUri = result.getData().getData();
+> // Do something with the selected contact at contactUri
+> // ...
+> }
+> });
 > 
 > public void selectContact() {
-> 
-> Intent intent = new Intent(Intent.ACTION\_PICK);
-> 
-> intent.setType(ContactsContract.Contacts.CONTENT\_TYPE);
-> 
-> if (intent.resolveActivity(getPackageManager()) \!= null) {
-> 
-> startActivityForResult(intent, REQUEST\_SELECT\_CONTACT);
-> 
+> Intent intent = new Intent(Intent.ACTION_PICK);
+> intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+> if (intent.resolveActivity(getPackageManager()) != null) {
+> pickContactLauncher.launch(intent);
 > }
-> 
-> }
-> 
-> @Override
-> 
-> protected void onActivityResult(int requestCode, int resultCode,
-> Intent data) {
-> 
-> if (requestCode == REQUEST\_SELECT\_CONTACT && resultCode ==
-> RESULT\_OK) {
-> 
-> Uri contactUri = data.getData();
-> 
-> // Do something with the selected contact at contactUri
-> 
-> ...
-> 
-> }
-> 
 > }
 
 码 5‑38
@@ -1815,7 +1786,7 @@ CommonDataKinds.Phone.CONTENT\_TYPE），以获取联系人的电话号码。如
 ContactsContract.CommonDataKinds 类的 CONTENT\_TYPE 配合使用要比使用
 Contacts.CONTENT\_TYPE 更高效（如上一部分所示），因为结果可直接访问所需数据，无需对联系人提供程序执行更复杂的查询。
 
-传送至的 onActivityResult() 回调的结果意图包含指向所选联系人数据的 content:
+传送至的 Activity Result 回调的结果意图包含指向所选联系人数据的 content:
 URI。响应会为的应用授予该联系人数据的临时读取权限，即使的应用不具备
 READ\_CONTACTS 权限也没有关系。
 
@@ -1835,58 +1806,30 @@ READ\_CONTACTS 权限也没有关系。
 
 示例 Intent：
 
-> static final int REQUEST\_SELECT\_PHONE\_NUMBER = 1;
-> 
-> public void selectContact() {
-> 
-> // Start an activity for the user to pick a phone number from contacts
-> 
-> Intent intent = new Intent(Intent.ACTION\_PICK);
-> 
-> intent.setType(CommonDataKinds.Phone.CONTENT\_TYPE);
-> 
-> if (intent.resolveActivity(getPackageManager()) \!= null) {
-> 
-> startActivityForResult(intent, REQUEST\_SELECT\_PHONE\_NUMBER);
-> 
-> }
-> 
-> }
-> 
-> @Override
-> 
-> protected void onActivityResult(int requestCode, int resultCode,
-> Intent data) {
-> 
-> if (requestCode == REQUEST\_SELECT\_PHONE\_NUMBER && resultCode ==
-> RESULT\_OK) {
-> 
-> // Get the URI and query the content provider for the phone number
-> 
-> Uri contactUri = data.getData();
-> 
-> String\[\] projection = new String\[\]{CommonDataKinds.Phone.NUMBER};
-> 
-> Cursor cursor = getContentResolver().query(contactUri, projection,
-> 
-> null, null, null);
-> 
-> // If the cursor returned is valid, get the phone number
-> 
-> if (cursor \!= null && cursor.moveToFirst()) {
-> 
+> private final ActivityResultLauncher<Intent> pickPhoneLauncher =
+> registerForActivityResult(
+> new ActivityResultContracts.StartActivityForResult(),
+> result -> {
+> if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+> Uri contactUri = result.getData().getData();
+> String[] projection = new String[]{CommonDataKinds.Phone.NUMBER};
+> try (Cursor cursor = getContentResolver().query(contactUri, projection, null, null, null)) {
+> if (cursor != null && cursor.moveToFirst()) {
 > int numberIndex = cursor.getColumnIndex(CommonDataKinds.Phone.NUMBER);
-> 
 > String number = cursor.getString(numberIndex);
-> 
 > // Do something with the phone number
-> 
-> //...
-> 
+> // ...
 > }
-> 
 > }
+> }
+> });
 > 
+> public void selectContactPhone() {
+> Intent intent = new Intent(Intent.ACTION_PICK);
+> intent.setType(CommonDataKinds.Phone.CONTENT_TYPE);
+> if (intent.resolveActivity(getPackageManager()) != null) {
+> pickPhoneLauncher.launch(intent);
+> }
 > }
 
 码 5‑39
@@ -2102,7 +2045,7 @@ ContactsContract.Intents.Insert 中。
 
 如需求用户选择文档或照片等文件并向的应用返回文件引用，使用 ACTION\_GET\_CONTENT 行为并指定所需 MIME
 类型。向的应用返回的文件引用对活动的当前生命周期而言是瞬态引用，因此如果想稍后进行访问，就必须导入可在稍后读取的副本。用户还可利用此意图在进程中创建新文件（例如，用户可以不选择现有照片，而是用相机拍摄新照片）。传送至的
-onActivityResult() 方法的结果意图包括的数据具有指向该文件的 URI。该 URI 可以是任何类型，如 http:
+Activity Result 回调方法的结果意图包括的数据具有指向该文件的 URI。该 URI 可以是任何类型，如 http:
 URI、file: URI 或 content: URI。不过，如果想将可选择的文件限定为可从内容提供程序 (content: URI)
 访问的文件，以及通过 openFileDescriptor() 以文件流形式提供的文件，则应该为意图添加
 CATEGORY\_OPENABLE 类别。在 Android 4.3（API 级别 18）及更高版本上，还可以通过为意图添加
@@ -2127,39 +2070,19 @@ ClipData 对象中访问每一个选定的文件。
 
 用于获取照片的示例 Intent：
 
-> static final int REQUEST\_IMAGE\_GET = 1;
+> private final ActivityResultLauncher<String> getImageLauncher =
+> registerForActivityResult(
+> new ActivityResultContracts.GetContent(),
+> uri -> {
+> if (uri != null) {
+> Uri fullPhotoUri = uri;
+> // Do work with photo saved at fullPhotoUri
+> // ...
+> }
+> });
 > 
 > public void selectImage() {
-> 
-> Intent intent = new Intent(Intent.ACTION\_GET\_CONTENT);
-> 
-> intent.setType("image/\*");
-> 
-> if (intent.resolveActivity(getPackageManager()) \!= null) {
-> 
-> startActivityForResult(intent, REQUEST\_IMAGE\_GET);
-> 
-> }
-> 
-> }
-> 
-> @Override
-> 
-> protected void onActivityResult(int requestCode, int resultCode,
-> Intent data) {
-> 
-> if (requestCode == REQUEST\_IMAGE\_GET && resultCode == RESULT\_OK) {
-> 
-> Bitmap thumbnail = data.getParcelable("data");
-> 
-> Uri fullPhotoUri = data.getData();
-> 
-> // Do work with photo saved at fullPhotoUri
-> 
-> ...
-> 
-> }
-> 
+> getImageLauncher.launch("image/*");
 > }
 
 码 5‑46
@@ -2196,7 +2119,7 @@ ClipData 对象中访问每一个选定的文件。
 类型，求打开由另一个应用管理的文件。如果还需要允许用户创建应用可写入的新文档，可改用
 ACTION\_CREATE\_DOCUMENT 行为。例如，ACTION\_CREATE\_DOCUMENT意图允许用户选择他们想在哪里创建新
 PDF 文档（在另一个管理文档存储的应用内），而不是从现有文档中进行选择。的应用随后会收到其可以写入新文档的 URI 位置。尽管从
-ACTION\_GET\_CONTENT 行为传递至的 onActivityResult() 方法的意图可能返回任何类型的 URI，来自
+ACTION\_GET\_CONTENT 行为传递至的 Activity Result 回调方法的意图可能返回任何类型的 URI，来自
 ACTION\_OPEN\_DOCUMENT 和 ACTION\_CREATE\_DOCUMENT 的结果意图始终将所选文件指定为
 DocumentsProvider 支持的 content: URI。可以通过 openFileDescriptor() 打开该文件，并使用
 DocumentsContract.Document 中的列查询其详细信息。返回的 URI
@@ -2232,38 +2155,19 @@ ClipData 对象检索每个项目。注意：的意图必须指定 MIME 类型�
 
 用于获取照片的示例 Intent：
 
-> static final int REQUEST\_IMAGE\_OPEN = 1;
+> private final ActivityResultLauncher<String[]> openImageLauncher =
+> registerForActivityResult(
+> new ActivityResultContracts.OpenDocument(),
+> uri -> {
+> if (uri != null) {
+> Uri fullPhotoUri = uri;
+> // Do work with full size photo saved at fullPhotoUri
+> // ...
+> }
+> });
 > 
 > public void selectImage() {
-> 
-> Intent intent = new Intent(Intent.ACTION\_OPEN\_DOCUMENT);
-> 
-> intent.setType("image/\*");
-> 
-> intent.addCategory(Intent.CATEGORY\_OPENABLE);
-> 
-> // Only the system receives the ACTION\_OPEN\_DOCUMENT, so no need to
-> test.
-> 
-> startActivityForResult(intent, REQUEST\_IMAGE\_OPEN);
-> 
-> }
-> 
-> @Override
-> 
-> protected void onActivityResult(int requestCode, int resultCode,
-> Intent data) {
-> 
-> if (requestCode == REQUEST\_IMAGE\_OPEN && resultCode == RESULT\_OK) {
-> 
-> Uri fullPhotoUri = data.getData();
-> 
-> // Do work with full size photo saved at fullPhotoUri
-> 
-> ...
-> 
-> }
-> 
+> openImageLauncher.launch(new String[]{"image/*"});
 > }
 
 码 5‑48
@@ -3054,7 +2958,7 @@ Telephony 处的文档。
 
 #### 案例
 
-通过意图不仅可以启动本项目中的应用程序，还可以通过不同的设定，启动系统提供的应用程序，利用系统定义的功能。具体的启动和激活方式，可以使用显示意图，也可以使用隐式意图的行为、类别和数据的任意一种过滤条件设置。例如，在下面的代码中定义了一个URI，并把这个URI作为新创建的意图对象的Data，并将意图的行为设置为ACTION\_VIEW。通过这样的设置，当前的活动发送出这个意图之后，就可以启动系统的浏览器，并通过浏览器打开链接的网页。
+通过意图不仅可以启动本项目中的应用程序，还可以通过不同的设定，启动系统提供的应用程序，利用系统定义的功能。具体的启动和激活方式，可以使用显式意图，也可以使用隐式意图的行为、类别和数据的任意一种过滤条件设置。例如，在下面的代码中定义了一个URI，并把这个URI作为新创建的意图对象的Data，并将意图的行为设置为ACTION\_VIEW。通过这样的设置，当前的活动发送出这个意图之后，就可以启动系统的浏览器，并通过浏览器打开链接的网页。
 
 > Uri uri=Uri.parse(“http://developer.android.com");
 > 
@@ -3163,7 +3067,7 @@ Telephony 处的文档。
 > 
 > intent = new Intent(Intent.ACTION\_VIEW,
 > 
-> Uri.parse("content://contacts/people/"));
+> Uri.parse("content://com.android.contacts/contacts"));
 > 
 > break;
 > 
@@ -3171,7 +3075,7 @@ Telephony 处的文档。
 > 
 > intent = new Intent(Intent.ACTION\_EDIT,
 > 
-> Uri.parse("content://contacts/people/1"));
+> Uri.parse("content://com.android.contacts/contacts/1"));
 > 
 > break;
 > 
@@ -3193,7 +3097,7 @@ Telephony 处的文档。
 
 图 5‑4
 
-前面只列出了主要的布局文件代码和活动定义的代码，如果要让程序顺利、正常执行，还需要定义字符串等资源，活动也需要在AndroidMenifest.xml文件中注册。通过前面的例子，讨论了如何运用意图对象启动和激活其他的组件，如何在组件之间发送和接收消息。在应用程序设计中，可以根据需要灵活运用意图的各种功能。
+前面只列出了主要的布局文件代码和活动定义的代码，如果要让程序顺利、正常执行，还需要定义字符串等资源，活动也需要在AndroidManifest.xml文件中注册。通过前面的例子，讨论了如何运用意图对象启动和激活其他的组件，如何在组件之间发送和接收消息。在应用程序设计中，可以根据需要灵活运用意图的各种功能。
 
 ## 广播接收器
 
@@ -3271,16 +3175,19 @@ BroadcastReceiver 组件对象来处理它接收到的每个广播。此对象�
 码 5‑75
 
   - 创建 IntentFilter 并调用 registerReceiver(BroadcastReceiver,
-    IntentFilter) 来注册接收器。注意：要注册本地广播，调用
-    LocalBroadcastManager.registerReceiver(BroadcastReceiver,
-    IntentFilter)：
+    IntentFilter) 来注册接收器。注意：`LocalBroadcastManager` 已废弃，应用内通信建议使用
+    `LiveData`、`Flow/SharedFlow` 或其他可感知生命周期的事件机制。
 
 > IntentFilter filter = new
 > IntentFilter(ConnectivityManager.CONNECTIVITY\_ACTION);
 > 
 > filter.addAction(Intent.ACTION\_AIRPLANE\_MODE\_CHANGED);
 > 
+> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+> this.registerReceiver(br, filter, Context.RECEIVER_NOT_EXPORTED);
+> } else {
 > this.registerReceiver(br, filter);
+> }
 
 码 5‑76
 
@@ -3303,9 +3210,9 @@ android:priority 属性来控制；具有相同优先级的接收器将按随机
 
 该方法会按随机的顺序向所有接收器发送广播。这称为常规广播。这种方法效率更高，但也意味着接收器无法从其他接收器读取结果，无法传递从广播中收到的数据，也无法中止广播。
 
-  - LocalBroadcastManager.sendBroadcast
+  - 显式包名广播（`intent.setPackage(...)`）或应用内事件总线
 
-该方法会将广播发送给与发送器位于同一应用中的接收器。如果您不需要跨应用发送广播，请使用本地广播。这种实现方法的效率更高（无需进行进程间通信），而且您无需担心其他应用在收发您的广播时带来的任何安全问题。
+当广播只希望在本应用内消费时，优先使用应用内可观察事件机制（如 `Flow/SharedFlow`、`LiveData`）。如果仍需使用系统广播通道，建议显式限定包名并配合权限校验，避免无关应用接收。
 
 以下代码段展示了如何通过创建意图并调用sendBroadcast(Intent) 来发送广播。
 
@@ -3375,14 +3282,7 @@ registerReceiver(BroadcastReceiver, IntentFilter, String, Handler) 或清单中�
 码 5‑82
 
 如果要使用广播接收器的功能，首先在需要发送信息的地方创建意图对象，把要携带的信息和用于过滤的信息载入意图对象中，然后通过调用方法把意图对象以广播方式发送出去。当意图发送以后，所有已经注册的广播接收器会检查注册时的IntentFilter是否与发送的意图相匹配，若匹配则就会调用广播接收器的onReceive()方法。所以当定义一个广播接收器的时候，都需要实现onReceive()方法。安卓系统中定义了很多标准的广播行为来响应系统的广播事件，见表
-5-1。这些行为可以在应用程序中指定意图的行为字段。随着安卓平台的发展，它会不定期地更改系统广播的行为方式。如果应用以安卓7.0或更高版本为目标平台，或者安装在搭载安卓7.0
-或更高版本的设备上，请注意以下更改。从安卓9.0，NETWORK\_STATE\_CHANGED\_ACTION广播不再接收有关用户位置或个人身份数据的信息。此外，如果应用安装在搭载安卓9.0
-或更高版本的设备上，则通过 WLAN 接收的系统广播不包含 SSID、BSSID、连接信息或扫描结果。要获取这些信息，调用
-getConnectionInfo()。从安卓8.0开始，系统对清单声明的接收器施加了额外的限制。如果您的应用以安卓8.0
-或更高版本为目标平台，那么对于大多数隐式广播（没有明确针对您的应用的广播），您不能使用清单来声明接收器。当用户正在活跃地使用您的应用时，您仍可使用上下文注册的接收器。安卓7.0（API
-级别 24）及更高版本不发送以下系统广播：ACTION\_NEW\_PICTURE、ACTION\_NEW\_VIDEO。此外，以安卓7.0
-及更高版本为目标平台的应用必须使用 registerReceiver(BroadcastReceiver, IntentFilter)
-注册 CONNECTIVITY\_ACTION 广播。无法在清单中声明接收器。
+5-1。这些行为可以在应用程序中指定意图的行为字段。随着安卓平台的发展，广播相关限制持续收紧，实践上建议遵循以下原则：对于大多数隐式广播，优先使用上下文动态注册，避免仅依赖清单静态声明；在 Android 13（API 33）及更高版本中，动态注册时应明确指定 `RECEIVER_EXPORTED` 或 `RECEIVER_NOT_EXPORTED`；涉及网络能力检测时，优先使用 `ConnectivityManager.NetworkCallback`，而不是依赖 `CONNECTIVITY_ACTION`；涉及 Wi-Fi 详细信息时，使用当前版本的权限模型与相关 API（例如 `WifiManager` 和运行时权限）获取，不再依赖早期广播字段。
 
 下面通过简单的例子来学习在应用程序中其他组件如何创建和使用广播消息，如何使用不同的注册方式来设置广播接收器的过滤条件，处理广播信息，如何使用广播接收器来处理系统广播信息。
 
@@ -3407,11 +3307,15 @@ getConnectionInfo()。从安卓8.0开始，系统对清单声明的接收器施�
 > 
 > import android.os.Bundle;
 > 
+> import android.os.Build;
+> 
 > import android.view.View;
 > 
 > import android.view.View.OnClickListener;
 > 
 > import android.widget.Button;
+> 
+> import android.content.Context;
 > 
 > import androidx.appcompat.app.AppCompatActivity;
 > 
@@ -3431,6 +3335,8 @@ getConnectionInfo()。从安卓8.0开始，系统对清单声明的接收器施�
 > private Button unregisterReceiver;
 > 
 > private TestReceiver receiver;
+> 
+> private boolean isReceiverRegistered = false;
 > 
 > @Override
 > 
@@ -3472,7 +3378,9 @@ getConnectionInfo()。从安卓8.0开始，系统对清单声明的接收器施�
 > 
 > public void onClick(View v) {
 > 
+> if (receiver == null) {
 > receiver = new TestReceiver();
+> }
 > 
 > IntentFilter filter = new IntentFilter();
 > 
@@ -3480,7 +3388,14 @@ getConnectionInfo()。从安卓8.0开始，系统对清单声明的接收器施�
 > 
 > // 动态注册BroadcastReceiver
 > 
+> if (!isReceiverRegistered) {
+> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+> registerReceiver(receiver, filter, Context.RECEIVER_NOT_EXPORTED);
+> } else {
 > registerReceiver(receiver, filter);
+> }
+> isReceiverRegistered = true;
+> }
 > 
 > }
 > 
@@ -3499,7 +3414,10 @@ getConnectionInfo()。从安卓8.0开始，系统对清单声明的接收器施�
 > 
 > // 注销BroadcastReceiver
 > 
+> if (isReceiverRegistered) {
 > unregisterReceiver(receiver);
+> isReceiverRegistered = false;
+> }
 > 
 > }
 > 
@@ -3515,7 +3433,10 @@ getConnectionInfo()。从安卓8.0开始，系统对清单声明的接收器施�
 > 
 > super.onPause();
 > 
+> if (isReceiverRegistered) {
 > unregisterReceiver(receiver);
+> isReceiverRegistered = false;
+> }
 > 
 > }
 > 
@@ -3555,7 +3476,7 @@ getConnectionInfo()。从安卓8.0开始，系统对清单声明的接收器施�
 
 码 5‑88 TestReceiver.java
 
-④程序代码编写完成后，不要忘记还需要在AndroidMenifest.xml文件中注册才能够运行。
+④程序代码编写完成后，不要忘记还需要在AndroidManifest.xml文件中注册才能够运行。
 
 执行前面的代码，出现用户界面后可以分步测试观察结果日志，了解动态注册对广播接收器功能的影响。（1）首先点击“发送广播”按钮的时候，因为程序没有注册TestReceiver，所以TestReceiver不会监听处理任何广播信息，LogCat没有输出任何信息。（2）点击“注册广播接收器”按钮，程序会执行此按钮事件处理代码，动态地注册TestReceiver；再点击“发送广播”按钮，TestReceiver会监听系统中的广播意图，并检测是否与注册的过滤条件匹配，这里发送的意图的行为字段的值与动态注册的意图过滤器条件相同，系统会调用其onReceive()方法处理这个广播消息，则LogCat会增添新的日志信息。（3）点击“注销广播监听器”按钮，程序会执行此按钮事件处理代码，动态地注销TestReceiver，TestReceiver恢复到没有注册时的情况；再点击“发送广播”，LogCat没有输出任何信息。
 
