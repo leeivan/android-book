@@ -453,6 +453,8 @@ SystemClock.uptimeMillis()。在深度睡眠中花费的时间会增加执行的
 
 ### AsyncTask
 
+> 版本提示（适配 Android 16 / API 36）：AsyncTask 已在 Android 11（API 30）弃用。本节保留用于理解历史代码，新的项目应优先使用 Kotlin 协程（Coroutine）+ ViewModel，或使用 WorkManager/ExecutorService 实现异步任务。
+
 用Handler类来在子线程中更新界面线程虽然避免了在主线程进行耗时计算，但费时的任务操作总会启动一些匿名的子线程，太多的子线程给系统带来巨大的负担，随之带来一些性能问题。因此安卓提供了一个工具类AsyncTask来实现异步执行任务。AsyncTask类擅于处理一些后台的比较耗时的任务，给用户带来良好用户体验的，不再需要子线程和Handler就可以完成异步操作并且刷新用户界面。如果要使用AsyncTask，需要创建AsyncTask类，并实现其中的抽象方法以及重写某些方法。利用AsyncTask不需要自己来写后台线程，无需终结后台线程，但是AsyncTask的方式对循环调用的方式并不太合适。
 
 AsyncTask
@@ -727,15 +729,15 @@ SDK包括了Service类，其中的代码封装了服务的行为，但是服务�
 
   - 绑定方式(bindService)，通过bindService()方法启动
 
-应用程序组件可以通过调用Context.startService()方法获得服务，这个过程也是使服务生效的过程，例如在活动中调用startService()方法。可以通过调用Context.startService()启动服务；然后通过调用Context.stopService()或Service.stopSelf()停止服务。服务一旦启动，就能够无限期的在后台运行，即使启动它的组件被销毁。通常一个被启动的服务只有一个单一操作，并且不给调用者返回结果，例如这个服务可能在网络上下载或上传文件。当操作完成的时候，服务应该自己终止。如果仅以启动方式使用的服务，这个服务需要具备自管理的能力，且不需要通过方法调用向外部组件提供数据或功能。
+应用程序组件可以通过调用Context.startService()方法获得服务，这个过程也是使服务生效的过程，例如在活动中调用startService()方法。可以通过调用Context.startService()启动服务；然后通过调用Context.stopService()或Service.stopSelf()停止服务。服务一旦启动，生命周期就独立于启动它的组件，直到被显式停止或被系统回收。通常一个被启动的服务只有一个单一操作，并且不给调用者返回结果，例如这个服务可能在网络上下载或上传文件。当操作完成的时候，服务应该自己终止。如果仅以启动方式使用的服务，这个服务需要具备自管理的能力，且不需要通过方法调用向外部组件提供数据或功能。
 
 应用程序组件也可以通过调用bindService()方法启动和绑定一个服务，通过ServiceConnection或直接获取服务中的状态和数据信息，例如使用活动的bindService()方法。被绑定的服务会提供一个允许组件跟服务交互的客户端接口，用于发送请求、获取结果、甚至是跨进程的进程间通信实现远程服务。应用组件绑定服务后，可以使用ServiceConnection获取服务对象，并且调用服务中的方法。应用组件通过Context.bindService()方法绑定服务，并且建立ServiceConnection；通过Context.unbindService()方法解除绑定，并且停止ServiceConnection。如果在绑定过程中服务没有启动，Context.bindService()会自动启动服务。同一个服务可以绑定多个ServiceConnection，这样可以同时为多个不同的组件提供服务。一个被绑定服务的运行时间跟绑定它的应用程序组件一样长。多个组件能够绑定一个服务，但是只有所有这些绑定被解绑后，这个服务才被销毁。
 
 这两种获得服务的方法并不是完全独立的，在某些情况下可以混合使用。例如在MP3播放器中，我们可以通过Context.startService()方法启动音乐播放的后台服务，但在播放过程中如果用户需要暂停音乐播放，则需要通过Context.bindService()获取ServiceConnection和服务对象，进而通过调用服务对象中的方法暂停音乐播放，并保存相关信息。在这种情况下，如果调用Context.stopService()并不能够停止服务，需要在所有的ServiceConnection关闭后，服务才能够真正的停止。无论使用上述两种方式的一种，还是同时使用这两种方式获得服务，都需要使用到意图，这与获得活动组件的方式相同。
 
 简单地说，服务是一种即使用户未与应用交互也可在后台运行的组件，因此只有在需要服务时才应创建服务。如果必须在主线程之外执行操作，但只在用户与应用交互时执行此操作，则应创建新线程，例如只是想在活动运行的同时播放一些音乐，则可在
-onCreate()中创建线程，在onStart()中启动线程运行，然后在onStop()中停止线程。还可考虑使用 AsyncTask 或
-HandlerThread，而非传统的 Thread
+onCreate()中创建线程，在onStart()中启动线程运行，然后在onStop()中停止线程。还可考虑使用
+HandlerThread、ExecutorService 或 Coroutine，而非传统的 Thread
 类。请记住，如果确实要使用服务，则默认情况下它仍会在应用的主线程中运行，因此如果服务执行的是密集型或阻止性操作，则仍应在服务内创建新线程。
 
 ### [生命周期](http://blog.csdn.net/fireofstar/article/details/7299443)
@@ -748,13 +750,15 @@ HandlerThread，而非传统的 Thread
 **图** **7‑5
 服务的[生命周期](http://blog.csdn.net/fireofstar/article/details/7299443)**
 
-使用startService()创建服务时，一个组件调用startService()方法创建服务，然后服务无限期的运行，并且必须通过调用stopSelf()方法来终止自己。其他组件也能够通过调用stopService()方法来终止这个服务。当服务被终止，系统就会把它销毁。使用绑定方式(bindService)创建服务时，当有一个组件调用bindService()方法时，服务就会被绑定，客户端通过IBinder接口与服务通信。客户端能够调用unbindService()方法来解除与服务的绑定。可以有多个客户端绑定到一个服务上，但是当所有的绑定都被解除以后，系统才会销毁这个服务，而服务不需要终止自己。这两种是完全独立的，能够绑定一个已经用startService()方法启动的服务，例如可以通过调用startService()方法启动后台的音乐服务，这个方法使用意图标识了要播放的音乐；之后如果用户想要进行一些播放器的控制时，或想要获取有关当前歌曲信息时，可以在一个活动中通过调用bindService()方法来绑定这个服务，这时直到所有的客户端解绑后，stopService()或stopSelf()方法才能实际终止这个服务。
+使用startService()创建服务时，一个组件调用startService()方法创建服务，然后服务会持续运行，直到调用stopSelf()方法或stopService()方法结束。使用绑定方式(bindService)创建服务时，当有一个组件调用bindService()方法时，服务就会被绑定，客户端通过IBinder接口与服务通信。客户端能够调用unbindService()方法来解除与服务的绑定。可以有多个客户端绑定到一个服务上，但是当所有的绑定都被解除以后，系统才会销毁这个服务，而服务不需要终止自己。这两种是完全独立的，能够绑定一个已经用startService()方法启动的服务，例如可以通过调用startService()方法启动后台的音乐服务，这个方法使用意图标识了要播放的音乐；之后如果用户想要进行一些播放器的控制时，或想要获取有关当前歌曲信息时，可以在一个活动中通过调用bindService()方法来绑定这个服务，这时直到所有的客户端解绑后，stopService()或stopSelf()方法才能实际终止这个服务。  
+
+> 版本提示（Android 8.0+）：应用在后台时，系统对后台服务启动有严格限制。长时间任务通常应使用 WorkManager；确需立即对用户可感知任务执行时，应使用前台服务（Foreground Service）并及时调用 startForeground() 显示通知。
 
 要创建一个服务，必须创建一个Service类的子类。服务实现中，需要重写一些处理服务生命周期关键特征的回调方法，并且给组件提供一种合适的绑定服务的机制，需要重写的回调方法包括：
 
   - onStartCommand()
 
-当一个组件通过调用startService()方法请求启动一个服务时，系统会调用这个服务的onStartCommand()方法。一旦这个方法执行了，那么这个服务就被启动，并且在后台无限期的运行。实现了这个方法，当服务的工作结束时，必须调用stopSelf()方法或stopService()方法来终止服务。如果只让服务提供绑定的能力，不需要实现这个方法。
+当一个组件通过调用startService()方法请求启动一个服务时，系统会调用这个服务的onStartCommand()方法。一旦这个方法执行了，那么这个服务就被启动，并在满足平台限制的前提下继续运行。实现了这个方法，当服务的工作结束时，必须调用stopSelf()方法或stopService()方法来终止服务。如果只让服务提供绑定的能力，不需要实现这个方法。
 
   - onBind()
 
@@ -869,7 +873,15 @@ HandlerThread，而非传统的 Thread
 
 ### 创建服务
 
-安卓的一个组件可以通过调用startService()方法创建一个启动类型的Service，并调用服务的onStartCommand()方法来启动的服务。如果一个服务一旦被启动，它就具有了一个独立于启动它的组件的生命周期，并且这个服务能够无限期的在后台运行，即使启动它的组件被销毁了。
+安卓的一个组件可以通过调用startService()方法创建一个启动类型的Service，并调用服务的onStartCommand()方法来启动服务。服务被启动后，具有独立于启动组件的生命周期。  
+
+在较新系统版本中，这一机制还受到后台执行限制：  
+
+  - Android 8.0（API 26）及以上：后台应用不能随意启动后台服务。  
+  - Android 12（API 31）及以上：对前台服务启动时机与行为有更严格约束。  
+  - Android 14（API 34）及以上：前台服务类型（foregroundServiceType）与权限要求更严格。  
+
+因此，新的应用应将“可延迟后台任务”优先迁移到 WorkManager，把 Service 主要用于“用户可感知、需要立即执行”的任务。
 
 活动之类的应用程序组件在通过调用startService()方法来启动服务时，需要给指定的Service传递一个意图对象，携带一些服务所使用的数据。服务在onStartCommand()方法中接受这个意图对象，例如一个活动需要把一些数据保存到在线数据库中，这个活动就能启动一个服务，并且把要保存的数据通过一个意图对象传递给startService()方法。这个服务在onStartCommand()方法中接受这个意图对象，连接到互联网，并且执行数据库事务。当事务结束，这个服务就自己终止并销毁。
 
@@ -879,216 +891,99 @@ HandlerThread，而非传统的 Thread
 
 Service是所有服务的基类。当通过继承这个类创建启动类型服务时，重要的是要给这个服务创建一个新的线程，避免其占用应用程序的主线程，影响正在运行的活动的性能。
 
-  - 继承IntentService
+  - 历史方案：IntentService（已弃用）
 
-IntentService是Service类的子类，可以使用工作线程来依次处理所有的启动请求，如果所需创建的服务不用同时处理多个请求，那么这是最好的选择。当通过继承这个类创建启动类型服务时，需要做的所有工作就是实现onHandleIntent()方法，它接受每个启动请求的意图对象，以便完成后台工作。
+IntentService是Service类的子类，可以使用工作线程依次处理启动请求。  
 
-#### IntentService
+> 版本提示（Android 11 / API 30 起）：IntentService 已弃用。新代码应优先使用 WorkManager；如需进程内串行任务，可使用 Coroutine + Dispatcher/Executor + Service 组合。
 
-IntentService是Service类的子类，用于处理异步请求。因为大多被启动类型的服务不需要同时处理多个请求，所以使用IntentService类来实现自己的服务可能是最好的选择。客户端可以通过startService(Intent)方法传递请求给IntentService。首先分析IntentService源代码，见码
-7‑8，是IntentService抽象类的具体定义代码。从IntentService的定义中可以看出，IntentService实际上是Looper、Handler、Service
-的集合体，其不仅有服务的功能，还有消息处理和消息循环的功能。
+#### WorkManager（推荐）
 
-> import android.content.Intent;
+在新项目中，原来由 IntentService 处理的“可延迟后台任务”应优先迁移到 WorkManager。WorkManager 提供了系统感知的任务调度能力，能够在应用进程被杀后继续执行，并自动适配不同 Android 版本的后台执行限制。
+
+下面给出一个等价于“后台模拟下载 5 秒”的最小示例。首先定义一个 Worker：
+
+> import android.content.Context;
 > 
-> import android.os.\*;
+> import androidx.annotation.NonNull;
+> import androidx.work.Data;
+> import androidx.work.Worker;
+> import androidx.work.WorkerParameters;
 > 
-> public abstract class IntentService extends Service {
+> public class DownloadWorker extends Worker {
 > 
-> private volatile Looper mServiceLooper;
+> public static final String KEY_URL = "key_url";
 > 
-> private volatile ServiceHandler mServiceHandler;
-> 
-> private String mName;
-> 
-> private boolean mRedelivery;
-> 
-> private final class ServiceHandler extends Handler {
-> 
-> public ServiceHandler(Looper looper) {
-> 
-> super(looper);
-> 
+> public DownloadWorker(@NonNull Context context, @NonNull WorkerParameters params) {
+> super(context, params);
 > }
 > 
+> @NonNull
 > @Override
-> 
-> public void handleMessage(Message msg) {
-> 
-> onHandleIntent((Intent)msg.obj);
-> 
-> stopSelf(msg.arg1);
-> 
-> }
-> 
-> }
-> 
-> public IntentService(String name) {
-> 
-> super();
-> 
-> mName = name;
-> 
-> }
-> 
-> public void setIntentRedelivery(boolean enabled) {
-> 
-> mRedelivery = enabled;
-> 
-> }
-> 
-> @Override
-> 
-> public void onCreate() {
-> 
-> super.onCreate();
-> 
-> HandlerThread thread = new HandlerThread("IntentService\[" + mName +
-> "\]");
-> 
-> thread.start();
-> 
-> mServiceLooper = thread.getLooper();
-> 
-> mServiceHandler = new ServiceHandler(mServiceLooper);
-> 
-> }
-> 
-> @Override
-> 
-> public void onStart(Intent intent, int startId) {
-> 
-> Message msg = mServiceHandler.obtainMessage();
-> 
-> msg.arg1 = startId;
-> 
-> msg.obj = intent;
-> 
-> mServiceHandler.sendMessage(msg);
-> 
-> }
-> 
-> @Override
-> 
-> public int onStartCommand(Intent intent, int flags, int startId) {
-> 
-> onStart(intent, startId);
-> 
-> return mRedelivery ? START\_REDELIVER\_INTENT : START\_NOT\_STICKY;
-> 
-> }
-> 
-> @Override
-> 
-> public void onDestroy() {
-> 
-> mServiceLooper.quit();
-> 
-> }
-> 
-> @Override
-> 
-> public IBinder onBind(Intent intent) {
-> 
-> return null;
-> 
-> }
-> 
-> protected abstract void onHandleIntent(Intent intent);
-> 
-> }
-
-码 7‑8 IntentService.java
-
-IntentService在处理事务时，还是采用的Handler方式，创建一个名叫ServiceHandler的内部Handler，并把它直接绑定到HandlerThread所对应的子线程。ServiceHandler把处理intent所对应的事务的代码都封装到叫做onHandleIntent()回调方法中，因此我们直接实现onHandleIntent()方法，再在里面根据意图的不同进行不同的事务处理就可以了。另外IntentService默认实现了onBind()方法，返回值为null。
-
-继承IntentService的好处是处理异步请求的时候可以减少写代码的工作量，比较轻松地实现项目的需求。IntentService的构造方法一定是参数为空的构造方法，然后再在其中调用父类的构造方法super("name")。因为服务的实例化是系统来完成的，而且系统是用参数为空的构造方法来实例化服务的，所以我们只需要实现onHandleIntent()方法，来完成由客户提供的工作。下面是一个使用IntentService创建启动服务的简单例子，在onHandleIntent()方法中实现了模拟download文件时耗时的状况，具体实现如码
-7‑9。
-
-> public class HelloIntentService extends IntentService {
-> 
-> /\*\*
-> 
-> \* A constructor is required, and must call the super
-> [IntentService(String)](http://developer.android.com/reference/android/app/IntentService.html#IntentService\(java.lang.String\))
-> 
-> \* constructor with a name for the worker thread.
-> 
-> \*/
-> 
-> public HelloIntentService() {
-> 
-> super("HelloIntentService");
-> 
-> }
-> 
-> /\*\*
-> 
-> \* The IntentService calls this method from the default worker thread
-> with
-> 
-> \* the intent that started the service. When this method returns,
-> IntentService
-> 
-> \* stops the service, as appropriate.
-> 
-> \*/
-> 
-> @Override
-> 
-> protected void onHandleIntent(Intent intent) {
-> 
-> // Normally we would do some work here, like download a file.
-> 
-> // For our sample, we just sleep for 5 seconds.
-> 
-> long endTime = System.currentTimeMillis() + 5\*1000;
-> 
-> while (System.currentTimeMillis() \< endTime) {
-> 
-> synchronized (this) {
-> 
+> public Result doWork() {
+> String url = getInputData().getString(KEY_URL);
 > try {
-> 
-> wait(endTime - System.currentTimeMillis());
-> 
-> } catch (Exception e) {
-> 
+> // 模拟耗时任务，例如下载或同步
+> Thread.sleep(5000);
+> return Result.success();
+> } catch (InterruptedException e) {
+> // 被中断时让系统按策略重试
+> return Result.retry();
+> }
 > }
 > 
+> public static Data buildInput(String url) {
+> return new Data.Builder().putString(KEY_URL, url).build();
 > }
-> 
-> }
-> 
-> }
-> 
-> }
-
-码 7‑9 **HelloIntentService.java**
-
-码
-7‑9中只是定义了一个构造方法和onHandleIntent()方法，如果还要重写onCreate()、onStartCommand()或onDestroy()其他的回调方法时，必须要调用父类相同的回调方法，以便IntentService对象能够适当的处理工作线程的活动，例如要在码
-7‑9中添加onStartCommand()方法的实现代码，则在这个方法的实现代码中，必须执行语句super.onStartCommand()来调用父类的同一回调方法，使得本类的onStartCommand()方法获取意图并将其交付给onHandleIntent()方法。
-
-> @Override
-> 
-> public int onStartCommand(Intent intent, int flags, int startId) {
-> 
-> Toast.makeText(this, "service starting", Toast.LENGTH\_SHORT).show();
-> 
-> return super.onStartCommand(intent,flags,startId);
-> 
 > }
 
-码 7‑10
+码 7‑8 DownloadWorker.java
 
-除了onHandleIntent()方法以外，唯一不需要调用实现的方法是onBind()方法，但是如果你的服务允许绑定，就要实现这个方法。
+然后在页面中提交任务：
+
+> import androidx.work.Constraints;
+> import androidx.work.ExistingWorkPolicy;
+> import androidx.work.NetworkType;
+> import androidx.work.OneTimeWorkRequest;
+> import androidx.work.WorkManager;
+> 
+> Constraints constraints = new Constraints.Builder()
+> .setRequiredNetworkType(NetworkType.CONNECTED)
+> .build();
+> 
+> OneTimeWorkRequest request =
+> new OneTimeWorkRequest.Builder(DownloadWorker.class)
+> .setConstraints(constraints)
+> .setInputData(DownloadWorker.buildInput("https://example.com/file.zip"))
+> .addTag("download_task")
+> .build();
+> 
+> WorkManager.getInstance(this).enqueue(request);
+
+码 7‑9 EnqueueWork.java
+
+如果需要避免重复入队，可使用唯一任务名：
+
+> WorkManager.getInstance(this).enqueueUniqueWork(
+> "sync_once",
+> ExistingWorkPolicy.KEEP,
+> request
+> );
+
+码 7‑10 EnqueueUniqueWork.java
+
+与 IntentService 相比，WorkManager 的优势在于：
+
+  - 自动遵循系统后台限制，跨版本行为更稳定。  
+  - 支持约束条件（网络、电量、充电状态等）与重试策略。  
+  - 支持链式任务与唯一任务，便于避免重复执行。  
+
+如果任务必须“立即执行且用户可感知”（如运动追踪、导航、通话），应使用前台服务，而不是 WorkManager。
 
 #### Service
 
-继承IntentService类来实现一个被启动类型的服务很简单，但是如果服务要执行多线程，而不是通过工作队列来处理启动请求，那么就需要定义Service类的子类来处理每个意图。为便于比较，在码
-7‑11例子中，使用继承Service类的方式创建了一个服务，执行了与上节继承IntentService类的码 7‑9相同的工作。但与码
-7‑9的处理方式不同，其对于每个启动请求，它都会使用一个工作线程来执行工作，并且每次只处理一个请求。
+如果任务不适合 WorkManager（例如需要与前台通知深度协作，或需要更细粒度地控制服务生命周期），可以定义 Service 的子类自行管理线程与队列。码
+7‑11示例展示了继承 Service 的方式：它对每个启动请求分发后台处理逻辑，并在处理完成后主动结束对应请求。
 
 > public class HelloService extends Service {
 > 
@@ -1216,10 +1111,9 @@ IntentService在处理事务时，还是采用的Handler方式，创建一个名
 
 在码
 7‑11中，服务创建时会调用onCreate()方法。在onCreate()方法中创建Handler线程(HandlerThread)后启动此线程，然后获取当前线程的Looper对象来初始化服务的mServiceLooper，并创建mServicehandler对象。当一个组件通过调用startService()方法请求启动一个服务时，系统会调用这个服务的onStartCommand()方法。对于每一个启动服务的请求，都会产生一条带有startId和Intent参数的Message，并发送到MessageQueue中。ServiceHandler
-通过继承Handle来实现服务请求的多任务处理。、继承Service类实现服务比继承IntentService类多做很多工作，但是因为自己处理每个onStartCommand()方法的调用，所以就能够同时执行多个请求。在码
-7‑11例子中没有这么做，但是如果想要这么做的话，那么可以给每个请求创建一个新的线程，并且立即运行它们，而不需要等待前一个请求完成。请注意，onStartCommand()
-方法必须返回整型数。整型数是一个值，用于描述系统应如何在系统终止服务的情况下继续运行服务。IntentService
-的默认实现会处理此情况，但可以对其进行修改。从 onStartCommand()
+通过继承Handle来实现服务请求的多任务处理。继承Service类实现服务比WorkManager方案需要更多手动管理工作，但也带来更高控制力。在码
+7‑11例子中没有同时并行多个请求；如果业务需要并行处理，可以为每个请求创建新的线程并立即运行，而不必等待前一个请求完成。请注意，onStartCommand()
+方法必须返回整型数。整型数用于描述系统在终止服务后如何重建服务。从 onStartCommand()
 返回的值必须是以下常量之一：
 
   - START\_NOT\_STICKY
@@ -1240,7 +1134,7 @@ onStartCommand()。所有挂起意图均依次传递。此常量适用于主动�
 
 #### 启动和终止
 
-安卓的一个组件可以通过调用startService()方法创建一个启动类型的服务，并调用服务的onStartCommand()方法来启动的服务。当一个服务定义完成后，可以在其它组件中通过创建符合条件的意图对象或显示指定要启动的服务，并且将其传递给StartService()方法，这样就可以实现从一个活动或其他的应用程序组件启动服务，例如在活动的onCreate()代码中添加如下代码，能够创建显示指定的意图对象，并把其作为startService()方法的参数来启动指定的HelloService服务。
+安卓的一个组件可以通过调用startService()方法创建一个启动类型的服务，并调用服务的onStartCommand()方法来启动服务。当一个服务定义完成后，可以在其它组件中通过创建符合条件的意图对象或显示指定要启动的服务，并将其传递给startService()方法。对于可延迟任务，也可以在活动中直接提交 WorkManager 任务。下面示例同时演示了这两种触发方式。
 
 > import android.content.Intent;
 > 
@@ -1253,6 +1147,8 @@ onStartCommand()。所有挂起意图均依次传递。此常量适用于主动�
 > import android.widget.Button;
 > 
 > import androidx.appcompat.app.AppCompatActivity;
+> import androidx.work.OneTimeWorkRequest;
+> import androidx.work.WorkManager;
 > 
 > import com.example.ch06.R;
 > 
@@ -1298,11 +1194,13 @@ onStartCommand()。所有挂起意图均依次传递。此常量适用于主动�
 > 
 > public void onClick(View v) {
 > 
-> Intent intent = new Intent(StartServiceActivity.this,
+> OneTimeWorkRequest request =
+> new OneTimeWorkRequest.Builder(DownloadWorker.class)
+> .setInputData(DownloadWorker.buildInput("https://example.com/file.zip"))
+> .addTag("download_task_from_ui")
+> .build();
 > 
-> HelloIntentService.class);
-> 
-> startService(intent);
+> WorkManager.getInstance(StartServiceActivity.this).enqueue(request);
 > 
 > }
 > 
@@ -3403,7 +3301,7 @@ getPendingIntent() 来接收包含整个返回堆栈的 PendingIntent。
 > 
 > PendingIntent resultPendingIntent =
 > 
-> stackBuilder.getPendingIntent(0, PendingIntent.FLAG\_UPDATE\_CURRENT);
+> stackBuilder.getPendingIntent(0, PendingIntent.FLAG\_UPDATE\_CURRENT | PendingIntent.FLAG\_IMMUTABLE);
 
 码 7‑43
 
@@ -3472,7 +3370,7 @@ PendingIntent，但还应确保在清单中定义了相应的任务选项。
 > 
 > PendingIntent notifyPendingIntent = PendingIntent.getActivity(
 > 
-> this, 0, notifyIntent, PendingIntent.FLAG\_UPDATE\_CURRENT
+> this, 0, notifyIntent, PendingIntent.FLAG\_UPDATE\_CURRENT | PendingIntent.FLAG\_IMMUTABLE
 > 
 > );
 
@@ -3802,6 +3700,23 @@ ID，以及一个用户可见名称。以下代码段演示了如何创建通知
 创建新分组后，可以调用 setGroup() 以将新的 NotificationChannel
 对象与该分组相关联。将渠道提交至通知管理器后，便无法更改通知渠道和分组之间的关联。
 
+### Android 13+ 通知权限与 Android 12+ PendingIntent 要求
+
+从 Android 13（API 33）开始，普通通知需要运行时权限 `POST_NOTIFICATIONS`。应用首次发送通知前，应先请求该权限，并处理“拒绝/仅本次允许”等用户选择。未获授权时，即使渠道已创建，通知也可能不显示。  
+
+从 Android 12（API 31）开始，创建 `PendingIntent` 时必须显式指定可变性：  
+
+  - 默认优先 `FLAG_IMMUTABLE`（更安全，推荐）。  
+  - 只有在必须修改内容（如 RemoteInput 直接回复等）时才使用 `FLAG_MUTABLE`。  
+
+另外，从 Android 12 开始，通知点击后的“中转启动活动”（notification trampoline）受到限制。推荐做法是让通知直接启动 `Activity`，或把耗时逻辑放到 `BroadcastReceiver`/`Service` 中执行。
+
+### Android 14+ 前台服务与精确闹钟注意事项
+
+在 Android 14（API 34）及以上版本，前台服务需要更精确地声明类型（`foregroundServiceType`），并满足对应权限与使用场景约束。  
+
+如果业务确实需要精确闹钟（例如日历提醒、闹钟），请关注 `SCHEDULE_EXACT_ALARM`/`USE_EXACT_ALARM` 的平台与商店政策要求；多数可延迟任务应继续使用 WorkManager。
+
 ### 通知标志 
 
 从 8.0（API 级别
@@ -3955,9 +3870,9 @@ setStyle()。注意：建议不要使用未经装饰的通知，因为这会使�
 
 本章主要介绍了安卓系统多任务的机制和服务这个基本的组件。安卓多任务的调度和实现采用消息驱动机制。应用程序启动时，系统会为其创建一个名为“main”的主线程。默认情况下，同一个应用程序的所有组件都运行在同一个进程的这个主线程里。如果希望安卓应用程序实现多任务，可以通过代码指定组件运行在其他进程里，或为进程创建额外的线程。安卓线程之间和进程之间是不能直接传递消息的，必须通过对消息队列和消息循环的操作来完成。安卓消息循环是针对线程的，每个线程都可以有自己的消息队列和消息循环。安卓提供了Handler
 类和 Looper
-类来来访问消息队。安卓有两种方式实现多线程操作界面：第一种是创建新线程Thread，用Handler负责线程间的通信和消息；第二种方式AsyncTask异步执行任务。
+类来来访问消息队。安卓有两种常见方式实现多线程操作界面：第一种是创建线程/线程池（Thread、HandlerThread、ExecutorService）并通过Handler或主线程调度器回传结果；第二种是使用Coroutine等现代并发工具。AsyncTask在 Android 11（API 30）起已弃用，适合仅用于理解历史代码。
 
-服务是安卓的四大组件之一，用于支持安卓系统的服务。服务不能与用户交互，也不能自己启动，需要调用Context.startService()或Context.bindService()来启动，在后台运行。安卓的其它应用的组件可以在后台启动一个服务运行，即使用户切换到另一个应用此服务也会继续运行。无论使用哪一种方式启动，还是同时使用这两种方式获得服务，都需要使用意图。
+服务是安卓的四大组件之一。服务不能与用户交互，也不能自己启动，需要调用Context.startService()或Context.bindService()来启动。新版本安卓对后台服务启动和前台服务使用做了更严格的限制：对可延迟任务，推荐使用 WorkManager；对用户可感知且需要立即执行的任务，使用前台服务并按要求声明类型和权限。
 
 通知是一个消息，以图标或文字的形式显示在设备的状态栏位置提示用户。安卓系统的
-NotificationCompat.Builder类用于创建Notification对象。所有通知都必须分配到相应的渠道。对于每个渠道，可以设置应用于其中的所有通知的视觉和听觉行为。
+NotificationCompat.Builder类用于创建Notification对象。所有通知都必须分配到相应的渠道。对于每个渠道，可以设置应用于其中的所有通知的视觉和听觉行为。适配新版本时还应注意：Android 13+ 需要 `POST_NOTIFICATIONS` 运行时权限，Android 12+ 需要为 `PendingIntent` 显式声明可变性。
