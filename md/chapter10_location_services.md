@@ -1,6 +1,8 @@
 # 定位服务基础
 
-安卓通过android.location包中的类为应用程序提供定位服务，定位框架中的核心组件就是定位服务系统，其提供了支撑底层设备的定位API。与其他系统服务一样，并不是直接实例化一个LocationManager对象，而是通过调用Context类的getSystemService(Context.LOCATION\_SERVICE)方法来获得一个LocationManager对象，这个方法会返回一个新的LocationManager对象。应用程序获取一个LocationManager对象后，就可以进行定位服务的各种操作，例如：
+安卓通过android.location包中的类为应用程序提供定位服务，定位框架中的核心组件就是定位服务系统，其提供了支撑底层设备的定位API。与其他系统服务一样，并不是直接实例化一个LocationManager对象，而是通过调用Context类的getSystemService(Context.LOCATION\_SERVICE)方法来获得LocationManager实例。应用程序获取一个LocationManager对象后，就可以进行定位服务的各种操作，例如：
+
+> 版本说明（截至 2026 年）：本章以现代 Android 定位实践为基线，重点兼容 Android 10+ 后台定位规则、Android 12+ 大致/精确位置授权模型，以及 Android 14+ 前台服务权限要求。
 
   - 查询所有定位提供者列表，获得最新的用户位置信息。
 
@@ -43,6 +45,13 @@ android:foregroundServiceType="location" ... \>
 \</service\>
 
 码 ‑1
+
+如果应用在 Android 14（API 级别 34）及更高版本中启动“位置类型”的前台服务，还需要在清单中声明对应权限：
+
+\<uses-permission android:name="android.permission.FOREGROUND\_SERVICE" /\>
+
+\<uses-permission
+android:name="android.permission.FOREGROUND\_SERVICE\_LOCATION" /\>
 
 当应用请求 ACCESS\_COARSE\_LOCATION 权限或 ACCESS\_FINE\_LOCATION
 权限时（如以下代码段所示），就是在声明需要获取前台位置信息：
@@ -382,6 +391,8 @@ requestLocationUpdates()，则在无法获取位置信息，或者获取新位�
 
   - Criteria：使得应用能够通过在LocationProvider中设置的属性来选择合适的定位提供者。
 
+> 版本提示：`LocationManager + Criteria` 仍可用，但新项目通常优先采用 `FusedLocationProviderClient`，以在不同信号源之间获得更稳定的精度与功耗平衡。
+
 在安卓中，可以通过回调的方法得到用户位置。使用LocationManager类，向其requestLocationUpdates()方法传入一个LocationListener对象，就可以获得位置更新。在LocationListener中，必须要实现响应的几个回调方法，以便当用户位置信息和服务状态的变化时LocationManager调用。码
 10‑7使用一个简单的例子，说明了如何定义一个LocationListener，并且请求位置更新。
 
@@ -656,18 +667,15 @@ LocationRequest。这些参数用于确定位置信息请求的准确度。如�
 
   - 更新间隔
 
-setInterval() -
-此方法以毫秒为单位，设置应用接收位置信息更新的频率。请注意，为了优化电池电量的使用，位置信息的更新频率可能会高于或低于此频率，此外也可能完全不更新位置信息（例如，当设备没有网络连接时）。
+setIntervalMillis() - 以毫秒为单位设置位置信息更新间隔。系统会基于电量和可用信号动态调整，实际更新频率可能高于或低于该值。
 
   - 最快更新间隔
 
-setFastestInterval() - 此方法以毫秒为单位，设置应用处理位置信息更新的最快频率。除非以快于 setInterval()
-中指定的频率接收更新对应用有益，否则无需调用此方法。
+setMinUpdateIntervalMillis() - 以毫秒为单位设置应用可接收更新的最快频率。仅在确实需要更高频更新时设置。
 
   - 优先级
 
-setPriority() - 此方法设置请求的优先级，此优先级可以明确地提示 Google Play
-服务提供的位置信息服务应该使用哪些位置信息来源。支持使用以下值：
+setPriority() - 设置请求优先级，提示系统在精度与功耗之间平衡。现代 API 对应 Priority 常量：
 
   - PRIORITY\_BALANCED\_POWER\_ACCURACY - 使用此设置可以请求城市街区级别的定位精确度，即大约 100
     米。这是一个粗略的准确度，消耗的电量可能会比较少。使用此设置时，位置信息服务可能会使用 WLAN
@@ -679,26 +687,24 @@ setPriority() - 此方法设置请求的优先级，此优先级可以明确地�
   - PRIORITY\_LOW\_POWER - 使用此设置可以请求城市级别的定位精确度，即大约 10
     公里。这是一个粗略的准确度，消耗的电量可能会比较少。
 
-  - PRIORITY\_NO\_POWER -
-    如果不希望增加耗电量，又想及时获得可用的位置信息更新，请使用此设置。使用此设置时，应用不会触发任何位置信息更新，但会接收其他应用触发的位置信息更新。
+  - PRIORITY\_PASSIVE - 不主动触发定位，仅消费其他请求产生的位置更新。
 
 创建位置信息请求并设置相关参数，如以下代码示例中所示：
 
 protected void createLocationRequest() {
 
-LocationRequest locationRequest = LocationRequest.create();
+LocationRequest locationRequest = new LocationRequest.Builder(
+Priority.PRIORITY_HIGH_ACCURACY, 10000L)
 
-locationRequest.setInterval(10000);
+.setMinUpdateIntervalMillis(5000L)
 
-locationRequest.setFastestInterval(5000);
-
-locationRequest.setPriority(LocationRequest.PRIORITY\_HIGH\_ACCURACY);
+.build();
 
 }
 
 码 ‑17
 
-将优先级 PRIORITY\_HIGH\_ACCURACY 与在应用清单中定义的 ACCESS\_FINE\_LOCATION 权限设置及
+将优先级 Priority.PRIORITY\_HIGH\_ACCURACY 与在应用清单中定义的 ACCESS\_FINE\_LOCATION 权限设置及
 5000 毫秒（5
 秒）的快速更新间隔配合使用，可让一体化位置信息提供程序返回准确度在几英尺以内的位置信息更新，这种方法适用于实时显示位置信息的地图应用。性能提示：如果应用在收到位置信息更新后会访问网络或执行其他长时间运行的工作，将最快间隔调整为较慢的值，此调整可防止应用收到更新却无法使用。待长时间运行的工作完成后，再重新将最快间隔设置为较快的值。
 
@@ -732,9 +738,9 @@ Task对象完成后，应用可以通过查看 LocationSettingsResponse
 LocationSettingsResponse 对象的 getLocationSettingsStates()
 方法。提示用户更改位置信息设置，如需确定位置信息设置是否适合位置信息请求，将
 OnFailureListener 添加至验证位置信息设置的 Task 对象，然后检查传递到 onFailure() 方法的 Exception
-对象是否为 ResolvableApiException 类的实例，如果是就表示必须更改设置。接下来，通过调用
+对象是否为 ResolvableApiException 类的实例，如果是就表示必须更改设置。接下来，可以调用
 startResolutionForResult()
-方法显示一个对话框，请求用户授予修改位置信息设置的权限。以下代码段展示了如何确定用户的位置信息设置是否允许位置信息服务创建
+显示系统对话框，请求用户修改位置信息设置。对于新项目，建议结合 Activity Result API 处理结果回调，而不是依赖 onActivityResult()。以下代码段展示了如何确定用户的位置信息设置是否允许位置信息服务创建
 LocationRequest，以及如何在必要时向用户请求更改位置信息设置的权限：
 
 task.addOnSuccessListener(this, new
@@ -769,9 +775,8 @@ if (e instanceof ResolvableApiException) {
 
 try {
 
-// Show the dialog by calling startResolutionForResult(),
-
-// and check the result in onActivityResult().
+// Show the dialog by calling startResolutionForResult().
+// For new code, handle result with Activity Result API.
 
 ResolvableApiException resolvable = (ResolvableApiException) e;
 
@@ -836,7 +841,7 @@ Google Play
 限制后台位置信息更新次数，如果后台位置信息访问权限对应用至关重要，请注意：在搭载安卓8.0（API 级别
 26）及更高版本的设备上，安卓系统为了延长设备电池的续航时间，采用了“后台位置信息限制”的设置。在这些版本的安卓系统中，如果应用在后台运行，其每小时只能接收几次位置信息更新。详细了解后台位置信息限制。
 
-在开发应用的过程中，需要对获取用户位置的模型进行效率测试。最简单的测试就是使用Android真机设备，但是如果没有一个真正的物理设备，也可以使用安卓虚拟机的虚拟位置进行基于用户位置的测试。向应用提供模拟位置数据的方法主要有三种：Eclipse，DDMS或者模拟器控制台的“geo”命令行。由于提供模拟位置数据是使用的GPS的数据类型，所以必须使用GPS\_PROVIDER来获取位置更新，否则模拟数据无法工作。如果使用DDMS工具，可以使用多种方法模拟位置数据，其中包括向设备手动发送独立的经纬度；使用GPX文件向设备发送的一系列路径；使用KML文件向设备发送独立的一序列化的路径位置。如果使用模拟器控制台的“geo”命令行发送模拟位置数据，需要在安卓模拟器上装载应用，并打开SDK下的/tools目录下打开设备终端的控制台，连接到模拟器控制台：
+在开发应用的过程中，需要对获取用户位置的模型进行效率测试。最简单的测试就是使用Android真机设备，但是如果没有一个真正的物理设备，也可以使用安卓虚拟机的虚拟位置进行基于用户位置的测试。当前主流方式是使用 Android Studio Emulator 的 Extended controls（Location）或模拟器控制台的“geo”命令行。Eclipse/DDMS 已不再是现代 Android 开发流程的常用工具。由于提供模拟位置数据是使用的GPS的数据类型，所以必须使用GPS\_PROVIDER来获取位置更新，否则模拟数据无法工作。使用模拟器控制台的“geo”命令行发送模拟位置数据时，需要在安卓模拟器上装载应用，并打开设备终端控制台，连接到模拟器控制台：
 
 > telnet localhost \<console-port\>
 
