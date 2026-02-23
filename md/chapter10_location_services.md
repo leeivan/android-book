@@ -2,7 +2,7 @@
 
 安卓通过android.location包中的类为应用程序提供定位服务，定位框架中的核心组件就是定位服务系统，其提供了支撑底层设备的定位API。与其他系统服务一样，并不是直接实例化一个LocationManager对象，而是通过调用Context类的getSystemService(Context.LOCATION\_SERVICE)方法来获得LocationManager实例。应用程序获取一个LocationManager对象后，就可以进行定位服务的各种操作，例如：
 
-> 版本说明（截至 2026 年）：本章以现代 Android 定位实践为基线，重点兼容 Android 10+ 后台定位规则、Android 12+ 大致/精确位置授权模型，以及 Android 14+ 前台服务权限要求。
+> 版本说明（截至 2026 年 2 月）：本章以现代 Android 定位实践为基线，并以 Android 16（API 36）为主要版本，重点兼容 Android 10+ 后台定位规则、Android 12+ 大致/精确位置授权模型，以及 Android 14+ 前台服务权限要求。
 
   - 查询所有定位提供者列表，获得最新的用户位置信息。
 
