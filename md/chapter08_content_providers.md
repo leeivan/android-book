@@ -268,7 +268,9 @@ URI，为了从内容提供器中检索数据，需要两个基本步骤：
 
 下面的代码示例只保留最小必需项：在 Manifest 中通过 \<uses-permission\> 声明读取联系人数据所需的权限。
 
-> \<uses-permission android:name="android.permission.READ\_CONTACTS" /\>
+```xml
+<uses-permission android:name="android.permission.READ_CONTACTS" />
+```
 
 > 版本提示：`READ_USER_DICTIONARY` 在 Android 6.0（API 23）起仅面向输入法（IME）或拼写检查器，普通应用不应将其作为通用示例权限。
 
@@ -278,30 +280,32 @@ URI，为了从内容提供器中检索数据，需要两个基本步骤：
 
 权限申请完成后，从内容提供器中检索数据的第二步就是构建查询程序，接下来以用户词典的内容提供器为例，说明如何使用ContentResolver.query()获取其中的数据。由于ContentResolver.query()的参数对应于 SELECT 语句的结构，类似于关系数据库表的查询。因此如果要获取某个内容提供器中的数据，必须要清楚这个内容提供器可以提供什么数据内容，也就是明了这个二维表的结构。这可以从内容提供器的文档中查到。首先在应用程序中，对应ContentResolver.query()的参数，声明一些访问用户词典内容提供器所需要的变量（见码 8‑5）。
 
-> public class TryAccessDictionary{
->
-> String\[\] mProjection = {
->
-> UserDictionary.Words.\_ID, // Contract class constant for the \_ID
-> column name
->
-> UserDictionary.Words.WORD, // Contract class constant for the word
-> column name
->
-> UserDictionary.Words.LOCALE // Contract class constant for the locale
-> column name
->
-> };
->
-> // Defines a string to contain the selection clause
->
-> String mSelectionClause = null;
->
-> // Initializes an array to contain selection arguments
->
-> String\[\] mSelectionArgs = {""};
->
-> }
+```java
+public class TryAccessDictionary{
+
+    String[] mProjection = {
+
+        UserDictionary.Words._ID, // Contract class constant for the _ID
+        column name
+
+        UserDictionary.Words.WORD, // Contract class constant for the word
+        column name
+
+        UserDictionary.Words.LOCALE // Contract class constant for the locale
+        column name
+
+    };
+
+    // Defines a string to contain the selection clause
+
+    String mSelectionClause = null;
+
+    // Initializes an array to contain selection arguments
+
+    String[] mSelectionArgs = {""};
+
+}
+```
 
 码 8‑5 **查询参数变量声明**
 

@@ -445,15 +445,13 @@ LocationManager.NETWORK\_PROVIDER
 
 这两种方式的区别是什么呢？GPS\_PROVIDER提供精确的GPS定位，但在室内几乎无法定位而导致无法收集信息，即有定位盲区。GPS定位基本原理是测量出已知位置的卫星到用户接收机之间的距离，然后综合多颗卫星的数据就可知道接收机的具体位置。要达到这一目的，卫星的位置可以根据星载时钟所记录的时间在卫星星历中查出，所以使用必须在户外。而NETWORK\_PROVIDER为网络定位，其偏差较大，但无定位盲区，只要有网络一般都可以收集的到。网络定位简单来说就是当接入WI-FI就使用WI-FI定位，当前接入4G网就是基站定位。实际上基站和WI-FI有单独的定位方式，只不过系统都封装到了NETWORK\_PROVIDER方法中。除了requestLocationUpdates()方法，LocationManager类还提供了getLastKnownLocation()方法，来获取上一次获取到的位置信息，而并非当前的GPS位置信息。为了从NETWORK\_PROVIDER或GPS\_PROVIDER获取位置更新，必须声明在应用程序的Manifest文件中声明用户访问的ACCESS\_COARSE\_LOCATION或ACCESS\_FINE\_LOCATION权限。
 
-> \<manifest ... \>
->
-> \<uses-permission
->
-> android:name="android.permission.ACCESS\_FINE\_LOCATION" /\>
->
-> ...
->
-> \</manifest\>
+```xml
+<manifest ... >
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION" />
+    ...
+</manifest>
+```
 
 码 10‑10 **定位服务用户权限设置**
 
