@@ -1,14 +1,14 @@
-# 菜单和应用栏
+# 第4章 菜单和应用栏
 
 本章关注应用导航和操作入口的组织方式。对于用户来说，菜单和应用栏决定了“功能放在哪里、如何被发现、如何被快速执行”；对于开发者来说，这一章要解决的是如何把页面操作、导航层级和界面空间利用组织得更清晰。
 
 在当前 Android 开发中，菜单与应用栏依然是导航和操作入口的重要组成部分，但工程实践已经从早期的原生 `ActionBar` 逐步迁移到 AndroidX、Material 3 与更明确的生命周期管理方式。要实现准确且一致的应用导航，除了理解“向上（Up）”与“返回（Back）”的原则，还需要掌握 `AppCompat/Toolbar`、`MenuHost/MenuProvider`、`NavigationUI` 以及在 Jetpack Compose 中使用 `TopAppBar` 等现代方案。
 
-## 菜单
+## 4.1 菜单
 
 在安卓中，支持菜单视图元素的关键类是 `android.view.Menu`，每个 Activity 都会关联一个该类型的菜单对象。一个菜单对象包含菜单项和子菜单，菜单项由 `android.view.MenuItem` 类表示，子菜单由 `android.view.SubMenu` 类表示。菜单项具有名称、菜单项 ID、分组 ID、顺序等属性。菜单和其他可视控件一样，可以通过 XML 定义在 `res/menu` 目录中，并在 Kotlin/Java 代码中通过资源 ID 加载。
 
-### 菜单资源
+### 4.1.1 菜单资源
 
 对于所有类型的菜单，安卓提供了标准的XML格式来定义菜单项，所以除了在代码中实例化菜单之外，还可以在一个XML菜单资源中定义菜单和菜单项，然后在活动中使用资源ID加载菜单资源。使用XML资源来定义菜单是一种推荐的方式。使用XML资源来定义菜单有许多优点，例如可以更好地体现菜单的结构，可以使逻辑代码和菜单内容分离，可以为不同的平台版本、不同的屏幕尺寸等提供可以替换的菜单配置。菜单资源定义可通过
 MenuInflater 进行扩充的应用菜单，包括选项菜单、上下文菜单和子菜单。
@@ -280,7 +280,7 @@ android:title="@string/open" /\>
 
 如果要将定义好的菜单资源加载到活动中，需要使用[MenuInflater.inflate()](http://developer.android.com/reference/android/view/MenuInflater.html#inflate\(int,%20android.view.Menu\))方法，在下面的章节中，介绍每种菜单的加载方式。
 
-### 菜单类型
+### 4.1.2 菜单类型
 
 Android 提供丰富的菜单能力。虽然早期文档会按系统版本介绍差异，但在当前开发中，建议统一基于 AndroidX API 理解：菜单可以与应用栏（App Bar/Toolbar）联动，也可以作为上下文操作或弹出菜单响应用户交互。常见的三种基础类型如下：
 
@@ -298,7 +298,7 @@ Android 提供丰富的菜单能力。虽然早期文档会按系统版本介绍
 
 这些菜单既可以在 XML 资源文件中定义，也可以在 Kotlin/Java 中动态创建。对于基于 Fragment 的现代项目，推荐结合 `MenuHost/MenuProvider` 生命周期安全地注册菜单。
 
-#### 选项菜单
+#### 4.1.2.1 选项菜单
 
 在安卓界面中，选项菜单承载的是与当前 Activity 或 Fragment 上下文相关的主要操作。现代设备通常不会依赖实体菜单键，而是把少量高频动作放在应用栏中直接显示，把其余操作放入溢出菜单。因此，学习选项菜单时，重点不应只放在“菜单显示在哪里”，而应放在“哪些操作应该前置、哪些操作适合后置，以及菜单何时创建、何时更新”。
 
@@ -1445,7 +1445,7 @@ popupMenu.show();
 
 图 4‑8 弹出式菜单
 
-### 菜单分组
+### 4.1.3 菜单分组
 
 菜单组是菜单项集合，可以用来为菜单项设置共同的属性。菜单组的设置可以使一组菜单选项的属性同时改变，呈现出共同的特性，例如：
 
@@ -1556,7 +1556,7 @@ public boolean onOptionsItemSelected(MenuItem item) {  
 
 如果不用这种方式设置复选状态，那么当用户选择菜单项（复选框或复选按钮）的时候，它的可视状态将不会发生改变。
 
-### 设置意图
+### 4.1.4 设置意图
 
 菜单选项也可以创建意图来启动另一个活动，这个活动既可以是本应用程序中的，也可以是其它应用程序中的。如果确认了所需的意图的特性以及初始化此意图的菜单选项后，就可以在菜单选项事件响应的回调方法中使用startActivity()运行此意图。但是，添加调用这个意图对象的菜单项之后，如果不能确定用户设备上是否包含了处理这个意图对象的应用程序，就有可能由于没有接收这个意图对象的活动，导致这个菜单选项不会有任何作用，不能实现预期的功能，成为一个非功能性菜单选项。这个问题可以使用动态添加菜单项的方法来解决，安卓通过在设备上查找处理意图对象的活动，动态地把菜单项添加到菜单中。
 
@@ -1615,7 +1615,7 @@ public boolean onCreateOptionsMenu(Menu menu){
 中的值作为菜单项标题，使用应用图标作为菜单项图标。addIntentOptions()
 方法会返回已添加的菜单项数量。
 
-## 应用栏
+## 4.2 应用栏
 
 应用栏（App Bar）是位于活动顶部的重要导航与操作区域，能够显示标题、导航入口、主要动作以及附加视图。早期资料常把它称为 `ActionBar`，但在现代 Android 工程中，更常见的实现方式是 `Toolbar` 或 `MaterialToolbar`。无论底层实现如何变化，应用栏承担的职责没有改变：它负责告诉用户“当前在哪一层”“可以做什么操作”“怎样返回上一层”。
 
@@ -1664,7 +1664,7 @@ public boolean onCreateOptionsMenu(Menu menu){
 
 默认状态下，应用栏跟在应用程序标题后面，显示在应用程序的顶部。如果活动设置了弹出菜单，就可以直接从应用栏以动作选项的方式直接访问。使用应用栏可以与许多控件结合使用，应用栏支持的基本应用模式包括：项目、视图、动作提供器、导航标签、下拉菜单。
 
-### 添加项目（更新为 AndroidX/Material 方案）
+### 4.2.1 添加项目（更新为 AndroidX/Material 方案）
 
 在当前 Android 开发中，推荐使用 AndroidX `AppCompatActivity` + `MaterialToolbar`（或 Compose 的 `TopAppBar`）来实现应用栏，而不是依赖早期 Holo 主题下的原生 ActionBar。
 
@@ -1865,7 +1865,7 @@ Toast.LENGTH\_SHORT).show();
 
 如果在片段中添加菜单项，那么通过片段类的onCreateOptionsMenu回调方法，当用户选择其中一个片段的菜单项时，系统会调用那个片段对象对应的onOptionsItemSelected()方法。
 
-### 添加视图
+### 4.2.2 添加视图
 
 动作视图是作为动作按钮的替代品显示在应用栏中的一个可视构件。动作视图在不改变活动或片段的情况下，可以给用户提供快捷的访问和丰富的操作。例如，如果有一个用于搜索的可选菜单项![](media/chapter04_menus_and_app_bar/media/image12.png)，可以用SearchView类来替代应用栏上的搜索按钮![](media/chapter04_menus_and_app_bar/media/image12.png)。**图
 4‑12**显示了从动作按钮![](media/chapter04_menus_and_app_bar/media/image12.png)（上图）展开为动作视图的例子。
@@ -2040,7 +2040,7 @@ return false;
 
 图 ‑13 SearchViewActivity
 
-### 动作提供器
+### 4.2.3 动作提供器
 
 与动作视图类似，动作提供器Action
 Provider使用一个定制的布局代替一个动作按钮。与动作视图不同，当点击动作提供器时，其可以显示子菜单，并需对所有选项进行控制处理。有两种方式来使用Action
@@ -2077,7 +2077,7 @@ android:actionProviderClass="android.widget.ShareActionProvider" /\>
 由于每一个ActionProvider类，定义自身的动作行为，就不必在 onOptionsItemSelected()监听动作事件了。如果需要在
 onOptionsItemSelected()方法中对其他的动作的事件进行处理，必须确认此方法的返回值为false，从而保证动作提供器上菜单选项的事件发生时，系统能够回调onPerformDefaultAction()方法，执行其事件处理代码。前面的知识中提到过，在用户界面上选择选项菜单的任何一个选项，系统都会回调onOptionsItemSelected()方法，而应用栏是安卓高级版本中选项菜单的替代控件，所以一般情况下，可以把动作提供器的事件处理也放在onOptionsItemSelected()方法中，系统会在选择动作提供器时，回调这个方法。值得注意的是，如果动作提供器定义了一个子菜单，则在用户打开子菜单列表或选择子菜单选项时，活动无法接收onOptionsItemSelected()的回调，事件处理代码必须写在onPerformDefaultAction()方法中。
 
-#### 系统定义
+#### 4.2.3.1 系统定义
 
 安卓系统定义了一些动作提供器，提供了丰富的功能。每个ActionProvider类都定义了自己布局（例如子菜单）和动作行为，其他的应用程序在使用这些ActionProvider时，可以直接使用其功能，由onPerformDefaultAction()回调方法中系统定义的代码来处理事件，不需要再在onOptionsItemSelected()方法中监听动作和进行事件处理。但是，尽管预定义的ActionProvider提供了其在溢出菜单中所能执行的默认操作，应用程序的
 活动（或片段）也能够通过处理来自onOptionsItemSelected()回调方法的点击事件，来重写这个默认操作。系统预定义ActionProvider之一的
@@ -2260,7 +2260,7 @@ provider.setShareIntent(intent);
 
 默认情况，ShareActionProvider对象会基于用户的使用频率来保留共享目标的排列顺序。使用频率高的目标应用程序会显示在下拉列表的上面，并且最常用的目标会作为默认共享目标直接显示在应用栏。默认情况下，排序信息被保存在由DEFAULT\_SHARE\_HISTORY\_FILE\_NAME指定名称的私有文件中。如果只使用一种操作类型ShareActionProvider类或它的一个子类，可以继续使用这个默认的历史文件；但是，如果使用了不同类型的多个操作的ShareActionProvider类或它的子类，则需要调用setShareHistoryFileName()方法，为每种ShareActionProvider类都指定自己独立的XML历史文件。
 
-#### 自定义
+#### 4.2.3.2 自定义
 
 要创建自己的动作提供器，只需继承类，并且实现合适的回调方法。下面是需要实现的几个重要回调方法：
 
@@ -2305,7 +2305,7 @@ public View onCreateActionView() {
 
 系统会在选中溢出菜单中的菜单选项时，调用这个方法，并且动作提供器执行这个选中菜单项执行的默认操作。如果自定义的动作提供器，使用onPrepareSubMenu()回调方法创建了子菜单，即使把这个动作提供器放在溢出菜单中，子菜单也会显示。因此，当自定义动作提供器中子菜单存在时，系统不会回调onPerformDefaultAction()方法。
 
-## 小结
+## 4.3 小结
 
 本章围绕菜单与应用栏这两个常见导航入口展开。菜单部分介绍了菜单资源的定义方式、选项菜单、上下文菜单、弹出菜单、菜单分组以及与 Intent 结合的用法；应用栏部分说明了应用栏的组成、动作项、搜索视图、分享操作以及动作提供器等内容。
 
