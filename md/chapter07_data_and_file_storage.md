@@ -1,10 +1,14 @@
 # 数据和文件存储
 
-任何应用程序都可以通过文件系统存储文件，其它应用程序可以来读取这些文件，当然这可能需要访问权限的设置。安卓提供几种持久化应用程序数据的选择，具体选择那种方式依赖于具体的需求，例如数据应该是应用程序私有的还是共享的，或者数据所需要的存储空间等。在安卓中，应用程序的所有数据对其他应用程序都是私有的，其他应用只有通过设置权限才可以获取数据。安卓系统提供了几种本地数据的存储方式，如果要将这些数据共享，安卓通过定义内容提供者，能够把私有数据共享给其他应用程序。内容提供器是一种为了开放应用程序的数据读写，具有访问权限的可选组件，可以通过该改组件实现私有数据的读写访问。内容提供器提供了请求和修改数据的标准语法和读取返回数据的标准机制。
+本章讨论应用数据“保存在哪里、如何读取、何时共享”这三个基础问题。对于任何一款可持续使用的应用而言，界面只是入口，真正支撑业务连续性的往往是本地数据层。读者将在本章中依次学习文件存储、共享存储、偏好数据以及结构化数据库等常见方案，并理解它们各自的适用边界。
+
+> 版本说明（截至 2026 年）：本章以分区存储、MediaStore、Photo Picker、DataStore 与 Room 等当前主流实践为基线，对历史写法保留必要说明与迁移建议。
+
+安卓提供了多种持久化数据的选择，具体采用哪一种方式，取决于数据是否需要对外共享、数据规模有多大、是否需要结构化查询，以及访问过程是否受权限模型约束。在默认情况下，应用的数据对其他应用是私有的；只有在显式声明访问接口或共享策略时，其他应用才可能获得这些数据。
 
 ## 存储空间概述
 
-安卓使用的文件系统类似于其他平台上基于磁盘的文件系统，该系统提供了以下几种保存应用数据的选项：
+安卓提供了多种本地存储方案，但它们并不是可以任意互换的“同类选项”。选择存储方式时，真正需要先想清楚的是四个问题：数据是否只供本应用使用、是否需要对外共享、是否需要结构化查询，以及数据量和敏感度分别如何。带着这些问题理解下面的分类，后面的 API 选择才会更自然。
 
   - 应用专属文件
 
@@ -1767,9 +1771,9 @@ return resolver
 
 ## 键值对数据
 
-当应用程序需要保存配置偏好时，不同软件系统都有对应的解决方法。例如 Microsoft
-Windows 系统常用 .ini 文件，J2EE 应用常用 properties 或 XML。安卓提供了 SharedPreferences
-存储方式，适合保存轻量级键值对配置（例如开关状态、最近选择项）。在现代安卓中，这类数据默认是应用私有数据，不应设计为“全局共享访问”。
+当应用需要保存“少量、简单、按键查值”的配置时，最常见的做法就是使用键值对存储。它适合保存开关状态、最近选择项、界面偏好以及轻量级会话配置，但不适合存储复杂结构、关系数据或高频大规模写入的数据。也就是说，键值对存储解决的是“记住一些设置”，而不是“实现一个完整数据层”。
+
+在安卓中，经典方案是 `SharedPreferences`，现代方案则更推荐使用 Jetpack DataStore。二者都面向应用私有数据，但 DataStore 在异步读写、错误处理和类型安全上更适合新项目；理解它们的差异，有助于避免把“方便保存配置”误用成“随手保存一切数据”。
 
 应用程序通常包括允许用户修改应用程序的特性和行为的设置功能，例如一些应用程序允许用户指定通知是否启用或指定多久使用云同步数据。如果要为应用程序提供设置共享偏好的功能（见**图
 7‑1**），需要使用安卓的偏好API来构建统一的接口。
@@ -1778,13 +1782,9 @@ Windows 系统常用 .ini 文件，J2EE 应用常用 properties 或 XML。安卓
 
 **图** **7‑1 特性和行为的设置**
 
-如果有想要保存的相对较小键值对集合，可以使用 SharedPreferences API。SharedPreferences
-对象指向包含键值对的文件，并提供读写这些键值对的简单方法。每个 SharedPreferences
-文件均由框架管理，通常应保持为应用私有文件。介绍了如何使用 SharedPreferences API
-存储和检索简单值。注意：SharedPreferences API
-用于读写键值对，不要将它们与**偏好**API
-混淆，后者可帮助构建用于显示应用设置的界面（虽然它们也使用
-SharedPreferences 保存用户设置）。  
+如果有想要保存的相对较小键值对集合，可以使用 `SharedPreferences` API。`SharedPreferences` 对象对应一个由框架管理的键值文件，通常保持为应用私有。它非常适合教学和理解配置型数据存储的基本模式，但在现代工程实践中，更推荐把它视为“历史兼容与简单场景方案”，而不是新项目的默认首选。
+
+这里还需要区分两个容易混淆的概念：`SharedPreferences` 是数据存储接口；而偏好设置界面（Preference UI）是面向用户展示和修改这些配置的界面框架。二者经常配合使用，但并不是同一个东西。
 
 > 版本提示：新项目建议优先使用 Jetpack DataStore（Preferences 或 Proto）替代 SharedPreferences，以获得更好的异步能力、错误处理和类型安全。  
 
@@ -2649,42 +2649,21 @@ preferenceManager.setPreferenceDataStore(dataStore);
 
 ### Room概述
 
-如需在应用中使用 Room，将以下依赖项添加到应用的 build.gradle 文件：
+如需在应用中使用 Room，需要在模块构建脚本中添加对应依赖。具体版本号会随时间更新，因此应以当前稳定版为准，而不是机械照抄某个旧示例。下面给出的是依赖结构示意：
 
 dependencies {
 
-def room\_version = "2.4.2"
+implementation "androidx.room:room-runtime:<latest-stable>"
 
-implementation "androidx.room:room-runtime:$room\_version"
+annotationProcessor "androidx.room:room-compiler:<latest-stable>"
 
-annotationProcessor "androidx.room:room-compiler:$room\_version"
-
-// optional - RxJava2 support for Room
-
-implementation "androidx.room:room-rxjava2:$room\_version"
-
-// optional - RxJava3 support for Room
-
-implementation "androidx.room:room-rxjava3:$room\_version"
-
-// optional - Guava support for Room, including Optional and
-ListenableFuture
-
-implementation "androidx.room:room-guava:$room\_version"
-
-// optional - Test helpers
-
-testImplementation "androidx.room:room-testing:$room\_version"
-
-// optional - Paging 3 Integration
-
-implementation "androidx.room:room-paging:2.5.0-alpha01"
+// Kotlin 项目通常使用 kapt 或 KSP 代替 annotationProcessor
 
 }
 
 码 7‑87
 
-Room 包含三个主要组件：
+Room 包含三个主要组件。把这三个组件的职责分清楚，是理解 Room 的关键：
 
   - 数据库类，用于保存数据库并作为应用持久性数据底层连接的主要访问点。
 
@@ -3882,14 +3861,6 @@ getUsersWithPlaylistsAndSongs();
 
 ## 小结
 
-本章主要介绍了安卓系统的数据存储机制和存取方法。安卓应用程序可选择的本地数据存储方式包括：偏好数据、内部/外部文件和数据库。  
+本章系统梳理了安卓应用常见的数据持久化方式，包括应用专属文件、共享存储空间、偏好数据以及结构化数据库。不同方案的核心差别在于数据的私有性、共享方式、容量规模与访问接口：文件存储适合原始数据或资源文件，偏好数据适合轻量配置项，结构化数据则更适合关系清晰、需要查询和事务支持的业务数据。
 
-面向最新 Android 版本时，建议遵循以下原则：  
-
-  - 文件访问遵循分区存储模型，应用私有数据优先放内部存储或应用专属目录。  
-  - 共享媒体优先通过 MediaStore 访问；仅选择少量图片/视频时优先使用 Photo Picker。  
-  - 避免申请高风险的 `MANAGE_EXTERNAL_STORAGE`，仅在确有核心文件管理场景时使用。  
-  - 偏好数据新代码优先考虑 DataStore，存量代码可继续使用 SharedPreferences 并逐步迁移。  
-  - 结构化数据优先使用 Room，按实体与 DAO 组织增删改查与事务逻辑。  
-
-通过以上实践，可以在保证隐私与合规的前提下，获得更稳定的跨版本存储行为。
+面向现代 Android 版本时，还需要把存储能力放在隐私与合规框架下理解。实际开发中，应优先使用应用专属目录保存私有数据，通过 MediaStore 或 Photo Picker 访问共享媒体，谨慎申请高风险存储权限；对于键值型配置，可在 SharedPreferences 与 DataStore 之间根据项目阶段选择迁移策略；对于结构化数据，优先采用 Room 统一实体、DAO、事务和查询逻辑。只有把“存什么、放哪里、怎么访问”三件事同时想清楚，存储设计才算完整。
