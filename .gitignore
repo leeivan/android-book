@@ -3,6 +3,7 @@
 
 # 临时文件
 *.log
+.agents
 
 # 如果你不想上传原始docx
 # doc/
